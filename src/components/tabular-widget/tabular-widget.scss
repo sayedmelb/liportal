@@ -1,0 +1,57 @@
+tabular-widget {
+    .datatable-body-cell-label {
+        white-space: normal !important;
+        width: 100%!important;
+    }
+    
+    .datatable-header-cell {        
+        white-space: normal !important;        
+    }
+
+    .xl-cell-header {
+        font-weight: 50;
+        color: #00B1BB!important;
+        font-size: 1.3rem;
+        padding-bottom: 10px;
+        cursor: pointer; 
+    }
+
+    .xl-cell-row { 
+        height: 100px;
+    }
+
+    .datatable-row-even {
+        background: rgba(240, 240, 240, 1) !important;
+    }
+
+    .datatable-row-odd {
+        background: white !important;
+    }
+
+    .highlighted-row {
+        border: solid #00BEC9 2px !important;
+    }
+
+    .parent {
+        position:relative;
+        height:100px;
+        width:100%;
+    }
+
+    .content {
+        position:relative;
+        height:100px;
+        width:100%;
+    }
+    
+    .popup {
+        top:0px;
+        left:0px;
+        height:97px;
+        width:100%;
+        position:relative;
+        overflow-y: auto;
+    }    
+
+    @import './_material.scss'; 
+}

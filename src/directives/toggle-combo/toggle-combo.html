@@ -1,0 +1,88 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 class="pd-bt-2">
+      <span class="sub-heading">
+
+        {{schema.settings.togglecombo[0].label}}
+      </span>
+      <info-icon [infoText]="'Proactive Monitoring On - Optus will monitor your nominated links and in the case of a service outage proactively raise trouble ticket on your behalf. Full Proactive Monitoring description is available in the Service Description.'" [textPlacement]="'right'"></info-icon>
+      <br />
+    </ion-col>
+
+
+    <!-- replecements start-->
+    <ion-col col-3 *ngIf="networkType=='P2P'">
+
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-6 align-self-center><span class="inputLabel" [innerHTML]="schema.settings.togglecombo[0].columns[0].value"></span></ion-col>
+            <ion-col col-5><label class="switch"><input type="checkbox" [(ngModel)]="toggle01"  (click)="toggleOne()" id="togBtn"><div class="slider round"><!--ADDED HTML --><span class="on">ON</span><span class="off">OFF</span><!--END--></div></label></ion-col>
+            
+          </ion-row>
+
+    </ion-col>
+    <ion-col col-3 *ngIf="networkType=='P2P'"></ion-col>
+    <ion-col col-3 *ngIf="networkType=='P2P'">
+
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-6 align-self-center><span class="inputLabel" [innerHTML]="schema.settings.togglecombo[0].columns[1].value"></span></ion-col>
+            <ion-col col-5><label class="switch"><input type="checkbox" [(ngModel)]="toggle02"  (click)="toggleTwo()" id="togBtn1"><div class="slider round"><!--ADDED HTML --><span class="on">ON</span><span class="off">OFF</span><!--END--></div></label></ion-col>
+            
+          </ion-row>
+
+    </ion-col>
+    <ion-col col-3 *ngIf="networkType=='P2P'"></ion-col>
+ <!-- for Mesh below-->
+    <ion-col col-1 *ngIf="networkType!=='P2P'">
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-6 align-self-center></ion-col>
+            <ion-col col-5 style="padding-left: 2.1rem;"><label class="switch"><input type="checkbox" [(ngModel)]="toggle01"  (click)="toggleOne()" id="togBtn3"><div class="slider round"><!--ADDED HTML --><span class="on">ON</span><span class="off">OFF</span><!--END--></div></label></ion-col>
+            
+          </ion-row>
+
+    </ion-col>
+
+    <ion-col col-5 *ngIf="networkType !=='P2P'"></ion-col>
+    <ion-col col-3 *ngIf="networkType !=='P2P'"></ion-col>
+    <ion-col col-3 *ngIf="networkType !=='P2P'"></ion-col>
+
+    <!-- replecements end-->
+
+    <!-- <ion-col col-3 *ngIf="networkType=='P2P'">
+      <mbsc-form [options]="formSettings">
+        <mbsc-form-group>
+          <mbsc-switch [(ngModel)]="toggle01" color="info" style="cursor: pointer;" (click)="toggleOne()">
+            <span *ngIf="networkType=='P2P'" class="inputLabel" [ngClass]="{'noinputLabel': networkType!=='P2P'}"
+              [innerHTML]="schema.settings.togglecombo[0].columns[0].value"></span> 
+          </mbsc-switch>
+        </mbsc-form-group>
+      </mbsc-form>
+    </ion-col>
+    <ion-col col-1 *ngIf="networkType!=='P2P'">
+      <mbsc-form [options]="formSettings">
+        <mbsc-form-group>
+          <mbsc-switch [(ngModel)]="toggle01" color="info" style="cursor: pointer;" (click)="toggleOne()">
+            <span *ngIf="networkType=='P2P'" class="inputLabel" [ngClass]="{'noinputLabel': networkType!=='P2P'}"
+              [innerHTML]="schema.settings.togglecombo[0].columns[0].value"></span>
+          </mbsc-switch>
+        </mbsc-form-group>
+      </mbsc-form>
+    </ion-col>
+    <ion-col col-3 *ngIf="networkType=='P2P'"></ion-col>
+    <ion-col col-3 *ngIf="networkType=='P2P'">
+      <mbsc-form [options]="formSettings">
+        <mbsc-form-group>
+          <mbsc-switch [(ngModel)]="toggle02" color="info" style="cursor: pointer;" (click)="toggleTwo()">
+            <span class="inputLabel" [innerHTML]="schema.settings.togglecombo[0].columns[1].value"></span>
+          </mbsc-switch>
+        </mbsc-form-group>
+      </mbsc-form>
+    </ion-col>
+    <ion-col col-5 *ngIf="networkType !=='P2P'"></ion-col>
+    <ion-col col-3 *ngIf="networkType !=='P2P'"></ion-col>
+    <ion-col col-3></ion-col> -->
+
+  </ion-row>
+</ion-grid>

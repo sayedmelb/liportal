@@ -1,0 +1,105 @@
+configure-widget {
+
+  .toolbar-title-md {
+    font-family: "Mark Pro Heavy" !important;
+  }
+
+    ion-col.border-right.col {
+        border-right: 1px solid #D1D7DA;
+      }
+      @media (max-width: 1279px) {
+        .progressbar {
+          margin-left: -8rem;
+          .barTitle {
+            margin-top : -6rem;
+            margin-left: -1.25rem;
+            position: absolute;
+          }
+        }
+        
+      }
+      @media (min-width: 1280px) {
+        .progressbar {
+          margin-left: -10rem;
+
+          .barTitle {
+            margin-top : -6rem;
+            margin-left: -1.25rem;
+            position: absolute;
+          }
+        }
+
+      }
+      .scroll-container{
+           
+        height: 700px;
+      }
+
+      @media (max-width: 1400px) { 
+        .scroll-container{
+           
+          height: 500px;
+        }
+      }
+
+      @media (min-width: 1401px) {
+        .progressbar {
+          margin-left: -11rem;
+
+          .barTitle {
+            margin-top : -6rem;
+            margin-left: -1.25rem;
+            position: absolute;
+          }
+
+          .scroll-container{
+           
+            height: 800px;
+          }
+          
+        }
+
+      }
+     
+      
+      .cost-heading {
+        font-weight: 600;
+        font-size: 1.4rem;  
+      }
+    .sub-heading {
+        font-weight: bold;
+        padding-left: 2rem;
+        font-size: 1.6rem;
+        color: #000;
+      }
+      .sub-heading-2 {
+          color: #00B1BB;
+          font-size: 1.4rem;
+      }
+      .black-bold{
+          font-weight: bold;
+          font-size: 0.9em;
+      }
+      .grey-text{
+        font-size: 0.9em;
+        color: grey;
+      }
+      .description-text {
+        color: #747576;
+        padding-left:2rem;
+      }
+      .fixed-sticky{
+        position:fixed; 
+        top: 50px;
+      }
+      .scroll-container{
+        overflow: auto; 
+        //height: 600px;
+      }
+      .backdropOpacityPopover {
+        .popover-content {
+          overflow: hidden;
+        }
+      }
+    
+}

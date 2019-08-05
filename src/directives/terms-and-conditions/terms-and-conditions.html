@@ -1,0 +1,21 @@
+<div>
+  <div class="header">
+    Terms & Conditions
+    <!-- <span class="arrow-down" (click)="toggle()"> -->
+    <!-- <span class="arrow-down">
+      <ion-icon name="ios-arrow-down"></ion-icon>
+    </span> -->
+  </div>
+
+
+
+  <div *ngIf="show" [@openClose]>
+    <hr>
+    <ion-item no-lines *ngFor="let tncObj of termsAndConditions">
+      <ion-label text-wrap [innerHTML]="tncObj.label.text"></ion-label>
+      <ion-checkbox [(ngModel)]="tncObj.isChecked"></ion-checkbox>
+    </ion-item>
+
+
+  </div>
+</div>

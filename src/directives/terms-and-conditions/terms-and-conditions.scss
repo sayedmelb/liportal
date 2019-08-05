@@ -1,0 +1,31 @@
+terms-and-conditions {
+    .item.item-md .checkbox-md {
+        position: static;
+        display: block;
+        margin: 9px 15px 9px 4px;
+    }
+    .header {
+        font-size: 1.6rem;
+        font-weight: 600;
+        width: 100%;
+        
+    }
+    .header-description {
+        color: #7B7B7B;	font-size: 1rem; 
+    }
+    .label {
+        font-size: 1.4rem;
+        color: #575859;
+    }
+    .verticalDivider {
+        width: 1px;
+        height: 50px;
+        background-color: #d1d7da;
+      }
+
+    .arrow-down {
+        float: right;   
+        width: 5%;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,286 @@
+<ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col col-8 padding>
+      <ion-row align-items-start>
+        <ion-col>
+          <ion-title> {{ schema.settings.title }}</ion-title>
+          <br />
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ul class="progressbar">
+            <ng-container *ngFor="let list of schema.settings.list">
+              <li [ngClass]="{'active': list.status==='active','complete': list.status==='complete'}"><span
+                  class="barTitle">{{list.title}}</span></li>
+            </ng-container>
+          </ul>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row> based on Will
+        <ion-col>
+          <p class="para-height-med"></p>
+        </ion-col>
+      </ion-row> -->
+      <ion-row>
+        <ion-col col-12 *ngIf="isSaveLatter">
+          <ion-row>
+            <ion-col col-12>
+              <div style="height: 30px;"></div>
+            </ion-col>
+            <ion-col col-12> <span style="font-size: 2.5em; color:black; font-weight: bold">Your configuration was
+                saved for later</span> </ion-col>
+            <ion-col col-3> <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+            </ion-col>
+            <ion-col col-9></ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-12 *ngIf="!isSaveLatter">
+          <ion-row align-items-start>
+            <ion-col col-12>
+              <ion-title class="heading2">Change Summary</ion-title>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="checkNoChange('speed-summary')==true" align-items-start>
+            <ion-col col-12>
+              <speed-summary  [schema]="schema" [model]="schema.data"
+                [network]="networkType">
+              </speed-summary>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="checkNoChange('review-port-capacity')==true" align-items-start>
+            <ion-col col-12>
+              <review-port-capacity  [schema]="schema"
+                [model]="schema.data" [network]="networkType"></review-port-capacity>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="checkNoChange('review-flex-capacity')==true" align-items-start>
+            <ion-col col-12>
+              <review-flex-capacity  [schema]="schema"
+                [model]="schema.data" [network]="networkType"></review-flex-capacity>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="checkNoChange('review-vlan')==true" align-items-start>
+            <ion-col col-12>
+              <review-vlan  [schema]="schema" [model]="schema.data"
+                [network]="networkType">
+              </review-vlan>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="checkNoChange('review-qos')==true" align-items-start>
+            <ion-col col-12>
+              <review-qos  [schema]="schema" [model]="schema.data">
+              </review-qos>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="checkNoChange('grade-of-service')==true" align-items-start>
+            <ion-col col-12>
+              <review-change  [addresson]="schema.data.addressON"
+                [schema]="schema.settings.gradeOfService" [addressSource]="schema" [service]="grade"
+                [network]="networkType"></review-change>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="checkNoChange('review-proactive-monitoring')==true" align-items-start>
+            <ion-col col-12>
+              <review-proactive-monitoring  [schema]="schema"
+                [model]="schema.data" [network]="networkType">
+              </review-proactive-monitoring>
+            </ion-col>
+          </ion-row>
+
+          <ion-row *ngIf="checkNoChange('service-level')==true" align-items-start>
+            <ion-col col-12>
+              <review-change  [addresson]="schema.data.addressON"
+                [schema]="schema.settings.serviceLevel" [addressSource]="schema" [service]="sla"
+                [network]="networkType"></review-change>
+            </ion-col>
+          </ion-row>
+          <!--total start-->
+          <!-- hardcode version start-->
+
+          <ng-container *ngIf="schema.datasource.length > 0">
+            <!-- <ion-row align-items-start class="pd-lt-2 pd-tp-2"> -->
+                <ion-row align-items-start >  
+              <ion-col col-12> <span class="header">SERVICE CHARGE </span>
+              </ion-col>
+              <ion-col col-12>
+                <hr class="bold2">
+              </ion-col>
+            </ion-row>
+            <!-- <ion-grid text-center class="grid-bordered"> -->
+                <ion-grid  class="grid-bordered"> 
+              <!-- <ion-row align-items-start justify-content-center align-items-center style='height: 100%' > -->
+                <ion-row align-items-start align-items-center   style='height: 100%' >  
+                <ion-col col-3 style="border-left-style: none; border-right-style: none; border-bottom-style: none; ">&nbsp;</ion-col>
+                <ion-col col-3 text-center style="border-right-style: none; border-bottom-style: none;" ><span class="label-sub-bold">Before Change</span></ion-col>
+                <ion-col col-3 text-center style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-bold">After Change</span></ion-col>
+                <ion-col col-3 text-center style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-bold">Cost of Change</span></ion-col>
+                <!-- <ion-col col-12>
+                  <hr>
+                </ion-col> -->
+                <ion-col col-3 align-self-center text-center  align-items-center   class="col-med" style="border-left-style: none; border-right-style: none; border-bottom-style: none;"><span class="label-sub-bold color-blue">Service Address</span></ion-col>
+                <ion-col col-3 class="col-med" text-center justify-content-center  style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-bold color-blue">Monthly Recurring Charge</span></ion-col>
+                <ion-col col-3 class="col-med" text-center  style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-bold color-blue">Monthly Recurring Charge</span></ion-col>
+                <ion-col col-3 class="col-med" text-center  style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-bold color-blue">Install and one-off Charges</span></ion-col>
+                <!-- <ion-col col-12>
+                  <hr>
+                </ion-col> -->
+                <ion-col col-3 class="col-high" style="border-left-style: none; border-right-style: none; border-bottom-style: none;"> 
+                  <span ><span class="end-size" *ngIf="networkType=='P2P'"><strong>A-End</strong><br></span>
+                  <span
+                      class="label-sub-address"> <b>{{schema.datasource[0].selectedProduct.properties.service.properties.serviceId}}</b><br> 
+                      {{ schema.datasource[0].selectedProduct.properties.line | dynamicPipe:{pipes:'networkname'}  }}<br><br>
+                     <span class="grey-text-address">{{schema.datasource[0].selectedProduct.properties.location.title}}</span></span></span></ion-col>
+                <ion-col col-3 text-center class="col-high" style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-med">$500<br>&nbsp;<br>&nbsp;</span></ion-col>
+                <ion-col col-3 text-center class="col-high" style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-med">{{(!data.totalAend ? 'No Change': '$' +
+                    data.totalAend )}}<br>&nbsp;<br>&nbsp;</span></ion-col>
+                <ion-col col-3 text-center class="col-high" style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-med">{{(!data.installChargeAend ? 'No Change': '$750.00' )}}<br>&nbsp;<br>&nbsp;</span></ion-col>
+                <!-- <ion-col col-12>
+                  <hr>
+                </ion-col> -->
+                <ion-col col-3 *ngIf="networkType=='P2P'" class="col-high" style="border-left-style: none; border-right-style: none; border-bottom-style: none;"> 
+                  <span class="end-size"><b>B-End</b><br></span>
+                    <span class="label-sub-address">
+                    <strong>{{schema.datasource[0].otherEnds[0].properties.service.properties.serviceId}}</strong><br> 
+                    {{ schema.datasource[0].otherEnds[0].properties.line | dynamicPipe:{pipes:'networkname'}  }} 
+                      <br><br>
+                      <span class="grey-text-address">{{schema.datasource[0].otherEnds[0].properties.location.title}}</span></span></ion-col>
+                <ion-col col-3 *ngIf="networkType=='P2P'" col3 text-center class="col-high" style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-med">$500<br>&nbsp;<br>&nbsp;</span>
+                </ion-col>
+                <ion-col col-3 *ngIf="networkType=='P2P'" col3 text-center class="col-high" style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-med">{{(!data.totalAend ? 'No Change': '$' +
+                    data.totalAend )}} <br>&nbsp;<br>&nbsp;</span></ion-col>
+                <ion-col col-3 *ngIf="networkType=='P2P'" col3 text-center class="col-high" style="border-right-style: none; border-bottom-style: none;"><span class="label-sub-med">{{(!data.installChargeBend ? 'No Change': '$750.00' )}}<br>&nbsp;<br>&nbsp;</span></ion-col>
+                <!-- <ion-col col3 *ngIf="networkType=='P2P'" col-12>
+                  <hr>
+                </ion-col> -->
+                <ion-col col-3 style="border-left-style: none; border-right-style: none;"> <span><strong>Total of all Products:</strong></span></ion-col>
+                <ion-col col-3 text-center style="border-right-style: none;"><span *ngIf="networkType=='P2P'" class="label-sub-med">$1000</span> <span *ngIf="networkType!=='P2P'" class="label-sub-med">$500</span> </ion-col>
+                <ion-col col-3 text-center col3 *ngIf="networkType=='P2P'" style="border-right-style: none;"><span *ngIf="networkType=='P2P'" class="label-sub-med">{{(!data.totalAend ? 'No Change': '$' +
+                    data.totalAend * 2 )}} </span></ion-col>
+                <ion-col col-3 style="border-right-style: none;" text-center  *ngIf="networkType !=='P2P'"><span class="label-sub-med">{{(!data.totalAend ? 'No Change': '$' +
+                    data.totalAend  )}} </span></ion-col>
+                <ion-col col-3  *ngIf="networkType=='P2P'" text-center style="border-right-style: none;"><span class="label-sub-med" >{{(getTotalInstalledCharges()==0 ? 'No Change':
+                    '$' + getTotalInstalledCharges() )}}  </span></ion-col>
+                <ion-col col-3 style="border-right-style: none;" *ngIf="networkType !=='P2P'" text-center><span class="label-sub-med">{{(getTotalInstalledCharges()==0 ? 'No Change':
+                    '$' + getTotalInstalledCharges()/2 )}}  </span></ion-col>
+                          </ion-row>
+                        </ion-grid>            
+                <ion-row>
+                    <ion-col col-12><span class="grey-text">All charges are shown excluding GST.</span></ion-col>
+                </ion-row>
+              <ion-row>
+                <ion-col>
+                  <div style="height: 30px;"></div>
+                </ion-col>
+              </ion-row>
+          </ng-container>
+
+          <!--hard code version end-->
+
+          <!-- <ng-container *ngIf="schema.datasource.length > 0">
+              <ion-row align-items-start class="pd-lt-2 pd-tp-2">
+              <ion-col col-12> <span class="header">TOTAL COST </span>&nbsp;<span class="grey-text">(A-End + B-End)</span>
+              </ion-col>
+              <ion-col col-12>
+                <hr class="bold2">
+              </ion-col>
+              <ion-col col-3></ion-col>
+              <ion-col col-3 text-center><span class="label-sub-bold">Before Change</span></ion-col>
+              <ion-col col-6 text-center><span class="label-sub-bold">After Change</span></ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+              <ion-col col3><span class="label-sub-bold">Service Address</span></ion-col>
+              <ion-col col3><span class="label-sub-bold">Monthly Recurring Charge</span></ion-col>
+              <ion-col col3><span class="label-sub-bold">Install and one of Charges</span></ion-col>
+              <ion-col col3><span class="label-sub-bold">Monthly Recurring Charge</span></ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+              <ion-col col3> <span><strong>A-End:</strong><span class="label-sub">
+                    {{schema.datasource[0].properties.address.title}}</span></span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">${{this.schema.datasource[0].properties.offer.properties.price
+                  | number: '1.2-2'}}</span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">{{(!data.installChargeAend ? 'No Change': '$' +
+                  (data.installChargeAend) )}}</span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">{{(!data.totalAend ? 'No Change': '$' +
+                  data.totalAend )}}</span></ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+              <ion-col col3> <span><strong>B-End:</strong><span class="label-sub">
+                    {{schema.datasource[1].properties.address.title}}</span></span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">${{this.schema.datasource[1].properties.offer.properties.price
+                  | number: '1.2-2'}}</span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">{{(!data.installChargeBend ? 'No Change': '$' +
+                  (data.installChargeBend) )}}</span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">{{(!data.totalAend ? 'No Change': '$' +
+                  data.totalAend )}}</span></ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+              <ion-col col3> <span><strong>Total of all Products:</strong></span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">${{(this.schema.datasource[0].properties.offer.properties.price
+                  + this.schema.datasource[1].properties.offer.properties.price) | number: '1.2-2'}}</span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">{{(getTotalInstalledCharges()==0 ? 'No Change':
+                  '$' + getTotalInstalledCharges() )}}</span></ion-col>
+              <ion-col col3 text-center><span class="label-sub-bold">{{(!data.totalAend ? 'No Change': '$' +
+                  data.totalAend * 2 )}}</span></ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+              <ion-col col-12><span class="grey-text">Minimum total cost $### over 24 months", and below this
+                  statement, put "Other pricing Information</span></ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+            </ion-row> 
+            <ion-row>
+              <ion-col>
+                <div style="height: 30px;"></div>
+              </ion-col>
+            </ion-row>
+          </ng-container> -->
+          <!--total end-->
+          <ion-row align-items-start>
+            <ion-col col-12>
+              <hr>
+            </ion-col>
+            <ion-col col-12>
+              <terms-and-conditions [schema]="getSchemaForTnC()"></terms-and-conditions>
+            </ion-col>
+            <ion-col col-12>
+              <hr>
+            </ion-col>
+          </ion-row>
+          <ion-row align-items-start>
+            <ion-col col-3> <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col col-3> <button ion-button full class="button-white btnAction" (click)="saveforLatter($event)">SAVE
+                FOR LATTER</button> </ion-col>
+            <ion-col></ion-col>
+            <ion-col col-3> <button ion-button full class="button-yellow btnAction" (click)="goToNext()"
+                [disabled]="isSubmitDisabled()">SUBMIT</button> </ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+        <ion-col col-5></ion-col>
+        <ion-col col-2 style="text-align: center"> <span class="btnCancel" (click)="closeModel()">Cancel</span>
+        </ion-col>
+        <ion-col col-5></ion-col>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>

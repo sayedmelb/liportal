@@ -1,0 +1,195 @@
+<ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col col-8 padding>
+      <ion-row align-items-start>
+        <ion-col>
+          <ion-title> {{ schema.settings.title }}</ion-title>
+          <br/>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <!-- <ng-container *ngFor="let list of schema.settings.list">
+            <img [src]="schema.settings.path + list.image" class="thumbnail" />
+            <b padding-right>{{ list.label }}</b>
+          </ng-container> -->
+          <ul class="progressbar">
+            <li class="complete">Configure</li>
+            <li  class="active">Review</li>
+            <li>Confirm</li>
+        </ul>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr style="background-color: #D1D7DA; border-width: 0.5px;">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 *ngIf="isSaveLatter">
+          <ion-row>
+            <ion-col col-12>
+              <div style="height: 30px;"></div>
+            </ion-col>
+            <ion-col col-12>
+              <span style="font-size: 2.5em; color:black; font-weight: bold">Your configuration was saved for later</span>
+            </ion-col>
+            <ion-col col-3>
+
+              <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+            </ion-col>
+            <ion-col col-9></ion-col>
+
+          </ion-row>
+        </ion-col>
+         <ion-col col-12 *ngIf="!isSaveLatter">
+            <ion-row>
+                <ion-col col-12>
+                  <ion-title class="heading2">Change Summary</ion-title>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12>
+                  <speed-summary-schedule  [schema]="schema" [network]="networkType">
+                  </speed-summary-schedule>
+                </ion-col>
+              </ion-row>
+
+              <ion-row align-items-start class="pd-lt-2" *ngIf="schema.datasource[0].model[0].increased_utilisation_mode">
+                  <ion-col col-12>
+                    <ion-label class="header">FLEX SPEED UP RULES
+                      <span class="sub-header-label" style="display: inline; "> &nbsp;&nbsp;&nbsp; <strong>Increase to {{schema.datasource[0]?.model[0].contractedBw}}</strong></span>
+                    </ion-label>
+                    <hr class="bold2">
+                  </ion-col>
+        
+                  <ion-col col-12>
+                    <span class="fnt-label">
+                      <strong>{{schema.datasource[0].model[0].increased_utilisation_mode | titlecase}}:</strong> if the link exceeds
+                      <strong>{{schema.datasource[0].model[0].utilisation_increase_threshold_pc}}%</strong> utilisation of
+                      <strong>{{schema.datasource[0].selectedProduct.properties.service.properties.bandwidth | dynamicPipe:{pipes:'bandwidth'} }}</strong> contracted bandwidth.
+                    </span>
+                  <!--   <br>Above the threshold for 60% of the defined period -->
+                  </ion-col>
+                  <ion-col col-12>
+                      <div style="height: 15px;"></div>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row align-items-start class="pd-lt-2" *ngIf="schema.datasource[0].model[0].decreased_utilisation_mode">
+                    <ion-col col-12>
+                      <ion-label class="header">FLEX SPEED DOWN RULES
+                        <span class="sub-header-label" style="display: inline; ">&nbsp;&nbsp;&nbsp; <strong>Return to {{schema.datasource[0].selectedProduct.properties.service.properties.bandwidth | dynamicPipe:{pipes:'bandwidth'} }} contracted bandwidth</strong></span>
+                      </ion-label>
+                      <hr class="bold2">
+                    </ion-col>
+        
+                    <ion-col col-12>
+                      <span class="fnt-label">
+                        <strong>{{getFlexDown(schema.datasource[0].model[0].decreased_utilisation_mode)}}:</strong> if the link falls
+                        <strong>{{schema.datasource[0].model[0].utilisation_decrease_threshold_pc}}%</strong> utilisation of
+                        <strong>{{schema.datasource[0].selectedProduct.properties.service.properties.bandwidth | dynamicPipe:{pipes:'bandwidth'} }}</strong> contracted bandwidth.</span>
+                      <!-- <br>Below the threshold for 60% of the defined period -->
+                    </ion-col>
+                    <ion-col col-12>
+                        <div style="height: 15px;"></div>
+                    </ion-col>
+                  </ion-row>
+
+                  <ion-row align-items-start class="pd-lt-2">
+                      <ion-col col-12>
+                        <ion-label class="header">TIMEBOX RULES</ion-label>
+                        <hr class="bold2">
+                      </ion-col>
+          
+                      <ion-col col-12>
+                        <span *ngIf="schema.datasource[0].model[0].timeBox =='off'" class="fnt-label">
+                          <strong>Flex any time</strong>
+                        </span>
+                        <span *ngIf="schema.datasource[0].model[0].timeBox =='on'" class="fnt-label">
+                          <strong>Flex at specified times</strong>
+                        </span>
+                        <br>
+                        <span *ngIf="schema.datasource[0].model[0].timeBox =='on'" class="fnt-label">
+                          <strong>Between: </strong><span class="grey-font">{{schema.datasource[0].model[0].timebox_start_time }} and {{schema.datasource[0].model[0].timebox_end_time }}</span>
+                        </span>
+                        <br>
+                        <span *ngIf="schema.datasource[0].model[0].timeBox =='on'" class="fnt-label">
+                          <strong>On these days: </strong><span class="grey-font">{{getWeekDaysList(schema.datasource[0].model[0].weekFlexDays)}}</span>
+                        </span>
+                      </ion-col>
+                      <ion-col col-12>
+                          <div style="height: 15px;"></div>
+                      </ion-col>
+                    </ion-row>
+
+                    <ion-row align-items-start class="pd-lt-2">
+                        <ion-col col-12>
+                          <ion-label class="header">SPEND CAP</ion-label>
+                          <hr class="bold2">
+                        </ion-col>
+                                   
+                        <ion-col col-12>
+                          <span *ngIf="schema.datasource[0].model[0].spendCap =='off'" class="fnt-label">
+                              <strong>No cap</strong>
+                          </span>
+                          <ng-container *ngIf="schema.datasource[0].model[0].spendCap =='on'">
+                              <span class="fnt-label">
+                                <strong>Total spend cap $ {{schema.datasource[0].model[0].spendCapAmountsitea | number : '1.0-0'}} per month </strong>
+                              </span>
+                              <br><span>All charges shown are excluding GST.</span>
+                          </ng-container>                      
+                        </ion-col>
+                        <ion-col col-12>
+                            <div style="height: 15px;"></div>
+                        </ion-col>
+                      </ion-row>
+
+                    <ion-row align-items-start class="pd-lt-2">
+                        <ion-col col-12>
+                          <hr>
+                        </ion-col>
+                        <ion-col col-12>
+                          <terms-and-conditions [schema]="getSchemaForTnC()"></terms-and-conditions>
+                        </ion-col>
+                        <ion-col col-12>
+                          <hr>
+                        </ion-col>
+                      </ion-row> 
+          <ion-row>
+
+            <ion-col col-3>
+              <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col col-3>
+              <button ion-button full class="button-white btnAction" (click)="saveforLatter($event)">SAVE FOR LATTER</button>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col col-3>
+              <button ion-button full class="button-yellow btnAction" (click)="goToNext()" [disabled]="isSubmitDisabled()">SUBMIT FOR APPROVAL</button>
+            </ion-col>
+            <ion-col></ion-col>
+
+          </ion-row>
+        </ion-col> 
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+        <ion-col col-5></ion-col>
+        <ion-col col-2 style="text-align: center">
+          <span class="btnCancel" (click)="closeModel()">Cancel</span>
+        </ion-col>
+        <ion-col col-5></ion-col>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>

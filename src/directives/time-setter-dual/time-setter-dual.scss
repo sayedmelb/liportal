@@ -1,0 +1,34 @@
+time-setter-dual {
+
+    .mbsc-ios.mbsc-form {
+        background: #fff !important;
+    }
+
+    .mbsc-ios .mbsc-divider,
+    .mbsc-ios .mbsc-form-group-title {
+        background: #fff !important;
+    }
+
+    .mbsc-ios .mbsc-input input {
+        border: 1px solid color($colors, optusgrey);
+        cursor: pointer;
+    }
+
+    .mbsc-form-group {
+        margin: 0.1rem 0;
+    }
+
+    .space-pd {
+        width: 0.8rem;
+        padding-right: 0.7rem;
+    }
+
+    .grey-text {
+        font-size: 0.9em;
+        color: grey;
+    }
+
+    .pd-left {
+        padding-left: 0.7rem;
+    }
+}

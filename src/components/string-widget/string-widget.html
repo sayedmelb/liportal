@@ -1,0 +1,19 @@
+<ion-list>
+  <ion-item>
+    <ion-label [color]="schema.settings?.color || 'danger'" stacked *ngIf="schema.settings?.labelPosition=='stacked'">{{schema.label}} {{behaviour.mandatory?"*":""}}</ion-label>
+    <ion-label [color]="schema.settings?.color || 'danger'" floating *ngIf="!schema.settings || schema.settings?.labelPosition=='floating'">{{schema.label}} {{behaviour.mandatory?"*":""}}</ion-label>
+    <ion-input 
+        [readonly]="behaviour.readonly || null" 
+        [formControl]="control" 
+        [minlength]="schema.settings?.minLength || null" 
+        [maxlength]="schema.settings?.maxLength || null"
+        [placeholder]="schema.settings?.placeholder || ''"
+        [clearInput]="!behaviour.readonly"
+        (ionBlur)="onBlur($event)"
+        (ionChange)="onChange($event)">
+    </ion-input>
+  </ion-item>
+  <ion-item *ngIf="schema.error" id="form-error">
+    <ion-note color="danger" text-wrap>{{schema.error}}</ion-note>
+  </ion-item>
+</ion-list>

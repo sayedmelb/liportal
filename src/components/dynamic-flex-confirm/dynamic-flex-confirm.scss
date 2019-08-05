@@ -1,0 +1,30 @@
+dynamic-flex-confirm {
+    .sub-header-label {
+        color: color($colors, secondary);
+        cursor: pointer;
+    }
+    .btn-close {
+        width: 24%;
+        height: 12%;
+    }
+    .btn-close-text {
+        font-weight: bold;
+        font-size: 1.0em;
+    }
+    .sub-summary {
+        color: grey;
+        font-size: 1.1em
+    }
+    .close-header {
+        font-size: 1.5em;
+        color: black;
+        font-weight: bold;
+        margin-top: 100px;
+    }
+    .close-container {
+        background-color: #f9fafb;
+        text-align: center;
+        height: 320px;
+        border: 1px lightgray solid
+    }
+}

@@ -1,0 +1,40 @@
+<ion-row>
+  <ion-label>
+    <span class="label-container" *ngIf="network == 'P2P' " ><strong>{{column.value}}:</strong></span>
+    <span *ngIf="checkAddressState('gradeOfService') && schema.id=='gradeOfServicePB' && column.value=='A-End'">
+      {{addresssource.datasource[0].selectedProduct.properties.location.title}}</span>
+    <span *ngIf="checkAddressState('gradeOfService') && schema.id=='gradeOfServicePB' && column.value=='B-End'">
+      {{addresssource.datasource[0].otherEnds[0].properties.location.title}}</span>
+    <span *ngIf="checkAddressState('serviceLevel') && schema.id=='serviceLevelPB' && column.value=='A-End'">
+      {{addresssource.datasource[0].selectedProduct.properties.location.title}}</span>
+    <span *ngIf="checkAddressState('serviceLevel') && schema.id=='serviceLevelPB' && column.value=='B-End'">
+      {{addresssource.datasource[0].otherEnds[0].properties.location.title}}</span>
+  </ion-label>
+</ion-row>
+<ion-row
+  *ngIf="addresssource.datasource[0].model[index]['_'+fieldid] != addresssource.datasource[0].model[index][fieldid]">
+
+  <ion-col col-5><span class=" label-sub color-blue">Before</span></ion-col>
+          <ion-col col-2></ion-col>
+          <ion-col col-5><span class=" label-sub color-blue" *ngIf="addresssource.datasource[0].model[index]['_'+fieldid] !== addresssource.datasource[0].model[index][fieldid]">After</span></ion-col>
+  <ion-col col-5>
+    <span class="value"> {{ addresssource.datasource[0].model[index]['_'+fieldid] }}</span>
+  </ion-col>
+  <ion-col col-2>
+    <span class="separater">
+      &nbsp; <img class="arw" src='../../assets/imgs/12-hor.png'> &nbsp;
+    </span>
+  </ion-col>
+  <ion-col col-5>
+    <span class="value">{{ addresssource.datasource[0].model[index][fieldid] }} </span>
+  </ion-col>
+</ion-row>
+<ion-row
+  *ngIf="addresssource.datasource[0].model[index]['_'+fieldid] == addresssource.datasource[0].model[index][fieldid]">
+  <ion-col col-5>
+    <span class="value">{{ addresssource.datasource[0].model[index]['_'+fieldid] }} </span>
+  </ion-col>
+  <ion-col col-7>
+    <span class="iris-blue">&nbsp; (No Change) </span>
+  </ion-col>
+</ion-row>

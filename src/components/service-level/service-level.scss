@@ -1,0 +1,24 @@
+service-level {
+  .sub-heading {
+    font-weight: 600;
+    font-size: 1.6rem;
+    font-family: "Mark Pro";
+  }
+  ion-col.border-right.col {
+    border-right: 1px solid #D1D7DA;
+  }
+  .pad-left {
+    padding-left: 9rem;
+    font-size: 1.25rem;
+  }
+  .color-grey{
+    color: color($colors, optusgreyshade2);
+  }
+  .span-link {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #006280;
+  font-weight: 600;
+  padding-left: 20px;
+  }
+}

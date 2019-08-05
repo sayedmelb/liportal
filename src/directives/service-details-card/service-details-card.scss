@@ -1,0 +1,77 @@
+service-details-card {
+  .mbsc-ios.mbsc-card.mbsc-form {
+    background: color($colors, 'optusgreybg');
+    margin: 0px;
+    box-shadow: 0 0 1px 1px color($colors, 'optusgreyshadow');
+  }
+
+  .card {
+    position: relative;
+    z-index: 100;
+    padding: 15px;
+  }
+
+  .card-container {
+    position: relative;
+    text-align: center;
+    max-width: 400px;
+    min-height: 100px;
+    max-height: 150px;
+  }
+
+  .mbsc-card-header {
+    padding: 0.1rem;
+  }
+
+  .footer {
+    padding-top: 2rem;
+    text-align: right;
+  }
+
+  .sub-title {
+    text-align: left;
+    color: #888A8C;
+    font-family: "Mark Pro";
+    font-size: 1.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+//   .color-grey{
+  
+// }
+.small-text {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: color($colors, optusteal);
+}
+
+  .content {
+    text-align: left;
+    color: #000000;
+    font-family: "Mark Pro";
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .mbsc-card-content {
+    text-align: left;
+    padding-left: 0;
+    padding-bottom: 1rem;
+    left: 0;
+  }
+
+  .mbsc-card-footer {
+    padding: 0;
+    border-top: 0;
+  }
+
+  .list {
+    position: absolute;
+    z-index: 999;
+  }
+
+  .mbsc-ios .mbsc-btn {
+    color: color($colors, optusteal)
+  }
+}

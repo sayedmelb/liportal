@@ -1,0 +1,113 @@
+slider {
+  .custom-slider {
+    padding-left: 2rem;
+    div.info-box-grey {
+      font-size: 1.25rem;
+      border: 1px solid #D1D7DA;
+      text-align: center;
+      background-color: #FFFFFF;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+      padding: 5px;
+      margin-top: -15px; //This is to fix slider - bug
+      position: relative;
+      .selected-bandwidth {
+        font-weight: bold;
+      }
+      .flex-max {
+        color: color($colors, optusteal);
+      }
+      .arrow-bottom {
+        position: absolute;
+        top: 65px;
+        left: 60px;
+        z-index: 100;
+        border-color: inherit;
+
+        &:before {
+          content: "";
+          border-top: 5px solid #fff;
+          border-right: 5px solid transparent;
+          border-left: 5px solid transparent;
+          position: absolute;
+          top: -20px;
+          bottom: 0;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: -21px;
+          bottom: -1px;
+          border-top: 6px solid #5975a4;
+          border-right: 6px solid transparent;
+          border-left: 6px solid transparent;
+          z-index: -1;
+        }
+      }
+    }
+    .legend {
+      color: color($colors, optuslightgrey);
+    }
+    .ng5-slider {
+
+      .ng5-slider-bubble {
+        font-size: 1.25em;
+      }
+
+      .ng5-slider-bar {
+        background-color: #C4C4C4;
+        height: 7px;
+        .ng5-slider-left-out-selection {
+          background-color: #006280;  
+        }
+        .ng5-slider-right-out-selection {
+          background-color: #C4C4C4;  
+        }
+      }
+      .ng5-slider-left-out-selection {
+        height: 7px;
+        // background-color: #006280;  
+      }
+      .ng5-slider-right-out-selection {
+        height: 7px;
+        // background-color: #C4C4C4;  
+      }
+
+      .ng5-slider-pointer {
+        width: 20px;
+        height: 20px;
+        top: -6px;
+        cursor: pointer;
+        left:5px;
+        background-color: #00BEC9;
+        z-index: 99;
+      }
+
+      .ng5-slider-pointer:after {
+        background: #00BEC9;
+        height: 0px; 
+        width: 0px;
+      }
+
+      .ng5-slider-tick {
+        top: 6px;
+        width: 1px;
+        height: 14px;
+        background-color: #C4C4C4;
+      }
+    }
+  }
+  .warning-message {
+    margin-top: 4.5rem;
+    padding: 1rem 1rem;
+    width: 100%;
+    background-color: #FEF7D9;
+    box-shadow: 0 1px 0 0 #FFD100;
+    color: #575859;
+    font-family: "Mark Pro";
+    font-size: 1.5rem;
+    .warning-text {
+      padding-left: 2rem;
+    }
+  }
+}

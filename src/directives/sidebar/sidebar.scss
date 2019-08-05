@@ -1,0 +1,70 @@
+sidebar {
+    ion-list {
+        overflow-y: scroll;
+        font-size: 0.8em;
+    }
+    .pad-left {
+        padding-left: 0.6rem;
+    }
+    .title {
+        color: #000000; 
+        font-family: "Mark Pro";
+        // font-family: "MarkOT" !important;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .description {
+        color: #000000; 
+        font-family: "Mark Pro";
+        // font-family: "MarkOT" !important;
+        font-size: 1.5rem;
+    }
+    .field-text {
+        font-family: "Mark Pro";
+        // font-family: "MarkOT" !important;
+        color: color($colors, midgrey);
+        font-size: 1.25rem;
+    }
+    .field-label {
+        font-family: "Mark Pro";
+        // font-family: "MarkOT" !important;
+        color: color($colors, midgrey);
+        font-size: 1.50rem;
+        font-weight: bold;
+    }
+    .subheading {
+        color: #000000;
+        font-size: 1.5rem;
+    }
+    .crossbar {
+        position: absolute;
+        z-index: 99;
+        top: 0px;
+        right: -22px;
+        cursor: pointer;
+        height: 2.2rem;
+        width: 2.2rem;
+    }
+    .sideleftarrow {
+        position: absolute;
+        z-index: 99;
+        top: 34px;
+        right: -17px;
+        cursor: pointer;
+        display: none;
+    }
+    .statuslabel {
+        margin-top: 4px;
+        padding-left: 4px;
+        display: inline-block;
+        /* display: inline-block; */
+        vertical-align: middle;
+        line-height: 2.5rem;
+    }
+    .status-sidebar-icon {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+}

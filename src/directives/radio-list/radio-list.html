@@ -1,0 +1,54 @@
+<!-- <ion-grid>
+  <ion-row>
+    <ion-col col-12 padding-top class="pd-bt-2">
+      <span class="sub-heading-label">
+        {{list.label}}&nbsp;<info-icon></info-icon>
+      </span>
+      <br />
+    </ion-col> -->
+    <!-- <ion-col col-6 class="border-right" *ngFor="let col of list.columns"> -->
+    <!-- <ion-col col-6 *ngFor="let col of list.columns">
+      <div class="sub-heading">
+        <span class="heading-label">{{col.value}}</span>
+        <span class="buttons-list">
+          <ion-item no-margin no-lines *ngFor="let control of list.dataSource let i = index">
+            <button no-margin [ngClass]="{
+            btnActivated: control.value ==_radiolist.model[list.key][col.id]
+          }"
+              class=" button button-md button-clear button-clear-md button-large button-large-md btnNormal" (click)="setradioStatus($event,list.key,col.id, control.value)"
+              ion-button>
+              {{ control.value }}
+            </button>
+          </ion-item>
+
+        </span>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+<br> -->
+
+<ion-grid class="pad-margin-grid">
+    <ion-row>
+      <ion-col col-12 padding-top class="pd-bt-2">
+        <span class="sub-heading">
+          {{list.label}}
+        </span>
+        <br />
+      </ion-col>
+      <!-- <ion-col col-2></ion-col> -->
+      <ion-col col-1></ion-col>
+      <ion-col col-11 class="border-right" *ngFor="let col of list.columns" class="pd-bt-2">
+        <!-- <span class="radioLabel">{{col.value}} : </span> -->
+        <ng-container *ngFor=" let radio of list.dataSource let i = index">
+            <input type="radio" class="styled" [id]="radio.id" [value]="radio.value" [name]="[col.id]+[list.type]"
+              [(ngModel)]="_radiolist.model[list.key][col.id]" (click)="setradioStatus($event,list.key,col.id, radio.value)"  />
+            <Label class="radiosub">{{radio.value}}</Label>
+            <br/>
+            <br/>
+        </ng-container>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <br>
+  

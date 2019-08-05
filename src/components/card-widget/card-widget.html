@@ -1,0 +1,13 @@
+
+  <ion-card (click)="openForm()">
+    <ion-img [src]="schema.img.src" [width]="schema.img.width" [height]="schema.img.height"></ion-img>
+    <ion-card-content>
+      <ion-card-title>
+        {{ schema.title }}
+      </ion-card-title>
+    </ion-card-content>
+    <ion-item>
+      {{ schema.description }}
+      <ion-badge item-end [color]="schema.badgecolor">{{ schema.badge }}</ion-badge>
+    </ion-item>
+  </ion-card>

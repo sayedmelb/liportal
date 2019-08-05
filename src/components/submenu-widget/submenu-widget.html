@@ -1,0 +1,21 @@
+<ion-toolbar no-border-top>
+  <ion-segment [(ngModel)]="secondMenu">
+    <ng-template ngFor let-fieldset [ngForOf]="formProperty.schema.fieldsets">
+      <ng-container *ngFor=" let fieldId of fieldset.fields let i = index">
+        <div *ngIf="setDisplayStatus(fieldset.fields[i])==true" class="btn-background-silver" style="height: 42px; padding-right: 10px; padding-left: 10px;">
+          <i class="icon-home ico-black" style="margin-right: 0.5em; margin-top: 0.25em;"></i>
+          <ion-icon style="color: black; margin-left: 0.5em;"> |</ion-icon>
+          <span class="top-second-row-ion-elem" style="margin-left: 0.5em;">Manage</span>
+        </div>
+        <div *ngIf="setDisplayStatus(fieldset.fields[i])==true" class="triangle">
+        </div>
+      </ng-container>
+    </ng-template>
+    <ng-template ngFor let-fieldset [ngForOf]="formProperty.schema.fieldsets">
+      <ion-segment-button *ngFor="let fieldId of fieldset.fields  let i = index" [attr.data-index]="i" [ngStyle]="{'max-width': fieldset.itemwidths[i]}"
+        [ngClass]="setClass(fieldset.fields[i])" [value]="formProperty.getProperty(fieldId).schema.title" (click)="selectMenu(formProperty, fieldId)">
+        <sf-form-element [formProperty]="formProperty.getProperty(fieldId)"></sf-form-element>
+      </ion-segment-button>
+    </ng-template>
+  </ion-segment>
+</ion-toolbar>

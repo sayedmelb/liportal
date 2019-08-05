@@ -1,0 +1,24 @@
+<ion-list>
+	<ion-item class="optus-header" no-lines>
+		<ion-note   (click)="showServiceList()" class="tab-header link-header" [ngClass]="{'link-header': showTabList()==false}">
+			{{headerTitle}}
+		</ion-note> <span *ngIf="showTabList()==false">/ {{serviceid}}</span>
+		<!-- <pre>{{formProperty.schema.tabs|json}} </pre> -->
+	</ion-item>
+	<ion-item-divider class="tab-segment" no-border no-lines sticky style="z-index:999" no-padding>
+		<ion-segment *ngIf="showTabList()==true" color="md-teal" [(ngModel)]="subSelected" class="padding-left-10">
+			<ng-template ngFor let-tab [ngForOf]="formProperty.schema.tabs">
+				<ion-segment-button (click)="updateHeader(tab)" [value]="tab.id" (ionSelect)="selectSub(tab.id, tabContent)" [ngStyle]="{'max-width': tab.width}">
+					{{tab.title }}
+				</ion-segment-button>
+			</ng-template>
+		</ion-segment>
+		<hr style="margin-top: 0.7em;">
+	</ion-item-divider>
+</ion-list>
+
+<mbsc-scrollview  [options]="settings" #tabContent="mobiscroll" style="align-items: flex-start;" (mousedown)="preventScroll($event)" (touchstart)="preventScroll($event)"  >
+	<mbsc-scrollview-item *ngFor="let tab of formProperty.schema.tabs" [id]="tab.id">
+		<sf-form-element [formProperty]="formProperty.getProperty(tab.id)" *ngIf="formProperty.getProperty(tab.id) && (!propertiesBehaviour[tab.id] || propertiesBehaviour[tab.id].show)"></sf-form-element>
+	</mbsc-scrollview-item>
+</mbsc-scrollview>

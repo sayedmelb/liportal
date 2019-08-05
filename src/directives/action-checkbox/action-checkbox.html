@@ -1,0 +1,21 @@
+<ion-row>
+  <ion-col col-12 class="pd-lt-2 pd-tp-3 pd-bt-3">
+    <label class="{{schema.label.styles}}" (click)="schema.actions && schema.actions.click ? presentModal(): ''">
+      <input type="checkbox" class="checkbox {{schema.checkbox.styles}}"/>
+      <span *ngIf="schema.label.text =='Current contracted speed'"  class="{{schema.label.styles}}">
+          {{schema.label.text}}
+        </span>
+      <span  *ngIf="schema.label.text !=='Current contracted speed' && schema.checkbox.type =='schedule'"  class="{{schema.label.styles}}">
+        {{schema.label.text }} Current = {{ + data[0].utilizedByOtherServicesLabel }} Mbps
+      
+      </span>
+      <span  *ngIf="schema.label.text !=='Current contracted speed' && schema.checkbox.type =='permanent'"  class="{{schema.label.styles}}">
+        {{schema.label.text}} Current = {{ data ? data[0].utilizedByOtherServicesLabel : 500 }} Mbps
+      </span>
+      <span  *ngIf="schema.label.text !=='Current contracted speed' && schema.checkbox.type =='dynamic'"  class="{{schema.label.styles}}">
+          {{schema.label.text }} Current = {{ + data[0].utilizedByOtherServicesLabel }} Mbps
+        
+        </span>
+    </label>
+  </ion-col>
+</ion-row> 

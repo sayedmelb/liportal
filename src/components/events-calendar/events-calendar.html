@@ -1,0 +1,28 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-12>
+      <ion-row class="row-style"  (click)="toggle()">
+          <ion-col col-4 text-left style="vertical-align: middle; margin: auto;">
+              <div class="term-header">
+                  Schedule Flex Calendar
+                </div>
+          </ion-col>
+          <ion-col col-7></ion-col>
+          <ion-col col-1 text-right style="vertical-align: middle; margin: auto;">
+              <span *ngIf="!show" class="arrow-icon-down">
+
+              </span>
+              <span *ngIf="show" class="arrow-icon-up">
+
+                </span>
+              <!-- <span class="arrow-down">
+                <ion-icon name="ios-arrow-down"></ion-icon>
+              </span> -->
+            </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col *ngIf="show" col-12 class="pd-bt-2">
+      <calendar-widget [events]= "events" [eventdata]="eventdata"></calendar-widget>
+    </ion-col>
+  </ion-row>
+</ion-grid>

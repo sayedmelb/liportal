@@ -1,0 +1,32 @@
+
+
+<div class="sub-heading" *ngIf="bendVisible">
+    <span class="heading-label" *ngIf="networkType!=='Mesh'" >   
+       {{addressEnd}} 
+     </span> 
+  
+    <span class="buttons-list" >
+      
+        <ion-item no-margin no-lines *ngFor="let control of dataSource">
+            <button no-margin 
+            [ngClass]="{
+              btnActivated: control == model[column]
+            }"
+            class=" button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+            (click)="onClickEvent($event, control, model, column)"
+            ion-button
+          >
+            {{ control |dynamicPipe:{pipes:column} }} 
+          </button>
+        </ion-item>
+    
+    </span>
+    
+    
+  </div>
+  <!-- <br>
+  <span *ngIf="addressEnd=='A-End:' ">Test</span> -->
+
+ 
+  
+  

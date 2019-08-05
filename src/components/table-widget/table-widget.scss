@@ -1,0 +1,261 @@
+table-widget {
+    .tableWidget {
+        padding-top: 1.5rem;
+    }
+    .lg-cell-header {
+        color: #00b1bb !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 12rem!important; 
+    }
+    .xl-cell-header {
+        color: #00b1bb !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 18rem!important; 
+    }
+    .md-cell-header {
+        color: #00b1bb !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 12rem!important;   
+    }
+    .sm-cell-header {
+        color: #00b1bb !important;
+        font-weight: 700;
+        font-size: 1.5rem;
+        cursor: pointer;
+        width: 5rem!important;   
+    }
+    
+    .md-cell-row {
+        width: 12rem!important;
+        padding: 0 1rem 0 0;
+    }
+    .sm-cell-row {
+        width: 5rem!important;
+        padding: 0 1rem 0 0;
+    }
+    .lg-cell-row {
+        width: 12rem!important;
+        padding: 0 1rem 0 0;
+    }
+    .xl-cell-row {
+        width: 18rem!important;
+        padding: 0 1rem 0 0;
+    }
+
+    @media (min-width: 1360px) {
+        
+        .xl-cell-header {
+            color: #00b1bb !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 16rem!important; 
+        }
+        .lg-cell-header {
+            color: #00b1bb !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 16rem!important; 
+        }
+        
+        .md-cell-header {
+            color: #00b1bb !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 14rem!important;   
+        }
+        .sm-cell-header {
+            color: #00b1bb !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 5rem!important;   
+        }
+        
+        .xl-cell-row {
+            width: 16rem!important;
+            padding: 0 1rem 0 0;
+        }
+        .lg-cell-row {
+            width: 16rem!important;
+            padding: 0 1rem 0 0;
+        }
+        .md-cell-row {
+            width: 14rem!important;
+            padding: 0 1rem 0 0;
+        }
+        .sm-cell-row {
+            width: 5rem!important;
+            padding: 0 1rem 0 0;
+        }
+       
+        
+    }
+    @media (min-width: 1600px) {
+        .xl-cell-row {
+            width: 28rem!important;
+        }
+        .xl-cell-header {
+            color: #00b1bb !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 28rem!important; 
+        }
+        .lg-cell-header {
+            color: #00b1bb !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 22rem!important; 
+        }
+        .md-cell-header {
+            color: #00b1bb !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 22rem!important;   
+        }
+        
+        .md-cell-row {
+            width: 22rem!important;
+            padding: 0 1rem 0 0;
+        }
+        .lg-cell-row {
+            width: 22rem!important;
+            padding: 0 1rem 0 0;
+        }
+        
+    }
+
+    .datatable-header, .datatable-row-center, .datatable-body, .datatable-scroll, .datatable-body-row, .datatable-row-center {
+        // width: auto !important;
+        // float: left;
+
+    }
+    // .datatable-header-inner {
+    //     width: auto !important;
+    // }
+    
+    .itemlink {
+        color: #00B1BB;
+        cursor: pointer;
+        padding-left: 0.5em;
+    }
+    .cog{
+        color: #00B1BB; 
+        cursor:pointer;
+    }
+    .imgcog {
+        height: 10px; 
+        cursor:pointer; 
+    }
+
+    .serviceSearch {
+        height: 40px;
+        width: 300px;
+        padding-left: 5px;
+       
+    }
+    .btnAlign {
+        margin-top: 15px;
+    }
+    .status-icon {
+        width: 20px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .rowdate {
+        font-size: 0.7em;
+    }
+    .ancView{
+        text-decoration: none; 
+        cursor: pointer; 
+        color: #00B1BB; 
+        font-size: 0.9em;
+    }
+    .datatable-row-even {
+        background: rgba(240, 240, 240, 1);
+    }
+    .datatable-row-odd {
+        background: white;
+    }
+    .datatable-body-cell {
+        margin: 0;
+        font-size: 0.8em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        white-space: normal !important;
+       
+    } 
+    .datatable-footer {
+        background: white; // rgba(218, 226, 234,1);
+        padding: 0 1em 0 1em;
+        .page-count {
+            display: none;
+        }
+        .datatable-pager {
+            text-align: center!important;
+        }
+        .pager {
+            text-align: center;
+            li {
+                padding: 0 1em !important;
+                width: 1px;
+                a {
+                    color: rgba(68, 68, 68, 1);
+                    text-decoration: none;
+                }
+                a:hover {
+                    text-decoration: none;
+                }
+            }
+            li.active {
+                border-bottom: 4px solid red;
+            }
+        }
+    } // Style rules for the footer pagination elements
+    .datatable-icon-done-all:before {
+        background-image: url("../../assets/imgs/rht_dbl.png");
+        content: "";
+        background-size: 15px 15px;
+        display: inline-block;
+        width: 15px;
+        height: 15px; // width: 5px;
+        content: ">>";
+    }
+    .datatable-icon-left:before {
+        background-image: url("../../assets/imgs/lft.png");
+        content: "";
+        background-size: 15px 15px;
+        display: inline-block;
+        width: 15px;
+        height: 15px; // width: 5px;
+    }
+    .datatable-icon-right:before {
+        background-image: url("../../assets/imgs/rht.png");
+        content: "";
+        background-size: 15px 15px;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+    }
+    .datatable-icon-skip:before {
+        content: ""
+    }
+    .datatable-icon-prev:before {
+        content: "";
+    }
+    ion-avatar {
+        display: inline-block!important;
+    }
+   
+}

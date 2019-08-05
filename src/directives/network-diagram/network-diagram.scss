@@ -1,0 +1,55 @@
+network-diagram {
+    .graph {
+        cursor: move;
+        padding-left: 2.2rem;
+    }
+    .node {
+        fill: rgba(217, 242, 244, 0.42);
+        stroke: #fff;
+        stroke-width: 0px;
+    }
+    .line {
+        stroke: #00A3AD;
+        stroke-width: 2px;
+        stroke-dasharray: 0.75rem;
+    }
+    .adress-label {
+        word-wrap: normal;
+        color: #10A8B2;
+        font-family: "MarkOT" !important;
+        font-size: 1.12rem;
+        fill: #10A8B2;
+        font-weight: 500;
+    }
+    .header {
+        font-size: 2rem;
+        font-weight: bold; 
+        font-family: "Mark Pro";
+        // font-family: "MarkOT" !important;
+    }
+    .header-description {
+        font-size: 1.4rem; // font-weight: bold;
+        font-family: "Mark Pro";
+        // font-family: "MarkOT" !important;
+        color: #606060;
+    }
+    .lbl {
+        //font-family: "Mark Pro";
+        font-family: "MarkOT" !important;
+        font-size: 1.2rem;
+    }
+    .lbl-bold {
+        fill: black;
+        //font-family: "Mark Pro";
+        font-family: "MarkOT" !important;
+        font-size: 1.3rem;
+        font-weight: bold;
+    }
+    .lbl-light {
+        fill: black;
+        //font-family: "Mark Pro";
+        font-family: "MarkOT" !important;
+        font-size: 1.2rem;
+        font-weight: normal;
+    }
+}

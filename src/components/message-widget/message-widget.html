@@ -1,0 +1,86 @@
+<!-- <ion-header>
+	<ion-navbar>
+		<ion-title ></ion-title>
+	</ion-navbar>
+</ion-header> -->
+
+<ion-content padding>
+		<img  class="crossbar" (click)="dismiss('empty')" src='../../assets/imgs/crossmesg.JPG'>
+	<!-- <div style="width: 100%;">test</div><br> -->
+	<ion-row>
+		<ion-col col-2></ion-col>
+		<ion-col col-8 *ngIf="messagetype=='on' && messageFor=='Qos' ">
+			<p> The <b>QoS</b> Feature must be turned on for all services in Mesh Network. Do you wish to configure QoS on all service?</p>
+		</ion-col>
+		<ion-col col-8 *ngIf="messageFor=='scheduleDynamic'">
+			<p><b>Dynamic Flex</b> will be turned off during this schedule event window</p>
+		</ion-col>
+		<ion-col col-8 *ngIf="messageFor=='scheduleIsPermanent'">
+			<p>You can't do <b>Schedule Flex</b>, since permanent bandwidth currently applying to the network</p>
+		</ion-col>
+		<ion-col col-8 *ngIf="messageFor=='dynamicIsDynamic'">
+				<p>You can't do <b>Dynamic Flex</b>, since one Dynamic bandwidth request currently applying to the network</p>
+			</ion-col>
+		<ion-col col-8 *ngIf="messagetype=='off'  && messageFor=='Qos' ">
+			<p> The <b>QoS</b> Feature is a contracted feature and cannot be downgraded. Please talk to your account manager
+				for further details</p>
+		</ion-col>
+		<ion-col col-2></ion-col>
+		<ion-col col-12>
+			<ion-row *ngIf="messageFor=='Qos' ">
+				<ion-col col-4 *ngIf="messageFor=='Qos' "></ion-col>
+				<ion-col col-4> <button  ion-button class="button-yellow btn-msg" style="width: 10em;" item-start (click)="dismiss('continue')">
+					CONTINUE
+				</button>
+			</ion-col>
+				<ion-col col-4></ion-col>
+			</ion-row>
+			<ion-row *ngIf="messageFor=='scheduleDynamic' ">
+				<ion-col col-4></ion-col>
+				<ion-col col-4><button  ion-button class="button-yellow btn-msg" style="width: 10em;" item-start (click)="dismiss('continue')">
+					CONTINUE
+				</button></ion-col>
+				<!-- <ion-col col-2></ion-col>
+				<ion-col col-3><button  ion-button class="button-yellow btn-msg" style="width: 10em;" item-start (click)="dismiss('cancel')">
+					CANCEL
+				</button></ion-col> -->
+				<ion-col col-4></ion-col>
+			</ion-row>
+			<ion-row *ngIf="messageFor=='scheduleIsPermanent' ">
+				<ion-col col-4 *ngIf="messageFor=='scheduleIsPermanent' "></ion-col>
+				<ion-col col-4> <button  ion-button class="button-yellow btn-msg" style="width: 10em;" item-start (click)="dismiss('close')">
+					CLOSE
+				</button>
+			</ion-col>
+				<ion-col col-4></ion-col>
+			</ion-row>
+			<ion-row *ngIf="messageFor=='dynamicIsDynamic' ">
+					<ion-col col-4 *ngIf="messageFor=='dynamicIsDynamic' "></ion-col>
+					<ion-col col-4> <button  ion-button class="button-yellow btn-msg" style="width: 10em;" item-start (click)="dismiss('close')">
+						CLOSE
+					</button>
+				</ion-col>
+					<ion-col col-4></ion-col>
+				</ion-row>
+			
+		</ion-col>
+		<!-- <ion-col col-4 *ngIf="messageFor=='Qos' "></ion-col>
+		<ion-col col-1 *ngIf="messageFor=='scheduleDynamic' "></ion-col>
+		
+		<ion-col col-2> <button  ion-button class="button-yellow btn-msg" style="width: 10em;" item-start (click)="dismiss('continue')">
+				CONTINUE
+			</button>
+		</ion-col>
+		<ion-col col-1 *ngIf="messageFor=='scheduleDynamic' "></ion-col>
+		<ion-col col-2 *ngIf="messageFor=='scheduleDynamic' ">
+			<button  ion-button class="button-yellow btn-msg" style="width: 10em;" item-start (click)="dismiss('cancel')">
+				CANCEL
+			</button>
+		</ion-col>
+		<ion-col col-4></ion-col> -->
+
+	</ion-row>
+
+
+
+</ion-content>

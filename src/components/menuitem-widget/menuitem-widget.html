@@ -1,0 +1,21 @@
+<ion-item [ngStyle]="{'width': schema.itemwidth}" *ngIf="parent.settings.type=='menu'" [color]="schema.settings?.color || parent.settings?.color || 'optuswhite'"
+  [ngClass]="{'btn-background-silver': schema.title=='Manage' || schema.title=='icon-home' }">
+  <span *ngIf="schema.title=='Support'">|</span> 
+  <ion-note [ngStyle]="{'font-size': '1.3rem'}" (mouseenter)="mouseOvered=true" (mouseleave)="mouseOvered=false"
+    [color]="(mouseOvered==false)?parent.settings.menucolor:parent.settings.menuhover" (click)="onClick(schema)"
+    *ngIf="schema.itemtype =='text'" [ngClass]="{'first-menu-active': schema.title=='MY BUSINESS PORTAL' || schema.title=='Test User' }">{{schema.title}}</ion-note>
+  <i *ngIf="schema.itemtype =='icon'" [class]="schema.title"></i>
+  <span *ngIf="schema.title =='icon-home' " class="divider-padding">|</span>
+  <div class="arrow-container" *ngIf="schema.title=='MY BUSINESS PORTAL'">
+    <div class="arrow-up">.</div>
+  </div>
+  <img *ngIf="schema.itemtype =='logo'" class="img-logo">
+</ion-item>
+
+<!-- <ion-item *ngIf="parent.settings.type!='menu'">
+  <span class="optus-primary-crumb">{{schema.title}}</span>
+  <span class="optus-dark-crumb"> / </span>
+  <span class="optus-primary-crumb" *ngIf="schema.title ==='Manage' ">{{ activeSecondMenu }}</span>
+  <span class="optus-dark-crumb" *ngIf="schema.title ==='Manage' "> / </span>
+  <span class="activetab" *ngIf="schema.title ==='Manage' ">{{ activeTab }}</span>
+</ion-item> -->

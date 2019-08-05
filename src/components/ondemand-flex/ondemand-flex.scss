@@ -1,0 +1,177 @@
+ondemand-flex {
+    .crossbar {
+        position: absolute;
+        z-index: 99;
+        top: 0.5rem;
+        right: 0.5rem;
+        cursor: pointer;
+        height: 3rem;
+        width: 3rem;
+        
+    }
+
+    .top-first-row {
+        background-color: color($colors, optusblack);
+        height: 48px;
+    }
+    .img-logo {
+        content: url("../../assets/imgs/lockup_optus logo.png");
+        margin-top: 0.9em;
+        height: 1.1em;
+    }
+    ul.review-menu {
+        font-weight: bold;
+        & li {
+            margin-left: 10px;
+            display: inline;
+            list-style-type: none;
+        }
+    }
+    .select-option {
+        margin: 100px 150px !important;
+    }
+    .list-md .item-block .item-inner {
+        border-bottom: none;
+    }
+    .range-md .range-bar {
+        background: color($colors, sliderinactive);
+        height: 4px;
+    }
+    .range-bar.range-bar-active,
+    .range-md-secondary .range-knob,
+    .range-md-secondary .range-pin,
+    .range-md-secondary .range-pin::before {
+        background: color($colors, optustealdark);
+        left: 0% !important;
+        // right: 55.55% !important;// this is hard coded 12/dec 
+    }
+    .range-md .range-knob {
+        left: 7px !important;
+        top: 10px !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .range-md .range-pin {
+        top: -23px;
+    }
+    .lblUpper {
+        position: absolute;
+        margin-top: 100px; //105px;
+        right: 45%;
+    }
+    .lblLower {
+        margin-top: 60px !important;
+    }
+    .lblContracted {
+        position: absolute;
+        margin-top: 113px;
+        font-size: 0.9em;
+    }
+    @media(min-width:768px) {
+        .lblContracted {
+            margin-left: -250px;
+        }
+    }
+    @media(min-width:1600px) {
+        .lblContracted {
+            margin-left: -320px;
+        }
+    }
+    ion-range .range-knob-handle:last-child {
+        visibility: hidden;
+        left: 50% !important;
+    }
+    ion-range .range-tick:nth-child(9),
+    ion-range .range-tick:nth-child(1),
+    ion-range .range-tick:nth-child(19) {
+        height: 20px !important;
+        width: 1px;
+    }
+    .range-md .range-knob-min.range-knob-min .range-knob {
+        border: 2px solid color($colors, optustealdark); //#00B1BB;
+        background: color($colors, optustealdark); //#00B1BB;
+    }
+    .range-md .range-pin {
+        background: color($colors, sliderknobhover) !important;
+        min-width: 100px !important;
+        border-radius: 10% !important;
+        left: -20px;
+        border: 1px color($colors, sliderknobhover) solid;
+        color: color($colors, sliderknobfontcolor);
+    }
+    .range-md .range-knob {
+        background: color($colors, optustealdark) !important;
+    }
+    .range-md .range-pin::before {
+        background: color($colors, sliderknobhover) !important;
+        left: 40%;
+        top: 1px;
+        border-top-left-radius: 50%;
+        border-top-right-radius: 50%;
+        border-bottom-right-radius: 50%;
+        border-bottom-left-radius: 0;
+        margin-left: -13px;
+        position: absolute;
+        z-index: -999;
+        width: 26px;
+        height: 26px;
+        background: color($colors, sliderknobhover) !important;
+        content: "";
+        -webkit-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        -webkit-transition: background-color 120ms ease;
+        transition: background-color 120ms ease;
+        border-right-width: 0px;
+        border: 1px solid color($colors, sliderknobhover) !important;
+    }
+    .range-md .range-knob-min.range-knob-min .range-pin,
+    .range-md .range-knob-min.range-knob-min .range-pin::before {
+        color: color($colors, sliderknobfontcolor) !important;
+    }
+    .range-md .range-tick {
+        background: color($colors, slidermarker);
+        width: 0px;
+    }
+    .range-md .range-tick-active {
+        background: color($colors, slidermarker);
+        width: 0px;
+    }
+    .range-md [range-left] {
+        margin: 80px -72px 0 0;
+    }
+    .range-md [range-right] {
+        margin: 80px 0 0 -90px;
+    }
+    .margin-offset {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .bold2 {
+        height: 2px;
+        background-color: #000;
+    }
+    .btnCancel {
+        color: #31758c;
+        font-weight: bold;
+        font-size: 1.3em;
+        cursor: pointer;
+    }
+    .btnAction {
+        width: 120%;
+    }
+
+
+    ion-toolbar .toolbar-title-md {
+        text-align: center;
+        color: color($colors, optusyellow);
+        font-weight: 1000;
+        font-size: 3rem;
+      }
+
+    .custom-icon {
+        height: 2rem;
+        width: 2rem;
+        top: 5px;
+        position: relative;
+    }
+}

@@ -1,0 +1,25 @@
+<mbsc-form input-style="box" label-style="stacked">
+    <div class="mbsc-grid mbsc-form-grid">
+        <mbsc-form-group>
+            <!-- <mbsc-form-group-title></mbsc-form-group-title> -->
+            <div class="mbsc-row">
+                <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                    <mbsc-time [(ngModel)]="scheduled_start_time" [options]="desktopSettings"
+                        (ngModelChange)="onPickTime('start_time',scheduled_start_time)">Start Time (AEST)</mbsc-time>
+                </div>
+                <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                    <mbsc-time [(ngModel)]="scheduled_end_time" [options]="desktopSettings"
+                        (ngModelChange)="onPickTime('end_time',scheduled_end_time)">End Time (AEST)</mbsc-time>
+                </div>
+            </div>
+            <div class="mbsc-row">
+                <div class="mbsc-col-sm-12 mbsc-col-md-7">
+                <span class="space-pd">&nbsp;</span><span style='font-size: 1.3rem;'>  Total hours of every occurrence <br></span>
+                <span class="space-pd">&nbsp;</span><span class="grey-text pd-left">{{timediff | dynamicPipe:{pipes:'hoursminutes'} }}</span>    
+                </div>
+                <div class="mbsc-col-sm-12 mbsc-col-md-4">
+                </div>
+            </div>
+        </mbsc-form-group>
+    </div>
+</mbsc-form>

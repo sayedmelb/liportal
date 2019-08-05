@@ -1,0 +1,130 @@
+<ion-row>
+    <ion-col padding-top col-12>
+      <span class="sub-heading">Spend Cap</span> <br />
+      <br />
+      <span>
+        The spend cap feature allows you to set a maximum dollar
+        amount for flex charges per service during the month. Whne the
+        maximum Flex dollar amount is reached, the Dynamic Feature
+        will be turned off and the speed will reduce to the contracted
+        bandwidth. The Spend cap amount can be adjusted at any time
+        during the month.
+      </span>
+      <br />
+      <br />
+    </ion-col>
+    <ion-col col-12>
+      <button
+        ion-button
+        (click)="setSpendCap($event, 'off')"
+        class="btnNoCap btnActivatedSpendCap button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+      >
+        <span style="font-size: 1.1em;">No cap</span>
+      </button>
+      <button
+        ion-button
+        (click)="setSpendCap($event, 'on')"
+        ion-button
+        class="btnSpendCap  button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+        style="width:200px;"
+      >
+        <span style="font-size: 1.1em;">Set cap</span>
+      </button>
+    </ion-col>
+    <ion-col col-12>&nbsp;</ion-col>
+    <ion-col col-8 *ngIf="spendCap == 'on'">
+      <ion-card>
+        <ion-card-header>
+          <span style="font-size: 1.1em; font-weight: bold;">{{ schema.datasource[0].selectedProduct.properties.location.title }}</span>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label style="font-size: 1.1em;">
+            Dollar Amount</ion-label
+          >
+          <input type="text" id="cursitea" value="$ " disabled />
+          <input
+            maxlength="10"
+            minlength="1"
+            (keypress)="onlyNumbersWithDotSpendCap($event)"
+            (blur)="spendCaponBlur('amtsitea', '', '')"
+            type="text"
+            placeholder="0"
+            id="curamountsitea"
+            [(ngModel)]="spendCapAmountsitea"
+          />
+          <ion-label style="font-size: 1.1em;">
+            Whole hours(per mth)</ion-label
+          >
+          <input
+            maxlength="6"
+            minlength="1"
+            (keypress)="onlyNumbersWithDotSpendCap($event)"
+            (blur)="spendCaponBlur('hrsitea', '', '')"
+            type="text"
+            placeholder="0"
+            id="houramtsitea"
+            [(ngModel)]="spendCapHoursitea"
+          />
+          <input type="text" id="hoursitea" value=" hours" disabled />
+          <ion-label style="font-size: 1.1em;">
+            Edit dollar amount or hours</ion-label
+          >
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col
+      *ngIf="spendCap == 'on'"
+      col-1
+      align-self-center
+      style="z-index: 99999; display:none;"
+    >
+      <img
+        style="height: 30px; margin-left: -27px; cursor: pointer;  "
+        [ngClass]="{ unlink: spendCapToggle == true }"
+        (click)="updateSpendCap()"
+        class="spendlink"
+      />
+    </ion-col>
+    <ion-col style="display:none;" *ngIf="spendCap == 'on'" col-5>
+      <ion-card style="margin-left: -70px;">
+        <ion-card-header>
+          <span style="font-size: 1.1em; font-weight: bold;">{{ schema.datasource[0].selectedProduct.properties.location.title }}</span>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-label style="font-size: 1.1em;">
+            Dollar Amount</ion-label
+          >
+          <input type="text" id="cursiteb" value="$ " disabled />
+          <input
+            maxlength="10"
+            minlength="1"
+            (keypress)="onlyNumbersWithDotSpendCap($event)"
+            (blur)="spendCaponBlur('amtsiteb', '', '')"
+            type="text"
+            placeholder="0"
+            id="curamountsiteb"
+            [(ngModel)]="spendCapAmountsiteb"
+          />
+          <ion-label style="font-size: 1.1em;">
+            Whole hours(per mth)</ion-label
+          >
+          <input
+            maxlength="6"
+            minlength="1"
+            (keypress)="onlyNumbersWithDotSpendCap($event)"
+            (blur)="spendCaponBlur('hrsiteb', '', '')"
+            type="text"
+            placeholder="0"
+            id="houramtsiteb"
+            [(ngModel)]="spendCapHoursiteb"
+          />
+          <input type="text" id="hoursiteb" value=" hours" disabled />
+          <ion-label style="font-size: 1.1em;">
+            Edit dollar amount or hours</ion-label
+          >
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-3></ion-col>
+    <ion-col *ngIf="spendCap == 'on'"></ion-col>
+  </ion-row>

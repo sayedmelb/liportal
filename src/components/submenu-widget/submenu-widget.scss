@@ -1,0 +1,20 @@
+submenu-widget {
+    .segment-md .segment-button {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+        opacity: 1.0;
+    }
+    .toolbar-background-md {
+        background: none;
+    }
+    .segment-triangle-margin {
+        margin-left: -1.6em;
+    }
+    .segment-no-border {
+        border-bottom-style: none !important;
+    }
+    .segment-md .segment-button.segment-activated {
+        border-color: color($colors, secondary);
+        border-bottom-width: 4px;
+    }
+}

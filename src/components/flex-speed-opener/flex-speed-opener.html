@@ -1,0 +1,23 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-12>
+      <ion-row style="cursor: pointer;" (click)="toggle()">
+        <ion-col col-3 text-left style="vertical-align: middle; margin: auto;">
+          <div class="term-header">
+            Schedule Flex
+          </div>
+        </ion-col>
+        <ion-col col-8></ion-col>
+        <ion-col col-1 text-right style="vertical-align: middle; margin: auto;">
+          <span class="arrow-down">
+            <ion-icon name="ios-arrow-down"></ion-icon>
+          </span>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col *ngIf="show" col-12 class="pd-bt-2">
+      <flex-scheduling [schema]="schema" [model]="model">
+      </flex-scheduling>
+    </ion-col>
+  </ion-row>
+</ion-grid>

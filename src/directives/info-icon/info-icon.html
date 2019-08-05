@@ -1,0 +1,13 @@
+<!-- <span (click)="toggle()">
+  <img [ngClass]="iconStyle" src="{{iconSource}}"/>
+</span>
+<span *ngIf="showInfoBox" class="overlay">
+    <div class="popup"> -->
+      <!-- <a class="close">&times;</a> -->
+     <!--  <span [innerHTML]="infoText"></span>
+    </div>
+  </span>
+ -->
+<span tooltip="{{infoText}}" placement="{{textPlacement}}" delay="500">
+  <img [ngClass]="iconStyle" src="{{iconSource}}"/>
+</span>

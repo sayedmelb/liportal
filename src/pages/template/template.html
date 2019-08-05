@@ -1,0 +1,41 @@
+<ion-content>
+	<ion-grid style="margin-bottom: -22px; " no-padding *ngIf="header">
+		<ion-row>
+			<ion-col>
+			</ion-col>
+			<ion-col col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11>
+				<sf-form [schema]="header"></sf-form>
+			</ion-col>
+			<ion-col>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<ion-grid no-padding *ngIf="schema && (schema.widget=='page' || schema.widget=='popover')">
+		<ion-row>
+			<ion-col>
+			</ion-col>
+			<ion-col col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11 *ngIf="schema.widget=='page'">
+				<sf-form [schema]="content" [model]="schema.model.content" (onChange)="schema.model.content=$event.value"></sf-form>
+			</ion-col>
+			<ion-col col-12 *ngIf="schema.widget=='popover'">
+				<sf-form [schema]="content" [model]="schema.model.content" (onChange)="schema.model.content=$event.value"></sf-form>
+			</ion-col>
+			<ion-col>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+	<ion-grid no-padding *ngIf="schema && schema.widget=='page'">
+		<ion-row>
+			<ion-col>
+			</ion-col>
+			<ion-col col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11>
+				<div class="ax_default image " id="u464">
+					<img class="img sdx_footer" id="u464_img" src="../../assets/imgs/footer.png">
+				</div>
+			</ion-col>
+			<ion-col>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-row align-items-start class="pd-lt-2">
+        <ion-col col-12 class="container-col"> <span class="header">QOS </span>
+          <hr class="bold2">
+        </ion-col>
+        <ion-col col-6 class="container-col ">
+          <ng-container *ngIf="schema.datasource.length > 0">
+            <ion-row>
+              <ion-col col-12> <span class="label-container">
+                <span *ngIf="checkAddressState('qos')" > {{schema.datasource[0].selectedProduct.properties.location.title}}</span>
+              </span> </ion-col>
+              <ion-col col-12 *ngIf="schema.datasource[0].model[0].qos.status !== schema.datasource[0].model[0]._qos.status">
+                <span class="label-sub"> {{ schema.datasource[0].model[0].qos.status }} </span> </ion-col>
+              <ion-col col-12> <span class="iris-blue" *ngIf="schema.datasource[0].model[0].qos.status === schema.datasource[0].model[0]._qos.status ">(No
+                  Change)</span> </ion-col> 
+            </ion-row>
+          </ng-container>
+        </ion-col>
+        <ion-col col-6 ></ion-col>
+      </ion-row>

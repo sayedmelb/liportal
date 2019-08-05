@@ -1,0 +1,14 @@
+<mbsc-form input-style="box" label-style="stacked">
+    <div class="mbsc-grid mbsc-form-grid">
+        <mbsc-form-group>
+            <div class="mbsc-row">
+                <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                    <mbsc-date [(ngModel)]="single_occurance_date" [options]="desktopSettings" (ngModelChange)="onPickDate('single_date',single_occurance_date)">Start Date (AEST)</mbsc-date>
+                </div>
+                <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                        <mbsc-date [(ngModel)]="single_occurance_date1" [options]="desktopSettings" (ngModelChange)="onPickDate('single_date1',single_occurance_date1)">End Date (AEST)</mbsc-date>
+              </div>
+            </div>
+        </mbsc-form-group>
+     </div>
+</mbsc-form>

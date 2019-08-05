@@ -1,0 +1,86 @@
+<ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col col-8 padding>
+      <ion-row align-items-start>
+        <ion-col style="height:130px;">
+          <ion-title> {{ schema.settings.title }}</ion-title>
+          <br/>
+          <div *ngIf="isLoading">
+              <ion-spinner></ion-spinner>
+            </div>
+            <br/>
+            <div *ngIf="isLoadingProgress">
+                <ion-spinner></ion-spinner>
+              </div>  
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ul class="progressbar">
+            <ng-container *ngFor="let list of schema.settings.list">
+                <li [ngClass]="{'active': list.status==='active','complete': list.status==='complete'}"><span class="barTitle">{{list.title}}</span></li>
+            </ng-container>
+          </ul>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr style="background-color: #D1D7DA; border-width: 0.5px;">
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!isConfirm && !isFailedStatus">
+       
+        <ion-col col-12>
+            <mbsc-form [options]="formSettings">
+              <mbsc-form-group>
+                  <mbsc-progress [ngModel]="progress2" max="100" step-labels="[0, 25, 50, 75, 100]"></mbsc-progress>
+              </mbsc-form-group>
+            </mbsc-form>
+        </ion-col>
+        <!-- <ion-col col-12 class="ion-text-center">
+          <span class="loading-bar-header">We are currently applying your change to the network...</span>
+        </ion-col> -->
+        
+      </ion-row>
+      <ion-row>
+          <!-- *ngIf="isConfirm" -->
+        <ion-col col-12 >
+          <ion-row>
+            <ion-col col-12>
+              <div style="height: 30px;"></div>
+            </ion-col>
+            <ion-col col-12>
+              <div [ngClass]="{'container-height-high': isConfirm===true,'container-height-med': isConfirm===false}" class="close-container">
+                <br>
+                <span *ngIf="isFailedStatus"  class="loading-bar-header col-red">
+                    Oops, Something went wrong while applying your change to the network...<br>
+                    You will be contacted shortly.<br> Incident number: INC00000001
+                </span>
+                <span *ngIf="!isConfirm && !isFailedStatus" class="loading-bar-header">We are currently applying your change to the network...</span>
+                <br>
+                <span *ngIf="isConfirm  && !isFailedStatus"  class="loading-bar-header">Your change has been successfully applied to the network</span>
+                <br>
+                <br>
+                <span  *ngIf="!isConfirm   && !isFailedStatus"  class="close-header">Your request # {{request}} has been submitted</span>
+                <span  *ngIf="isConfirm  && !isFailedStatus"  class="close-header">Your request # {{request}} has been completed</span>
+                <br>
+                <span *ngIf=" !isFailedStatus"   class="sub-summary">Your request has been forwarded to user@optus.com.au </span>
+                <span style="display: none;" class="sub-header-label"> View all requests</span>
+                <br *ngIf="isConfirm">
+                <br *ngIf="isConfirm">
+                <br *ngIf="isConfirm">
+                <br *ngIf="isConfirm">
+                <button *ngIf="isConfirm ||  isFailedStatus"  ion-button class="button-yellow btnAction btn-close" (click)="closeModel()">
+                  <span *ngIf="isConfirm ||  isFailedStatus"  class="btn-close-text">CLOSE</span>
+                </button>
+              </div>
+              <div style="height: 150px;">&nbsp;</div>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>

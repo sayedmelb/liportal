@@ -1,0 +1,91 @@
+.button-md,
+.segment-md .segment-button {
+  text-transform: none;
+}
+.toolbar-title-md {
+  padding: 0;
+  color: color($colors, optusteal);
+  font-weight: 1000;
+  font-size: 3rem;
+}
+.header-md::after {
+  border-bottom: 1px transparent solid;
+}
+.toolbar-md {
+  padding: 0px;
+  min-height: 40px;
+}
+.padding-0 {
+  padding: 0px;
+}
+.margin-right-8 {
+  margin-right: 8% !important;
+}
+ion-select {
+  border: 1px solid;
+}
+@media (min-width: 400px) {
+  .backdropOpacityPopover {
+    .popover-content {
+      width: 90%;
+      left: 5% !important;
+      top: 0% !important;
+      
+    }
+  }
+}
+@media (min-width: 1600px) {
+  .backdropOpacityPopover {
+    .popover-content {
+     
+      width: 75%;
+      left: 12.5% !important;
+      top: 0% !important;
+    }
+  }
+}
+.grey {
+  color: color($colors, optusgreyshade2);
+}
+.optustealdark {
+  color: color($colors, optustealdark);
+}
+.button-yellow {
+  background-color: color($colors, optusyellow);
+}
+.button-md {
+  color: color($colors, optusblack);
+}
+.button-grey {
+  background-color: color($colors, optusbuttongrey);
+}
+.button-white {
+  background-color: color($colors, optuswhite);
+}
+ion-img {
+  background: transparent;
+}
+a {
+  color: color($colors, optustealdark);
+}
+.font-500 {
+  font-weight: 500;
+}
+.flex-color {
+  color: #80276c;
+}
+.warning-color {
+  color: #f9a01b;
+}
+.vl {
+  width: 1px;
+  height: 100%;
+  background: #d1d7da;
+  margin: auto;
+}
+.thumbnail {
+  height: 2rem;
+  width: 2rem;
+  top: 5px;
+  position: relative;
+}

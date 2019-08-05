@@ -1,0 +1,81 @@
+<ion-row *ngIf="schema.controls">
+  <!-- <button (click)= reloadData();>refresh</button> -->
+  <ng-container *ngFor="let control of schema.controls">
+    <ng-container *ngIf="control.type == 'search'">
+      <button
+        ion-button
+        (click)="onControlClick(control, $event)"
+        [clear]="control.clear"
+        type="button"
+      >
+        {{ control.title }} <br />
+        {{ control.subtitle }}
+      </button>
+      <div class="verticalLine"></div>
+    </ng-container>
+    <button
+      *ngIf="control.type == 'button'"
+      ion-button
+      (click)="onControlClick(control, $event)"
+      [ngClass]="{ active: control.active }"
+      [large]="control.large"
+      [outline]="control.outline"
+      [color]="control.color"
+      type="button"
+    >
+      <ion-img
+        [src]="schema.settings.path + schema.settings.signs[control.id]"
+        class="custom-icon"
+        *ngIf="schema.settings.signs[control.id]"
+      ></ion-img>
+      &nbsp; {{ control.title }} &nbsp;
+      <b class="black">{{ control.sites }}</b> &nbsp;
+    </button>
+  </ng-container>
+</ion-row>
+<ion-row class="maprow">
+  <ion-col col-4 no-padding *ngIf="schema.settings.behaviour.showChild">
+    <sidebar [schema]="schema" [model]="formProperty.value" (sidebarClose) ="getCloseStats($event)" ></sidebar>
+  </ion-col>
+  <ion-col no-padding>
+    <input
+      class="mapSearch"
+      placeholder="Search by address, state, service ID"
+      autocomplete="off"
+      (keyup)="updateFilter($event)"
+    />
+    <ngui-map
+      class="height-56"
+      [zoom]="schema.settings.zoom"
+      [center]="schema.settings.center"
+      (mapReady$)="onMapReady($event)"
+      (click)="onMapClick($event)"
+    >
+      <custom-marker
+        *ngFor="let data of schema.datasource"
+        [position]="[data.address.lat, data.address.long]"
+        (mouseenter)="onHover(data)"
+        (mouseleave)="onHoverOut()"
+        (click)="onClick()"
+        (initialized$)="onCustomMarkerInit($event, data)"
+      >
+        <img
+          [src]="schema.settings.path + schema.settings.marker[data.marker]"
+          class="custom-icon-size"
+        />
+      </custom-marker>
+      <info-window
+        id="iw"
+        [pixelOffset]="{ width: 0, height: 0 }"
+        [disableAutoPan]="true"
+        [zIndex]="9999"
+      >
+        <div
+          *ngIf="schema.settings.info"
+          [innerHtml]="schema.settings.info.text"
+          [ngClass]="schema.settings.info.class"
+        ></div>
+      </info-window>
+    </ngui-map>
+  </ion-col>
+</ion-row>

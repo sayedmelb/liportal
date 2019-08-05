@@ -1,0 +1,24 @@
+<ion-row align-items-start>
+  <ion-col col-12>
+    <ion-label>
+      <span class="header">{{schema.label}}</span>
+
+
+    </ion-label>
+    <hr class="bold2">
+  </ion-col>
+</ion-row>
+<ion-row align-items-start>
+  <!-- <ion-col col-6 *ngFor="let column of schema.columns; let i=index" [ngClass]="{'border-right': (i+1)!=schema.columns.length}"> -->
+  <ion-col col-6 *ngFor="let column of schema.columns; let i=index" >
+      <ng-container *ngIf="i==0">
+          <readonly-label [addresson]="addresson" [schema]="schema" [column]="column" [index]="i"
+          [addresssource]="addressSource" [service]="service" [network]="network"></readonly-label>
+      </ng-container>
+      <ng-container *ngIf="network=='P2P' && i==1">
+          <readonly-label [addresson]="addresson" [schema]="schema" [column]="column" [index]="i"
+          [addresssource]="addressSource" [service]="service"  [network]="network"></readonly-label>
+      </ng-container>
+    <!-- <readonly-label [addresssource] = "addressSource" [addresson]="addresson" [schema]="schema" [column]="column" [model]="model"></readonly-label> -->
+  </ion-col>
+</ion-row>

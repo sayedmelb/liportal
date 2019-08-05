@@ -1,0 +1,91 @@
+<ngx-datatable
+#table
+class="material striped"
+columnMode="force"
+[rows]="rows"
+[limit]="5"
+[headerHeight]="'auto'"
+[footerHeight]="50"
+[rowHeight]="100"
+[reorderable]="reorderable"
+[columns]="columns"
+[messages]="my_messages"
+[summaryRow]="false"
+[rowClass]="getRowClass"
+(activate)="onActivate($event)"
+(select)='onSelect($event)'
+>
+<ng-template ngFor let-col [ngForOf]="columns">
+    <ngx-datatable-column [resizeable]="true" [sortable]="true"
+      [name]="col.title"
+      [prop]="col.prop"
+      headerClass="{{col.headerClass}}"
+      cellClass="{{col.cellClass}}"
+      [cellTemplate]="col.columnTemplateType==0 ? templateExpandedText : col.template"
+    >
+    <ng-template
+          let-column="col"
+          ngx-datatable-header-template
+          let-sort="sortFn"
+        >
+          <ion-icon
+            color="optusblack"
+            *ngIf="col.type != 'cog'"
+            name="md-menu"
+          ></ion-icon>
+          <span (click)="sort()" style="font-size: 1.5rem;"> <b>{{ col.title }}</b> </span>
+      </ng-template>
+      
+      <!-- <ng-template
+          let-row="row"
+          let-value="value"
+          ngx-datatable-row-template
+          style="border: solid black 1px!important;"          
+        >          
+          <span> {{ value }} </span>
+      </ng-template> -->
+
+    </ngx-datatable-column>
+</ng-template>
+
+<ngx-datatable-footer>
+    <ng-template 
+      ngx-datatable-footer-template
+      let-rowCount="rowCount"
+      let-pageSize="pageSize"
+      let-selectedCount="selectedCount"
+      let-curPage="curPage"
+      let-offset="offset"
+      let-isVisible="false">
+        <div class="page-count">
+          <span *ngIf="selectedMessage">
+            {{selectedCount.toLocaleString()}} {{selectedMessage}} / 
+          </span>          
+        </div>
+        <datatable-pager
+            [pagerLeftArrowIcon]="'datatable-icon-left'"
+            [pagerRightArrowIcon]="'datatable-icon-right'"
+            [pagerPreviousIcon]="'datatable-icon-prev'"
+            [pagerNextIcon]="'datatable-icon-skip'"
+            [page]="curPage"
+            [size]="pageSize"
+            [count]="rowCount"
+            [hidden]="!((rowCount / pageSize) > 1)"
+            (change)="table.onFooterPage($event)">
+        </datatable-pager>
+    </ng-template>
+  </ngx-datatable-footer>
+
+</ngx-datatable>
+
+
+<ng-template style="width: 100%" #templateExpandedText let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+  <div class="parent">
+    <div [ngStyle]="setStyle(rowIndex)" class="content">      
+        {{ value.length > 50 ? value.substring(0, 49) : value}} <a *ngIf="value.length > 50" (click)="showIndex = rowIndex">More</a>
+    </div>
+    <div *ngIf="rowIndex == showIndex" class="popup">
+      {{value}} <br /> <a (click)="showIndex = -1">Less</a>
+    </div>
+  </div>    
+</ng-template>

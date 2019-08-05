@@ -1,0 +1,24 @@
+review-change {
+    .header {
+        font-size: 1.6rem;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .header-description {
+        color: #7B7B7B;	font-size: 1.6rem; 
+    }
+    .label {
+        font-size: 1.4rem;
+    }
+    .label-md {
+        margin-top: -10px!important;
+    }
+    .verticalDivider {
+        width: 1px;
+        height: 50px;
+        background-color: #d1d7da;
+      }
+      ion-col.border-right.col {
+        border-right: 1px solid #D1D7DA;
+      }
+}

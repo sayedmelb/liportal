@@ -1,0 +1,96 @@
+service-detail {
+    .collapsible-container {
+        padding: 5rem 0 5rem 0;
+    }
+
+    .header {
+        font-size: 1.6rem;
+        font-weight: 600;
+        width: 100%;
+
+    }
+
+    .button-yellow {
+        max-width: 7.5rem;
+        max-height: 3rem; 
+    }
+
+    .button-yellow span {
+        font-family: 'Mark Pro Heavy' !important;
+        // max-width: 7.5rem;
+        // max-height: 3rem;
+    }
+
+    .segment-md .segment-button {
+        background: color($colors, optuswhite);
+        border: none;
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #262626;
+        // padding-bottom: 4rem;
+        padding-bottom: 2rem;
+        height: 3.5rem;
+    }
+
+    .segment-button {
+        margin-bottom: -0.45em;
+    }
+
+    .segment-button.segment-activated {
+        color: color($colors, optusblack);
+        font-weight: bold;
+        border-bottom: 0.5rem #ff6e7e solid !important;
+    }
+
+    .tab-segment .label-md {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+    }
+
+    .tab-header {
+        color: color($colors, secondary);
+        font-size: 1.4em;
+        font-weight: bold;
+    }
+
+    hr {
+        height: 1px;
+        background-color: #D1D7DA !important;
+    }
+
+    .optus-header {
+        min-height: 4.0rem;
+
+    }
+
+    .optus-header .label-md {
+        margin-top: 0%;
+        margin-bottom: 0px;
+
+    }
+
+    .optus-header.item-md {
+        padding-left: 5px !important;
+
+    }
+
+    ion-segment {
+        justify-content: left;
+        height: 2rem;
+    }
+
+    .padding-left-10 {
+        padding-left: 1rem;
+    }
+
+    .link-header {
+        cursor: text;
+    }
+
+    .arrow-down {
+        float: right;
+        width: 5%;
+        cursor: pointer;
+    }
+}

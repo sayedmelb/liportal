@@ -1,0 +1,54 @@
+schedule-opener {
+  .arrow-down {
+    //float: right;   
+    width: 5%;
+    cursor: pointer;
+}
+.row-style{
+  cursor: pointer; 
+  background-color: #f4f4f4;
+}
+.term-header {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #006280;
+}
+
+  ion-col.border-right.col {
+    border-right: 1px solid #D1D7DA;
+  }
+  .flexInput {
+        width: 60px;
+        height: 30px;
+        text-align: center;
+        margin-top: -5px;
+      }
+      .btnAlign {
+        margin-top: -5px;
+        width: 170px;
+       // padding: 0!important;
+    }
+    .sub-heading {
+        font-weight: 600;
+        font-size: 1.6rem;
+      }
+      .inputLabel {
+        font-weight: bold;
+        font-size: 1.4rem;
+        padding-left: 2rem;
+        padding-right: 1rem;
+      }
+      .white-space-left {
+        margin-left: 2rem;
+      }
+      .small-text {
+          font-size: 1rem;
+          color: color($colors, optusgrey);
+      }
+      .iconsign {
+        width: 22px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 1rem;
+      }
+}

@@ -1,0 +1,184 @@
+toggle-combo {
+  ion-col.border-right.col {
+    border-right: 1px solid #D1D7DA;
+  }
+  .mbsc-ios.mbsc-form {
+    background: transparent;
+  }
+
+  .mbsc-ios .mbsc-control-w:before, .mbsc-ios .mbsc-control-w:after {
+    border-top: 0px solid #fff;
+    content: "";
+    
+}
+.noinputLabel {
+  padding-left: 0rem;
+}
+ 
+  .flexInput {
+        width: 60px;
+        height: 30px;
+        text-align: center;
+        margin-top: -5px;
+      }
+      .btnAlign {
+        margin-top: -5px;
+        width: 170px;
+       // padding: 0!important;
+    }
+    .sub-heading {
+        font-weight: 600;
+        font-size: 1.6rem;
+      }
+      .inputLabel {
+        font-weight: bold;
+        font-size: 1.4rem;
+        padding-left: 2rem;
+        padding-right: 0.5rem;
+      }
+      .white-space-left {
+        margin-left: 2rem;
+      }
+      .small-text {
+          font-size: 1rem;
+          color: color($colors, optusgrey);
+      }
+      .iconsign {
+        width: 22px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 1rem;
+      }
+
+      .toggle-md-secondary.toggle-checked .toggle-icon {
+        background-color: color($colors, optuswhite) !important;
+      }
+      .toggle-md-togglecolor.toggle-checked .toggle-icon {
+        background-color: color($colors, optusteal) !important;
+      }
+      .toggle-md-secondary.toggle-checked .toggle-inner {
+        background-color: color($colors, optuswhite) !important;
+      }
+      .toggle-md-togglecolor.toggle-checked .toggle-inner {
+        background-color: color($colors, optuswhite) !important;
+      }
+      .toggle-md.toggle-checked .toggle-inner {
+        -webkit-transform: translate3d(50px, 0, 0);
+        transform: translate3d(50px, 0, 0);
+      }
+      .toggle-md {
+        width: 101px;
+        height: 84px;
+      }
+      .toggle-md .toggle-inner {
+        width: 50px;
+        height: 26px;
+        top: 29px;
+      }
+      .toggle-md .toggle-icon {
+        border-radius: 0px;
+      }
+      .toggle-md .toggle-inner {
+        border-radius: 0px;
+      }
+
+
+ion-checkbox .item-cover {
+  width: 5% !important;
+}
+
+.item[no-lines] {
+  height: 1.8em;
+  min-height: 1.5em;
+}
+
+//html-toggle start
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #00a3ad;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #00a3ad;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(35px);
+  -ms-transform: translateX(35px);
+  transform: translateX(35px);
+}
+
+/*------ ADDED CSS ---------*/
+.on
+{
+  display: none;
+  left: 30%;
+}
+
+.off 
+{
+  left: 70%;
+}
+
+.on, .off
+{
+  color: white;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  font-size: 10px;
+  font-family: Verdana, sans-serif;
+}
+
+input:checked+ .slider .on
+{display: block;}
+
+input:checked + .slider .off
+{display: none;}
+
+/*--------- END --------*/
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;}
+//html-toggle-end
+
+
+
+}

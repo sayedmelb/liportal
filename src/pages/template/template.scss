@@ -1,0 +1,42 @@
+page-template {
+	ion-toolbar.toolbar-md {
+		cursor: pointer;
+		min-height: 36px;
+	}
+
+	.fab {
+		contain: layout;
+	}
+	
+	ion-fab {
+		button {
+			box-shadow: 0 4px 10px #6b6b6b;
+		}
+
+		ion-fab-list button[ion-fab] {
+			text-align: center;
+			overflow: visible;
+
+			div.label {
+				position: absolute;
+				right: 48px;
+				height: 24px;
+				line-height: 16px;
+				padding-left: 8px;
+				padding-right: 8px;
+				padding-top: 5px;
+				padding-bottom: 5px;
+				margin-top: 8px;
+				border-radius: 5px;
+				box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.14), 0 4px 5px rgba(0, 0, 0, 0.1);
+			}
+		}
+
+		.button-inner {
+			overflow: visible;
+		}
+	}
+	.sdx_footer {
+		width: 100%;
+	}
+}

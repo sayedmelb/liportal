@@ -1,0 +1,37 @@
+<div class="card-container" style="min-width: 250px!important;max-width:350px!important;">  
+  <mbsc-card [options]="settings" class="card">
+    <mbsc-card-header>
+        <mbsc-card-subtitle class="sub-title">{{schema.label}}
+
+        </mbsc-card-subtitle> 
+    </mbsc-card-header>
+    <mbsc-card-content class="content" style="height:60px!important;">
+        <!-- <span *ngIf="schema.label =='Service Address'" >{{getDisplayValue() | dynamicPipe:{pipes:'serviceaddress'} }}</span> -->
+        <span *ngIf="schema.label =='Service Address'" [innerHTML]="getDisplayValueAddress()" ></span> 
+        <span *ngIf="schema.label !=='Service Address' && schema.label !=='Network Name' && schema.label !=='Access Type' " >{{getDisplayValue() | dynamicPipe:{pipes:schema.pipe} }}</span>
+        <span *ngIf="schema.label =='Network Name'">{{getDisplayValue() | dynamicPipe:{pipes:'capitalize'} }}</span>
+        <span *ngIf="schema.label =='Access Type'">{{getDisplayValue() | dynamicPipe:{pipes:'accesstype'} }}</span>
+        
+        <span *ngIf="schema.label =='Flex Pack'" class='small-text' ><span > Flex Max</span>  {{parentschema.datasource[0].selectedProduct.properties.service.properties.bandwidth ? getFlexMax(): null}}</span>
+    </mbsc-card-content>
+   
+    <mbsc-card-footer>
+      <div class="footer">                    
+          <!-- <mbsc-button *ngIf="schema.action_type == actionType.Options" flat icon="arrow-down2" (click)="show = !show"></mbsc-button> -->
+          <!-- <mbsc-button *ngIf="schema.action_type == actionType.Links" flat (click)="show = !show">
+              <ion-icon name="settings"></ion-icon>
+          </mbsc-button> -->
+          <mbsc-button *ngIf="schema.action_type == actionType.Links" flat (click)="LoadChange()">
+            <ion-icon name="settings"></ion-icon>
+        </mbsc-button>
+          <mbsc-button *ngIf="schema.action_type == actionType.Edit" flat icon="pencil" (click)="loadPermBWChange($event)"></mbsc-button> 
+          <mbsc-button *ngIf="schema.action_type == actionType.None" [style.visibility]="schema.action_type == actionType.None ? 'hidden' : 'visible'" flat icon="pencil"></mbsc-button>                   
+      </div>            
+    </mbsc-card-footer>
+  </mbsc-card>
+  <div class="list" *ngIf="show">          
+      <mbsc-listview [options]="stripedSettings">
+          <mbsc-listview-item (click)="LoadChange()" *ngFor="let item of schema.options" style="text-align:left; font-weight: bold; cursor: pointer; font-size: 1.5rem; color: #00A3AD !important;">{{ item }}</mbsc-listview-item>
+      </mbsc-listview> 
+  </div> 
+</div>

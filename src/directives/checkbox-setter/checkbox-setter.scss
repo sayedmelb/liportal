@@ -1,0 +1,28 @@
+checkbox-setter {
+
+    .mbsc-ios.mbsc-form {
+        background: #fff!important;
+      }
+      .mbsc-ios .mbsc-divider, .mbsc-ios .mbsc-form-group-title {
+        background: #fff!important;
+      }
+      .mbsc-ios .mbsc-input input {
+        border: 1px solid  color($colors, optusgrey);
+        cursor: pointer;
+      }
+
+      .mbsc-form-group {
+          margin: 0.1rem 0;
+      }
+
+      .sub-heading {
+        font-size: 1.1em;
+        color: grey;
+        
+
+      }
+      // ion-list {
+      //   display: inline-flex!important;
+      // }
+
+}

@@ -1,0 +1,209 @@
+scheduled-flex-review-widget {
+    .height-16 {
+        height: 16rem;
+    }
+    .imageSchInfographic {
+        position: relative;
+        width: 100%;
+        /* for IE 6 */
+    }
+    .leftFlexChange {
+        position: absolute;
+        top: 68%;
+        left: 175px;
+        width: 100%;
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    .rightFlexChange {
+        position: absolute;
+        top: 68%;
+        left: 480px;
+        width: 100%;
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    @media(min-width:1500px) {
+        .leftFlexChange {
+            left: 225px;
+
+        }
+        .rightFlexChange {
+            left: 580px;  
+        }
+    }
+
+    //below from review-scss
+
+    .toolbar-title-md {
+        font-family: "Mark Pro Heavy" !important;
+      }
+      
+      .button-grey span, .button-white span, .button-yellow span{
+        font-family: 'Mark Pro Heavy'!important;
+      }
+      
+        .heading2 .toolbar-title-md {
+          font-size: 2.5rem;
+          margin-left: 0.8rem;
+        
+        }
+      
+        @media (max-width: 1279px) {
+          .progressbar {
+            margin-left: -9.0rem;
+            .barTitle {
+              margin-top : -6rem;
+              margin-left: -1.25rem;
+              position: absolute;
+            }
+          }
+        }
+        @media (min-width: 1280px) {
+          .progressbar {
+            margin-left: -10.5rem;
+            .barTitle {
+              margin-top : -6rem;
+              margin-left: -1.25rem;
+              position: absolute;
+            }
+          }
+      
+        }
+      
+        @media (min-width: 1520px) {
+          .progressbar {
+            margin-left: -12rem;
+            .barTitle {
+              margin-top : -6rem;
+              margin-left: -1.25rem;
+              position: absolute;
+            }
+          }
+      
+        }
+      
+      
+        ion-row.container-row.row {
+          padding: 20px 0 10px 0;
+        }
+      
+        ion-col.container-col.col {
+          padding: 5px 0 10px 5px;
+        }
+      
+        ion-col.border-right.col {
+          border-right: 1px solid #D1D7DA;
+        }
+      
+        .para-height-med {
+          height: 1rem;
+        }
+      
+        .arw {
+          max-width: 100%;
+          border: 0;
+          width: 18px;
+          vertical-align: sub;
+        }
+      
+        .verticalDivider {
+          width: 1px;
+          height: 50px;
+          background-color: #d1d7da;
+        }
+      
+        .label,
+        .label-sub {
+          font-size: 1.45rem;
+        }
+      
+        .label-container {
+          font-size: 1.6rem;
+        }
+        .grid-bordered{
+          // .row{
+          //   border-style: solid;
+          //   border-width: 0.05rem 0rem 0.05rem 0rem;
+          //   border-color: #dedede;
+          // }
+          .col{
+            border-style: solid;
+            border-width: 0.05rem 0.05rem 0.05rem 0.05rem;
+            border-color: #dedede;
+          }
+         
+        }
+        .col-med {
+          min-height: 5rem;
+        }
+        .col-high {
+          min-height: 11rem;
+        }
+      
+        .label-sub-med {
+          font-size: 1.4rem;
+          font-weight: 500;
+          word-wrap: normal;
+          display: inline-flex;
+          text-align: center;
+          font-family: "Mark Pro" !important;
+        }
+      
+        .label-sub-bold {
+          font-size: 1.4rem;
+          font-weight: 500;
+          word-wrap: normal;
+          display: inline-flex;
+          text-align: center;
+          font-family: "Mark Pro Heavy" !important;
+        }
+      
+        .color-blue {
+          color: #00B1BB;
+        }
+      
+        .header,
+        .header6 {
+          font-size: 1.6rem;
+          font-weight: 600;
+        }
+      
+        .header-margin {
+          margin-top: 0 !important;
+        }
+      
+        .sub-header-label {
+          color: color($colors, secondary);
+          font-weight: 500;
+          font-size: 1.6rem;
+        }
+      
+        .spn-left {
+          display: inline;
+          margin-left: -2.5rem;
+        }
+      
+        .fnt-label {
+          font-size: 1.4rem;
+      
+        }
+      
+        .button-grey:hover {
+          background-color: #d1d7da !important;
+        }
+      
+        .button-white:hover {
+          background-color: rgb(243, 245, 247) !important;
+        }
+      
+        .iris-blue {
+          color: #00B1BB;
+        }
+      
+        .grey-text {
+          font-size: 0.9em;
+          color: grey;
+        }
+
+}

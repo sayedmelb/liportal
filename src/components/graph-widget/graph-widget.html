@@ -1,0 +1,58 @@
+<mbsc-form *ngIf="isReporting">
+  <div class="mbsc-row">
+    <div class="mbsc-col">
+      <select [(ngModel)]="selectedFrame" mbsc-select [touchUi]="false">
+        <option *ngFor="let frame of frameSelection" [value]="frame">{{frame}}</option>
+      </select>
+    </div>
+    <div class="mbsc-col">
+      <select [(ngModel)]="selectedLocation" mbsc-select [touchUi]="false" [group]="true">
+        <optgroup *ngFor="let group of locations" [label]="group.group">
+          <option *ngFor="let location of group.locations" [value]="location.Value">{{location.Name}}</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="mbsc-col" *ngIf="selectedFrame=='Specific'">
+      <mbsc-datetime [(ngModel)]="start" placeholder="Start Time" [options]="externalSettings"></mbsc-datetime>
+    </div>
+    <div class="mbsc-col" *ngIf="selectedFrame=='Specific'">
+      <mbsc-datetime [(ngModel)]="end" placeholder="End Time" [options]="externalSettings"></mbsc-datetime>
+    </div>
+  <!-- </div>
+  <div class="mbsc-row"> -->
+    <div class="mbsc-col">
+        <mbsc-input [(ngModel)]="aggregate" label-style="inline" type="number" placeholder="Aggregation"></mbsc-input>
+    </div>
+    <div class="mbsc-col">
+      <select [(ngModel)]="selectedTimeFrame" mbsc-select [touchUi]="false">
+        <option *ngFor="let timeFrame of timeFrames" [value]="timeFrame">{{timeFrame}}</option>
+      </select>
+    </div>
+    <div class="mbsc-col">
+        <mbsc-button color="warning">Go</mbsc-button>
+        <mbsc-button (click)="OnRefresh()" color="warning">Refresh</mbsc-button>
+    </div>
+
+  </div>
+</mbsc-form>
+<div *ngIf="isLoading && isAvailabilityGraphLoading  && isReporting">
+  <ion-spinner></ion-spinner>
+</div>
+<div>
+    <br>
+  <span *ngIf="isReporting == false" class="report-message">Reporting is not available since the service is in Provisioning</span> 
+                
+</div>
+
+<div *ngIf="!isLoading && isReporting"  >
+  <p class="mbsc-row mbsc-col mbsc-align-center mbsc-justify-content-center graph-head">Utilisation</p>
+  <p class="mbsc-row mbsc-col mbsc-align-center mbsc-justify-content-center graph-container "><img src="{{base64URI}}"></p>
+</div>
+
+<div *ngIf="!isLoading && !isAvailabilityGraphLoading && isReporting">  
+  <p style="vertical-align: -webkit-baseline-middle;" class="mbsc-row mbsc-col mbsc-align-center mbsc-justify-content-center graph-head">
+    <span>Availability</span>&nbsp;&nbsp;<span>{{availabilityPercent}}</span>
+    <!-- <input style="width:60px; border: darkgray 2px solid;" [value]="availabilityPercent"> -->
+  </p>              
+  <p class="mbsc-row mbsc-col mbsc-align-center mbsc-justify-content-center graph-container "><img src="{{availabilityGraphBase64URI}}"></p>
+</div>

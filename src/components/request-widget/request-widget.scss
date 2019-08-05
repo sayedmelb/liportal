@@ -1,0 +1,43 @@
+request-widget {
+
+    .input-style {
+        border: 1px solid #999;
+        border-radius: 5px;
+        height: 40px;
+        width: 80%;
+      
+        -webkit-appearance: border-box;
+      }
+
+      a {
+        font: 400 13.3333px "Mark Pro" !important;
+      }
+
+    .circle {
+        width: 15px;
+        height: 15px;
+        border-radius: 7.5px
+    }
+
+    .purple {
+        background-color: purple;
+    }
+
+    .blue {
+        background-color: lightblue;
+    }
+
+    .green {
+        background-color: darkgreen;
+    }
+
+    .buttons {
+        text-align:right;
+        padding-left: 0px !important;
+    }
+
+    .col-padding {
+        padding-left: 0px !important;
+    }
+    
+}

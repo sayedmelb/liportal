@@ -1,0 +1,13 @@
+<ion-grid style=" padding-left: 0px;">
+    <ng-template ngFor let-fieldset [ngForOf]="formProperty.schema.fieldsets">
+        <ion-row *ngFor="let fieldId of fieldset.fields" [ngClass]="{'first-row': fieldId=='layer1','menu-second-row': fieldId=='layer2', 'menu-third-row': fieldId=='layer3' }">
+            <ion-col col-12>
+                <div *ngIf="fieldId=='layer1'" class="arrow-container">
+                    <div class="arrow-up">.</div>
+                </div>
+                <sf-form-element *ngIf="fieldId!='layer3'" [formProperty]="formProperty.getProperty(fieldId)"></sf-form-element>
+                <sf-form-element *ngIf="fieldId=='layer3'" [formProperty]="formProperty.getProperty(fieldId)"></sf-form-element>
+            </ion-col>
+        </ion-row>
+    </ng-template>
+</ion-grid>

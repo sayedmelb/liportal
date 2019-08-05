@@ -1,0 +1,274 @@
+<ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col col-8 padding>
+      <ion-row align-items-start>
+        <ion-col>
+          <ion-title> {{ schema.settings.title }}</ion-title>
+          <br/>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <!-- <ng-container *ngFor="let list of schema.settings.list">
+            <img [src]="schema.settings.path + list.image" class="thumbnail" />
+            <b padding-right>{{ list.label }}</b>
+          </ng-container> -->
+          <ul class="progressbar">
+            <li class="complete">Configure</li>
+            <li  class="active">Review</li>
+            <li>Confirm</li>
+        </ul>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr style="background-color: #D1D7DA; border-width: 0.5px;">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 *ngIf="isSaveLatter">
+          <ion-row>
+            <ion-col col-12>
+              <div style="height: 30px;"></div>
+            </ion-col>
+            <ion-col col-12>
+              <span style="font-size: 2.5em; color:black; font-weight: bold">Your configuration was saved for later</span>
+            </ion-col>
+            <ion-col col-3>
+
+              <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+            </ion-col>
+            <ion-col col-9></ion-col>
+
+          </ion-row>
+        </ion-col>
+        <ion-col col-12 *ngIf="!isSaveLatter">
+          <ion-row align-items-start>
+            <ion-col col-12>
+              <ion-title class="heading2">Change Summary</ion-title>
+              <h6>FLEX BANDWIDTH</h6>
+              <hr class="bold2">
+            </ion-col>
+            <ion-col col-5>
+              <span class="fnt-label">
+                <strong>A-End:</strong> {{data.macaddress1}}</span>
+              <br>
+              <span style="font-size:1.2em;">{{data.initialRange.lower}}</span> &nbsp;
+              <img class="arw" src='../../assets/imgs/12-hor.png'> &nbsp;
+              <span style="font-size:1.2em;">{{data.changeFlexValue}}+ Mbps</span>
+            </ion-col>
+            <ion-col>
+              <div class="verticalDivider"></div>
+            </ion-col>
+            <ion-col col-5>
+              <span class="fnt-label">
+                <strong>B-End:</strong> {{data.macaddress2}}</span>
+              <br>
+              <span style="font-size:1.2em;">{{data.initialRange.lower}}</span> &nbsp;
+              <img class="arw" src='../../assets/imgs/12-hor.png'> &nbsp;
+              <span style="font-size:1.2em;">{{data.changeFlexValue}}+ Mbps</span>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <div style="height: 30px;"></div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+              <ion-label class="header-margin header6">FLEX COST
+                <span class=" sub-header-label" style="display: inline; ">if triggered</span>
+              </ion-label>
+              <hr class="bold2">
+            </ion-col>
+            <ion-col col-5>
+              <span class="fnt-label">
+                <strong>A-End:</strong> {{data.macaddress1}}</span>
+              <br>
+              <span class="fnt-label">${{data.siteaFlexTotal | number : '1.2-2'}}/hr</span>
+            </ion-col>
+            <ion-col>
+              <div class="verticalDivider"></div>
+            </ion-col>
+            <ion-col col-5>
+              <span class="fnt-label">
+                <strong>B-End:</strong> {{data.macaddress2}}</span>
+              <br>
+              <span class="fnt-label">${{data.sitebFlexTotal | number : '1.2-2'}}/hr</span>
+            </ion-col>
+            <ion-col col-12>
+              <hr>
+              <span class="fnt-label">
+                <strong>Total cost $ {{totalCost() | number : '1.2-2'}}/hr </strong> (A-End + B-End)</span>
+              <br> $## minimum cost
+              <br> 60min minimum time period
+              <br>
+              <br> Other pricing information.
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div style="height: 30px;"></div>
+            </ion-col>
+          </ion-row>
+          <ion-row align-items-start>
+            <ion-col col-12>
+              <ion-label class="header-margin header6">FLEX UP RULES
+                <span class=" sub-header-label" style="display: inline; ">increase to {{data.changeFlexValue}}Mbps</span>
+              </ion-label>
+              <hr class="bold2">
+            </ion-col>
+
+            <ion-col col-12>
+              <span class="fnt-label">
+                <strong>{{data.flexUp | titlecase}}:</strong> if the link exceeds
+                <strong>{{data.flexupUtilisation}}%</strong> utilisation of
+                <strong>{{data.initialRange.lower}}Mbps</strong> contracted bandwidth.</span>
+              <br>Above the threshold for 60% of the defined period
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div style="height: 30px;"></div>
+            </ion-col>
+          </ion-row>
+          <ion-row align-items-start>
+            <ion-col col-12>
+              <ion-label class="header-margin header6">FLEX DOWN RULES
+                <span class=" sub-header-label" style="display: inline; ">Return to {{data.changeFlexValue}}Mbps contracted bandwidth</span>
+              </ion-label>
+              <hr class="bold2">
+            </ion-col>
+
+            <ion-col col-12>
+              <span class="fnt-label">
+                <strong>{{getFlexDown()}}:</strong> if the link falls
+                <strong>{{data.flexupUtilisationDown}}%</strong> utilisation of
+                <strong>{{data.initialRange.lower}}Mbps</strong> contracted bandwidth.</span>
+              <br>Below the threshold for 60% of the defined period
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div style="height: 30px;"></div>
+            </ion-col>
+          </ion-row>
+          <ion-row align-items-start>
+            <ion-col col-12>
+              <ion-label class="header-margin header6">TIMEBOX RULES</ion-label>
+              <hr class="bold2">
+            </ion-col>
+
+            <ion-col col-12>
+              <span *ngIf="data.timeBox =='off'" class="fnt-label">
+                <strong>Flex any time</strong>
+              </span>
+              <span *ngIf="data.timeBox =='on'" class="fnt-label">
+                <strong>Flex at specified times</strong>
+              </span>
+              <br>
+              <span *ngIf="data.timeBox =='on'" class="fnt-label">
+                <strong>Between:</strong> {{data.stime | date: 'hh:mm aa'}} and {{data.etime | date: 'hh:mm aa'}}
+              </span>
+              <br>
+              <span *ngIf="data.timeBox =='on'" class="fnt-label">
+                <strong>On these days:</strong> {{getWeekDaysList()}}
+              </span>
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col>
+              <div style="height: 30px;"></div>
+            </ion-col>
+          </ion-row>
+          <ion-row align-items-start>
+            <ion-col col-12>
+              <ion-label class="header-margin header6">SPEND CAP</ion-label>
+              <hr class="bold2">
+            </ion-col>
+
+
+            <ion-col col-5>
+              <span class="fnt-label">
+                <strong>A-End:</strong> {{data.macaddress1}}</span>
+              <br>
+              <span style="font-size:1.1em;">${{data.spendCapAmountsitea | number : '1.2-2'}}</span> per month
+            </ion-col>
+            <ion-col>
+              <div class="verticalDivider"></div>
+            </ion-col>
+            <ion-col col-5>
+              <span class="fnt-label">
+                <strong>B-End:</strong> {{data.macaddress2}}</span>
+              <br>
+              <span style="font-size:1.1em;">${{data.spendCapAmountsiteb | number : '1.2-2'}}</span> per month
+
+            </ion-col>
+            <ion-col col-12>
+              <hr>
+              <span class="fnt-label">
+                <strong>Total spend cap $ {{data.spendCapTotal | number : '1.2-2'}} per month </strong>
+              </span>
+              <br> $## minimum cost
+              <br> 60min minimum time period
+              <br>
+              <br> Other pricing information.
+
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-12>
+              <hr>
+            </ion-col>
+            <ion-col col-11>
+              <strong>Terms & Conditions</strong>
+            </ion-col>
+            <ion-col col-1 padding-right style="text-align: right;" (click)="openTnC()">
+              <ion-icon name="ios-arrow-down"></ion-icon>
+            </ion-col>
+            <ion-col col-12 *ngIf="tnc" class="height-16"></ion-col>
+            <ion-col col-12>
+              <hr>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+
+            <ion-col col-3>
+              <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col col-3>
+              <button ion-button full class="button-white btnAction" (click)="saveforLatter($event)">SAVE FOR LATTER</button>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col col-3>
+              <button ion-button full class="button-yellow btnAction" (click)="goToNext()">SUBMIT FOR APPROVAL</button>
+            </ion-col>
+            <ion-col></ion-col>
+
+          </ion-row>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+        <ion-col col-5></ion-col>
+        <ion-col col-2 style="text-align: center">
+          <span class="btnCancel" (click)="closeModel()">Cancel</span>
+        </ion-col>
+        <ion-col col-5></ion-col>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>

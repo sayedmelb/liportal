@@ -1,0 +1,148 @@
+<div class="fixed-sticky">
+  <cost-summary [schema]="schema" [model]="schema.datasource" [networkType]="networkType"></cost-summary>
+</div>
+<div *ngIf="isLoading">
+  <ion-spinner></ion-spinner>
+</div>
+<div class="scroll-container" *ngIf="!isLoading">
+  <ion-grid>
+    <br />
+    <ion-row>
+      <ion-col col-2 *ngIf="!schema.child"></ion-col>
+      <ion-col col-8 no-padding padding-left padding-right class="border-right">
+        <ion-row align-items-start>
+          <ion-col>
+            <ion-title> {{ schema.settings.title }} </ion-title>
+            <br />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul class="progressbar">
+              <ng-container *ngFor="let list of schema.settings.list">
+                <li [ngClass]="{'active': list.status==='active','complete': list.status==='complete'}"><span
+                    class="barTitle">{{list.title}}</span></li>
+              </ng-container>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <network-diagram [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null">
+        </network-diagram>
+        <ion-row class="pd-tp-2 pd-bt-2">
+          <!-- <ion-col>
+            <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplate()"></span>
+          </ion-col> -->
+          <ion-col col-12> <span class='sub-heading'>Contracted Speed</span><info-icon [infoText]="'Contracted Speed means the minimum committed speed provided as part of the service.  The contracted speed cannot be downgraded during the contract term. Increasing your contracted speed will also increase your Flex Max speed which can be used for temporary speed upgrades. (See Flex Capacity for further details).'" [textPlacement]="'right'"></info-icon>
+          </ion-col> 
+          <ion-col col-12>
+              <p *ngIf="networkType == 'P2P'" class='description-text'>Use the slider to set the service speed you require between A-End and B-End.
+                <br><b>Note:</b> The slider below represents the <b>A-End</b> which is currently the most utilised link
+              </p>
+              <p *ngIf="networkType !=='P2P'" class='description-text'>Use the slider to set the service speed you require</p>
+          </ion-col>
+        </ion-row>
+       <!-- <ion-row class="pd-tp-2 pd-bt-2">
+           <ion-col>
+            <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplateSpeedChange()"></span>
+          </ion-col> 
+          
+        </ion-row>-->
+        <ion-row class="dynamicslider">
+          <ion-col>
+            <slider [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+              (bwChange)="getSliderChange($event)"></slider>
+          </ion-col>
+        </ion-row>
+        <ion-row class="pd-tp-3">
+          <ion-col col-6 *ngFor="let control of tempSchemaForActionCheckbox">
+            <action-checkbox [schema]="control" ></action-checkbox>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <hr>
+              <!-- <radio-list [schema]="schema" [list]="schema.settings.radiolist[0]"></radio-list> -->
+          </ion-col>
+        </ion-row>
+        <service-level (valueChange)="getPortChange($event)" [addressEnds]="addressEnds" [networkType]="networkType"
+          [property]="'portCapacity'" [schema]="schema.datasource[0].schema.port_selections"
+          [model]="schema.datasource[0].model"></service-level>
+        <ion-row>
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <service-level (valueChange)="getPortChange($event)" [addressEnds]="addressEnds" [networkType]="networkType"
+          [property]="'flex_capacity'" [schema]="schema.datasource[0].schema.flex_pack"
+          [model]="schema.datasource[0].model"></service-level>
+        <ion-row>
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <two-button-combo [schema]="schema" [model]="schema.datasource[0].model"></two-button-combo>
+        <ion-row>
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <toggle-mono *ngIf="networkType=='Mesh'" [schema]="schema" [model]="schema.datasource[0].model"></toggle-mono>
+        <ion-row *ngIf="networkType=='Mesh'">
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <service-level *ngIf="networkType=='P2P'" (valueChange)="getPortChange($event)" [addressEnds]="addressEnds" [networkType]="networkType"
+          [property]="'gradeOfService'" [schema]="schema.datasource[0].schema.grade_of_service"
+          [model]="schema.datasource[0].model"></service-level>
+
+        <ion-row  *ngIf="networkType=='P2P'">
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <toggle-combo *ngIf="isProactiveMonitoring"  [schema]="schema" [model]="schema.datasource[0].model"></toggle-combo>
+        <ion-row *ngIf="isProactiveMonitoring" >
+            <ion-col>
+              <hr>
+            </ion-col>
+          </ion-row>
+  
+        <service-level (valueChange)="getPortChange($event)" [addressEnds]="addressEnds" [networkType]="networkType"
+          [property]="'serviceLevel'" [schema]="schema.datasource[0].schema.sd_fibre_sla"
+          [model]="schema.datasource[0].model"></service-level>
+        <ion-row align-items-start>
+          <ion-col col-12>
+            <hr>
+          </ion-col>
+          <ion-col col-12>
+            <add-contact [schema]="schema" [model]="schema.datasource[0].model"></add-contact>
+          </ion-col>
+          <ion-col col-12>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-4 *ngIf="schema.child">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        <navigation-button-list [schema]="schema"></navigation-button-list>
+      </ion-col>
+      <ion-col col-4>
+        &nbsp;
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

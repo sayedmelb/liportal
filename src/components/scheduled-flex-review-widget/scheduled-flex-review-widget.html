@@ -1,0 +1,281 @@
+<ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col col-8 padding>
+        <ion-row align-items-start>
+          <ion-col>
+            <ion-title> {{ schema.settings.title }}</ion-title>
+            <br />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul class="progressbar">
+              <ng-container *ngFor="let list of schema.settings.list">
+                <li [ngClass]="{'active': list.status==='active','complete': list.status==='complete'}"><span
+                    class="barTitle">{{list.title}}</span></li>
+              </ng-container>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p class="para-height-med"></p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 *ngIf="isSaveLatter">
+            <ion-row>
+              <ion-col col-12>
+                <div style="height: 30px;"></div>
+              </ion-col>
+              <ion-col col-12> <span style="font-size: 2.5em; color:black; font-weight: bold">Your configuration was
+                  saved for later</span> </ion-col>
+              <ion-col col-3> <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+              </ion-col>
+              <ion-col col-9></ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-12 *ngIf="!isSaveLatter">
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <ion-title class="heading2">Change Summary</ion-title>
+              </ion-col>
+            </ion-row>
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <speed-summary-schedule  [schema]="schema" [model]="schema.data"
+                  [network]="networkType">
+                </speed-summary-schedule>
+              </ion-col>
+            </ion-row>
+            <ion-row align-items-start>
+                <ion-col col-12>
+                  <flex-schedule-review  [schema]="schema" [model]="schema.data"
+                    [network]="networkType">
+                  </flex-schedule-review>
+                </ion-col>
+              </ion-row>
+              <ion-row align-items-start>
+                <ion-col col-12>
+                  <hr>
+                </ion-col>
+                <ion-col col-12>
+                  <terms-and-conditions [schema]="getSchemaForTnC()"></terms-and-conditions>
+                </ion-col>
+                <ion-col col-12>
+                  <hr>
+                </ion-col>
+              </ion-row> 
+             <!--<ion-row align-items-start>
+              <ion-col col-12>
+                <review-port-capacity *ngIf="checkNoChange('review-port-capacity')==true" [schema]="schema"
+                  [model]="schema.data" [network]="networkType"></review-port-capacity>
+              </ion-col>
+            </ion-row>
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <review-flex-capacity *ngIf="checkNoChange('review-flex-capacity')==true" [schema]="schema"
+                  [model]="schema.data" [network]="networkType"></review-flex-capacity>
+              </ion-col>
+            </ion-row>
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <review-vlan *ngIf="checkNoChange('review-vlan')==true" [schema]="schema" [model]="schema.data"
+                  [network]="networkType">
+                </review-vlan>
+              </ion-col>
+            </ion-row>
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <review-qos *ngIf="checkNoChange('review-qos')==true" [schema]="schema" [model]="schema.data">
+                </review-qos>
+              </ion-col>
+            </ion-row>
+  
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <review-change *ngIf="checkNoChange('grade-of-service')==true" [addresson]="schema.data.addressON"
+                  [schema]="schema.settings.gradeOfService" [addressSource]="schema" [service]="grade"
+                  [network]="networkType"></review-change>
+              </ion-col>
+            </ion-row>
+  
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <review-proactive-monitoring *ngIf="checkNoChange('review-proactive-monitoring')==true" [schema]="schema"
+                  [model]="schema.data" [network]="networkType">
+                </review-proactive-monitoring>
+              </ion-col>
+            </ion-row>
+  
+            <ion-row align-items-start>
+              <ion-col col-12>
+                <review-change *ngIf="checkNoChange('service-level')==true" [addresson]="schema.data.addressON"
+                  [schema]="schema.settings.serviceLevel" [addressSource]="schema" [service]="sla"
+                  [network]="networkType"></review-change>
+              </ion-col>
+            </ion-row> -->
+            <!--total start-->
+  
+            <!-- hardcode version start-->
+  
+            
+  
+         
+            <!-- <ion-row align-items-start>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+              <ion-col col-12>
+                <terms-and-conditions [schema]="getSchemaForTnC()"></terms-and-conditions>
+              </ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+            </ion-row>-->
+            <ion-row align-items-start>
+              <ion-col col-3> <button ion-button full class="button-grey btnAction" (click)="goToPrevious()">EDIT</button>
+              </ion-col>
+              <ion-col></ion-col>
+              <ion-col col-3> <button ion-button full class="button-white btnAction" >SAVE
+                  FOR LATTER</button> </ion-col>
+              <ion-col></ion-col>
+              <ion-col col-3> <button ion-button full class="button-yellow btnAction" (click)="goToNext()"
+                [disabled]="isSubmitDisabled()"  >SUBMIT</button> </ion-col>
+              <ion-col></ion-col>
+            </ion-row> 
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>
+            <hr>
+          </ion-col>
+          <ion-col col-5></ion-col>
+          <ion-col col-2 style="text-align: center"> <span class="btnCancel" (click)="closeModel()">Cancel</span>
+          </ion-col>
+          <ion-col col-5></ion-col>
+          <ion-col col-12>
+            <hr>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+
+<!-- <ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col col-8 no-padding padding-left padding-right>
+      <ion-row align-items-start>
+        <ion-col>
+          <ion-title>{{schema.settings.title}}</ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ng-container *ngFor="let list of schema.settings.list">
+            <img [src]="schema.settings.path + list.image" class="thumbnail" />
+            <b padding-right>{{ list.label }}</b>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <ion-card>
+        <ion-card-content no-padding>
+          <div class="imageSchInfographic">
+            <img [src]="schema.settings.networkimg">
+            <span class="leftFlexChange">{{ data.scheduled_bw ?
+              data.scheduled_bw :
+              data.contracted_bw }}{{ data.bw_unit }}</span>
+            <span class="rightFlexChange">{{ data.scheduled_bw ?
+              data.scheduled_bw :
+              data.contracted_bw }}{{ data.bw_unit }}</span>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-row>
+        <ion-col col-12>
+          <h6>FLEX BANDWIDTH</h6>
+          <hr class="bold2">
+          <ion-label class="grey">{{ data.from }}</ion-label>
+          <span>{{ data.contracted_bw }} -> {{ data.scheduled_bw ? data.scheduled_bw : data.contracted_bw }} {{ data.bw_unit }}</span>
+          <hr>
+          <ion-label class="grey">{{ data.address }}</ion-label>
+          <span>{{ data.contracted_bw }} -> {{ data.scheduled_bw }}
+              {{ data.bw_unit }}</span>
+          <h6>FLEX SCHEDULING</h6>
+          <hr class="bold2">
+          <ion-row>
+            <ion-col col-6 padding-top no-padding>
+              <ion-label class="grey">
+                Start Datetime
+              </ion-label>
+              <span>{{ data.scheduled_start_date | date: 'EEEE dd/MM/yyyy' }}</span><br>
+              <span>{{ data.scheduled_start_date | date: 'hh:mm aa' }}</span>
+            </ion-col>
+            <ion-col col-6 padding-top no-padding>
+              <ion-label class="grey">
+                End Datetime
+              </ion-label>
+              <span>{{ data.scheduled_end_date | date: 'EEEE dd/MM/yyyy' }}</span><br>
+              <span>{{ data.scheduled_end_date | date: 'hh:mm aa'}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-col col-12 no-padding>
+            <ion-label class="grey">Recurs</ion-label>
+            <span>{{ data.scheduled_recurrence }}</span>
+          </ion-col>
+          <ion-col col-12 no-padding>
+            <ion-label class="grey">Total flex time</ion-label>
+            <span>{{ ((data.scheduled_end_date - data.scheduled_start_date) / 1000 / 60
+              / 60) | number: '1.2-2' }} hours</span>
+          </ion-col>
+          <h6>Total monthly cost change</h6>
+          <hr class="bold2">
+          <ion-col col-12 no-padding>
+            <span>
+              $ {{ data.monthly_cost }} -> <b> $ {{(data.monthly_cost + ( 1.6 * ((875 - 750)/720) * ((data.scheduled_end_date - data.scheduled_start_date) / 1000 / 60/ 60))) | number: '1.2-2'}}</b>
+            </span><br>
+            <span class="grey">
+              Other pricing information
+            </span>
+          </ion-col>
+        </ion-col>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+        <ion-col col-11><strong>Terms & Conditions</strong></ion-col>
+        <ion-col col-1 padding-right style="text-align: right;" (click)="openTnC()">
+          <ion-icon name="ios-arrow-down"></ion-icon>
+        </ion-col>
+        <ion-col col-12 *ngIf="tnc" class="height-16"></ion-col>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+        <ion-col></ion-col>
+        <ion-col col-3>
+          <button ion-button full class="button-yellow btnAction" (click)="goToNext()">SUBMIT</button>
+        </ion-col>
+        <ion-col>
+        </ion-col>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+        <ion-col col-4></ion-col>
+        <ion-col col-2 style="text-align: center"><span class="btnCancel" (click)="closeModel()">Cancel</span></ion-col>
+        <ion-col col-2 style="text-align: center"><span class="btnCancel" (click)="goToPrevious()">Back</span></ion-col>
+        <ion-col col-4></ion-col>
+        <ion-col col-12>
+          <hr>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid> -->

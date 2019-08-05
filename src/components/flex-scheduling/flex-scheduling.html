@@ -1,0 +1,59 @@
+<ion-grid>
+  <ion-row>
+    <ion-col *ngIf="show" col-12>
+      <span class="sub-heading">
+        Flex select the date and time to select your flex bandwidth <info-icon></info-icon>
+      </span>
+    </ion-col>
+    <ion-col col-12>
+      <time-setter-dual [schema]="schema" [model]="model" (timehoursChange)="OnTimeHoursMinutes($event)"
+        (timesetterChange)="OnTimePicked($event)"></time-setter-dual> 
+    </ion-col>
+    <ion-col col-12>
+      <ion-row>
+        <ion-col col-3 class="border-right">
+          <ion-row>
+            <ion-col col-12>
+              <radio-list [schema]="schema" [list]="schema.settings.radiolist[0]"
+                (recurrenceChange)="OnRecurrencePicked($event)"></radio-list>
+            </ion-col>
+            <ion-col col-12 class="margin-tp">
+              <span>No Of Occurances</span><br>
+              <span class="grey-text">{{ noOfOccurance }}</span>
+            </ion-col>
+           
+            <ion-col col-12>
+              <!-- | dynamicPipe:{pipes:'hoursminutes'}  -->
+              <span style='font-size: 1.3rem;'>Total hours for all occurrences</span><br><span class="grey-text"> {{ totalHoursAllOccurancesRaw   }}
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+        <ion-col col-9 *ngIf="stateControl=='Once'">
+          <date-setter-mono [schema]="schema" [model]="model" (datesetterChange)="OnDatePicked($event)">
+          </date-setter-mono>
+
+        </ion-col>
+        <ion-col col-9 *ngIf="stateControl=='Daily'">
+          <checkbox-setter [schema]="schema" [model]="model" [network]="networkType" [checkboxlist]="checkboxlist"
+            [stateControl]="stateControl" (checkboxlistChange)="OnCheckBoxListChange($event)"
+            (datesetterChange)="OnDatePicked($event)"></checkbox-setter>
+        </ion-col>
+        <ion-col col-9 *ngIf="stateControl=='Weekly'">
+          <checkbox-setter [schema]="schema" [model]="model" [network]="networkType" [checkboxlist]="checkboxlist"
+            [stateControl]="stateControl" (weeklyCountChange)="OnWeeklyChangeCount($event)"
+            (checkboxlistChange)="OnCheckBoxListChange($event)" (datesetterChange)="OnDatePicked($event)">
+          </checkbox-setter>
+        </ion-col>
+        <ion-col col-9 *ngIf="stateControl=='Monthly'">
+          <checkbox-setter [schema]="schema" [model]="model" [network]="networkType" [checkboxlist]="checkboxlist"
+            [stateControl]="stateControl" (checkboxlistChange)="OnCheckBoxListChange($event)"
+            (datesetterChange)="OnDatePicked($event)"></checkbox-setter>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 *ngIf="stateControl!=='Once'">
+      <date-setter-dual [schema]="schema" [model]="model" (datesetterChange)="OnDatePicked($event)"></date-setter-dual>
+    </ion-col>
+  </ion-row>
+</ion-grid>

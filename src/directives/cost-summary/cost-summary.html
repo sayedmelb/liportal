@@ -1,0 +1,137 @@
+
+<ion-grid >
+  <ion-row>
+    <ion-col col-8 no-padding padding-left padding-right style="width: 110rem;">
+      &nbsp;
+    </ion-col>
+    <ion-col col-4>
+      <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col col-10>
+          <ion-title>{{schema.settings.costsummary[0].label}} </ion-title>
+          <ion-row>
+            <!-- <ion-col col-6> <span class="cost-heading" style="display: none;"> {{schema.settings.costsummary[0].costheading}} </span></ion-col>
+            <ion-col col-6 text-right>
+            </ion-col> -->
+            <ion-col col-12 *ngIf="costChange==true">
+              <hr class="bold2" />
+            </ion-col>
+            <ion-col col-12 *ngIf="costChange==false">
+              <ion-row>
+                <ion-col col-9>
+                  <hr class="bold2" />
+                </ion-col>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+          <ng-container *ngIf="hasmodel "> 
+            <ion-row>
+              <ion-col col-12 *ngIf="costChange==true">
+                <ion-row>
+                  <ion-col col-6></ion-col> 
+                  <ion-col col-3><span class="sub-heading-2" text-right>{{schema.settings.costsummary[0].subheadingleft}}</span></ion-col>
+                  <ion-col col-3 class="sub-heading-2" text-right><span>{{schema.settings.costsummary[0].subheadingright}}</span></ion-col>
+                  <ion-col col-12>
+                    <hr />
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <!-- <ion-col col-6 *ngIf="hasmodel && model[0].selectedProduct.properties.topology!=='Point to Point' " col-6>
+
+                <span class="black-bold"
+                  
+                  ><b>{{model[0].selectedProduct.properties.line  | dynamicPipe:{pipes:'networkname'} }}</b></span>
+
+              </ion-col> -->
+              <ion-col col-6><span class="black-bold" *ngIf="networkType=='P2P'">{{schema.settings.costsummary[0].aend}}: </span>
+                <span class="grey-text" *ngIf="networkType=='P2P'"> {{model[0].selectedProduct.properties.line  | dynamicPipe:{pipes:'networkname'} }}</span>
+                <span class="black-bold" *ngIf="networkType!=='P2P'"> {{model[0].selectedProduct.properties.line  | dynamicPipe:{pipes:'networkname'} }}</span>
+              </ion-col>
+              <ion-col col-3></ion-col>
+              <ion-col col-3></ion-col>
+              <ion-col col-6><span class="grey-text">{{schema.settings.costsummary[0].monthlylabel}}</span></ion-col>
+              <ion-col col-3><span text-right>${{500
+                  | number: '1.2-2'}}</span></ion-col>
+              <ion-col *ngIf="costChange==true" col-3 text-right><span>${{(totalAend | number: '1.2-2')}} </span></ion-col>
+              <ion-col *ngIf="costChange==false" col-3></ion-col>
+              <ion-col col-6><span class="grey-text">{{schema.settings.costsummary[0].installcharge}}</span></ion-col>
+              <ion-col col-2><span></span></ion-col>
+              <ion-col *ngIf="costChange==true" col-4 text-right><span>${{installChargeAend | number: '1.2-2' }} </span></ion-col>
+              <ion-col *ngIf="costChange==false" col-4></ion-col>
+              <ion-col col-12 *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' && costChange==true ">
+                <hr />
+              </ion-col>
+              <ion-col col-12 *ngIf="costChange==false">
+                <ion-row>
+                  <ion-col col-9>
+                    <hr />
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col col-6 *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' "><span class="black-bold">{{schema.settings.costsummary[0].bend}}:
+                </span><span class="grey-text">{{ schema.datasource[0].otherEnds[0].properties.line | dynamicPipe:{pipes:'networkname'} }}</span></ion-col>
+              <ion-col col-3 *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' "></ion-col>
+              <ion-col col-3 *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' "></ion-col>
+              <ion-col col-6 *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' "><span class="grey-text">{{schema.settings.costsummary[0].monthlylabel}}</span></ion-col>
+              <ion-col col-3 *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' "><span text-right>${{500
+                  | number: '1.2-2'}}</span></ion-col>
+              <ion-col *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' && costChange==true " col-3 text-right><span>${{(totalAend
+                  | number: '1.2-2')}} </span></ion-col>
+              <ion-col *ngIf="costChange==false" col-3></ion-col>
+              <ion-col *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' " col-6><span class="grey-text">{{schema.settings.costsummary[0].installcharge}}</span></ion-col>
+              <ion-col *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' " col-2><span></span></ion-col>
+              <ion-col *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point'  && costChange==true " col-4 text-right><span>${{installChargeBend
+                  | number: '1.2-2' }} </span></ion-col>
+              <ion-col *ngIf="costChange==false" col-4></ion-col>
+              <ion-col *ngIf="costChange==true" col-12>
+                <hr />
+              </ion-col>
+              <ion-col col-12 *ngIf="costChange==false && networkType=='P2P'">
+                <ion-row>
+                  <ion-col col-9>
+                    <hr />
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col col-6><span class="black-bold">{{schema.settings.costsummary[0].totallabel}} </span></ion-col>
+              <ion-col col-3></ion-col>
+              <ion-col col-3 text-right></ion-col>
+              <ion-col col-6><span class="grey-text">{{schema.settings.costsummary[0].monthlylabel}}</span></ion-col>
+              <ion-col col-3>
+                <span *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' " class="black-bold" text-right>${{500*2
+                  | number: '1.2-2'}}</span>
+                  <span *ngIf="model[0].selectedProduct.properties.topology!=='Point to Point' " class="black-bold" text-right>${{500
+                      | number: '1.2-2'}}</span>  
+                
+                </ion-col>
+              <ion-col col-3 text-right *ngIf="costChange==true">
+                <span *ngIf=" hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' " class="black-bold"> ${{(totalAend*2 | number:
+                  '1.2-2')}}
+                </span>
+                <span *ngIf=" hasmodel && model[0].selectedProduct.properties.topology!=='Point to Point' " class="black-bold"> ${{(totalAend*1 | number:
+                    '1.2-2')}}
+                  </span>
+                <!-- <span *ngIf="hasmodel && model[0].selectedProduct.properties.topology=='Point to Point' " class="black-bold">${{(totalAend | number:
+                  '1.2-2')}}
+                </span> -->
+              </ion-col>
+              <ion-col *ngIf="costChange==false" col-3></ion-col>
+              <ion-col col-6><span class="grey-text">Install Charge:</span></ion-col>
+              <ion-col col-2><span class="black-bold"></span></ion-col>
+              <ion-col *ngIf="costChange==true" col-4 text-right><span class="black-bold">${{installChargeBend +
+                  installChargeAend | number:
+                  '1.2-2' }} </span></ion-col>
+              <ion-col *ngIf="costChange==false" col-4></ion-col>
+              <ion-col col-12>
+                <span class="grey-text" style="font-weight: bold;"><br>All charges shown are excluding GST.</span>
+              </ion-col>
+            </ion-row>
+          </ng-container>
+        </ion-col>
+        <ion-col col-1></ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+

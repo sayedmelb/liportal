@@ -1,0 +1,58 @@
+<ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col col-8 padding>
+      <ion-row align-items-start>
+        <ion-col>
+          <ion-title> {{ schema.settings.title }}</ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <!-- <ng-container *ngFor="let list of schema.settings.list">
+            <img [src]="schema.settings.path + list.image" class="thumbnail" />
+            <b padding-right>{{ list.label }}</b>
+          </ng-container> -->
+          <ul class="progressbar">
+            <li class="complete">Configure</li>
+            <li  class="complete">Review</li>
+            <li class="complete">Confirm</li>
+        </ul>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr style="background-color: #D1D7DA; border-width: 0.5px;">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 *ngIf="isConfirm">
+          <ion-row>
+            <ion-col col-12>
+              <div style="height: 30px;"></div>
+            </ion-col>
+            <ion-col col-12>
+              <div class="close-container">
+                <br>
+                <br>
+                <br>
+                <span class="close-header">Your request #12345678 has been submitted for approval</span>
+                <br>
+                <span class="sub-summary">Your request has been forwarded to user@optus.com.au for approval. </span>
+                <span class="sub-header-label"> View all requests</span>
+                <br>
+                <br>
+                <br>
+                <br>
+                <button ion-button class="button-yellow btnAction btn-close" (click)="closeModel()">
+                  <span class="btn-close-text">CLOSE</span>
+                </button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>

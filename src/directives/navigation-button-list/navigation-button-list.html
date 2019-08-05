@@ -1,0 +1,70 @@
+<ion-grid>
+    <ion-row *ngIf="this.schema._key=='configure'"  >
+        <ion-col col-2>
+
+        </ion-col>
+        <ion-col col-3>
+            <ng-container *ngFor="let navlist of schema.settings.navigationbuttonlist">
+                <button *ngIf="navlist.type=='save' && navlist.show==true" ion-button  full [disabled]="!isValid" class="button-white btnAction" (click)="saveforLatter($event)">{{ navlist.label}}
+                  </button>
+              </ng-container>  
+          
+        </ion-col>
+        <ion-col col-2></ion-col>
+        <ion-col col-3>
+            <ng-container *ngFor="let navlist of schema.settings.navigationbuttonlist">
+                <button *ngIf="navlist.type=='review'  && navlist.show==true" ion-button full [disabled]="!isValid" class="button-yellow btnAction" (click)="setnextLevel($event)">{{ navlist.label}}
+                  </button>
+              </ng-container>
+        
+        </ion-col>
+        <ion-col col-2>
+        </ion-col>
+    </ion-row>
+    <ion-row *ngIf="this.schema._key=='review'"  >
+        <ion-col col-3>
+            <ng-container *ngFor="let navlist of schema.settings.navigationbuttonlist">
+                <button *ngIf="navlist.type=='edit' && navlist.show==true" ion-button  full [disabled]="!isValid" class="button-grey btnAction" (click)="goToPrevious()">{{ navlist.label}}
+                  </button>
+              </ng-container>  
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-3>
+            <ng-container *ngFor="let navlist of schema.settings.navigationbuttonlist">
+                <button *ngIf="navlist.type=='save' && navlist.show==true" ion-button  full [disabled]="!isValid" class="button-white btnAction" (click)="save($event)">{{ navlist.label}}
+                  </button>
+              </ng-container>  
+          
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-3>
+            <ng-container *ngFor="let navlist of schema.settings.navigationbuttonlist">
+                <button *ngIf="navlist.type=='submit' && navlist.show==true" ion-button  full [disabled]="!isValid" class="button-yellow btnAction" (click)="goToNext($event)">{{ navlist.label}}
+                  </button>
+              </ng-container>  
+        
+        </ion-col>
+        <ion-col col-1></ion-col>
+        
+    </ion-row>
+    <ion-row>
+        <ion-col col-12> <hr /> </ion-col>
+        <ion-col col></ion-col>
+        <ion-col col-3 style="text-align: center">
+            <ng-container *ngFor="let navlist of schema.settings.navigationbuttonlist">
+                <span *ngIf="navlist.type=='cancel'  && navlist.show==true" class="btnCancel" (click)="closeModel()">Cancel</span>
+              </ng-container>
+          
+        </ion-col>
+        <ion-col col></ion-col>
+        <ion-col col-12> <hr /> </ion-col>
+      </ion-row>
+      <!-- <ion-row>
+          <ion-col>
+              <ng-container *ngFor="let navlist of schema.settings.navigationbuttonlist">
+                 
+                  <b padding-right>{{ navlist.label }}</b><br/>
+              </ng-container>
+          </ion-col>
+      </ion-row> -->
+  </ion-grid>

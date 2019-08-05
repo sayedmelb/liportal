@@ -1,0 +1,51 @@
+message-widget {
+    .modal-wrapper{
+        position: absolute;
+        overflow: hidden;
+       // max-width: 500px!important;
+        border-radius: 10px;
+        width: 400px;
+        height: 400px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 0;
+        box-shadow: 0 16px 20px rgba(0,0,0,.9);
+        background-color: #f7f7f7;
+      }
+      .modal-wrapper.modalsizeController {
+        width: 200px;
+        height: 200px;
+      }
+
+      
+    // div.toolbar-title {
+    //     color: #ffffff;
+    // }
+
+    .backdropOpacityPopover {
+        ion-backdrop {
+          opacity: 0.1;
+        }
+    }
+    .crossbar {
+        position: absolute;
+        z-index: 99;
+        top: 0px;
+        right: 10px;
+        cursor: pointer;
+        height: 2.2rem;
+        width: 2.2rem;
+        cursor: pointer;
+    }
+    .scroll-content {
+        overflow-y: hidden;
+    }
+    .button-inner {
+        font-family: "Mark Pro Heavy"!important;
+        cursor: pointer;
+    }
+   
+}

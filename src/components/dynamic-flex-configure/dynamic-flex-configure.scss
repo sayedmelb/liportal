@@ -1,0 +1,494 @@
+dynamic-flex-configure {
+  #flexRange {
+    .range-pin:after {
+      content: " Mbps";
+    }
+  }
+  .range-md .range-knob-handle .range-pin {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  .range-md:not(.range-has-pin) .range-knob-handle .range-knob {
+    transform: scale(1);
+  }
+  .range-ios .range-knob-handle .range-pin {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  .toggle-md-secondary.toggle-checked .toggle-icon {
+    background-color: color($colors, optuswhite) !important;
+  }
+  .toggle-md-togglecolor.toggle-checked .toggle-icon {
+    background-color: color($colors, optusteal) !important;
+  }
+  .toggle-md-secondary.toggle-checked .toggle-inner {
+    background-color: color($colors, optuswhite) !important;
+  }
+  .toggle-md-togglecolor.toggle-checked .toggle-inner {
+    background-color: color($colors, optuswhite) !important;
+  }
+  .toggle-md.toggle-checked .toggle-inner {
+    -webkit-transform: translate3d(50px, 0, 0);
+    transform: translate3d(50px, 0, 0);
+  }
+  .toggle-md {
+    width: 101px;
+    height: 84px;
+  }
+  .toggle-md .toggle-inner {
+    width: 50px;
+    height: 26px;
+    top: 29px;
+  }
+  .toggle-md .toggle-icon {
+    border-radius: 0px;
+  }
+  .toggle-md .toggle-inner {
+    border-radius: 0px;
+  }
+  .upgradeFlex {
+    background-color: #fdf6da;
+    border-bottom: 1px solid #ddcb76 !important;
+    height: 2.5em !important;
+  }
+  .mbsc-ios .mbsc-control-w {
+    margin-top: 0;
+    border: 1px solid black;
+  }
+  .item-md.item-block .item-inner {
+    padding-right: 0;
+  }
+  .sliderdisplay {
+    display: none;
+  }
+  .on.segment-button {
+    text-transform: none;
+    background-color: grey;
+    color: grey;
+    border: 1px solid grey !important;
+  }
+  .off.ini.segment-button {
+    text-transform: none;
+    background-color: white;
+    color: grey;
+    border: 1px solid grey !important;
+  }
+  .off.segment-button {
+    text-transform: none;
+    background-color: #00627e;
+    color: #00627e;
+    border: 1px solid #00627e !important;
+  }
+  .off.segment-button.segment-activated {
+    background-color: white !important;
+    border-color: grey;
+    color: grey !important;
+    opacity: 1;
+    border: 1px solid grey !important;
+  }
+  .on.segment-button.segment-activated {
+    background-color: white !important;
+    border-color: #00627e;
+    color: #00627e !important;
+    opacity: 1;
+    border: 1px solid #00627e !important;
+  }
+  .btnNormal {
+    border: 1px solid #d0d6d9;
+    color: black;
+    font-size: 0.9em;
+    background-color: #f9fafb;
+    width: 10em;
+  }
+  .btnNormal.btnActivated {
+    border: 2px solid color($colors, secondary) !important;
+  }
+  .btnNormal.btnActivatedDown {
+    border: 2px solid color($colors, secondary) !important;
+  }
+  .btnNormal.btnActivatedTimebox {
+    border: 2px solid color($colors, secondary) !important;
+  }
+  .btnNormal.btnActivatedSpendCap {
+    border: 2px solid color($colors, secondary) !important;
+  }
+  .btnNormalwk {
+    border: 1px solid #d0d6d9;
+    color: black;
+    font-size: 0.9em;
+    background-color: #f9fafb;
+    width: 8em;
+  }
+  .btnNormalwk.btnActivatedDay {
+    border: 2px solid color($colors, secondary) !important;
+  }
+  .flexInput {
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    margin-top: -5px;
+  }
+  .flexinput-medium {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+  }
+  input[type="text"]#cur {
+    border-right: 0px;
+    outline: none;
+    width: 90px;
+    background: white;
+    border: 1px solid gray;
+    color: gray;
+    text-align: right;
+    height: 30px;
+  }
+  input[type="text"]#curamount {
+    -webkit-appearance: none !important;
+    color: gray;
+    text-align: center;
+    width: 70px;
+    border: 1px solid gray;
+    border-left: 0px;
+    margin: 0 0 0 -5px;
+    background: white;
+    outline: none;
+    text-align: left;
+    height: 30px;
+  }
+  input[type="text"]#hour {
+    -webkit-appearance: none !important;
+    color: gray;
+    text-align: left;
+    width: 60px;
+    border: 1px solid gray;
+    border-left: 0px;
+    margin: 0 0 0 -7px;
+    background: white;
+    height: 30px;
+  }
+  input[type="text"]#houramt {
+    -webkit-appearance: none !important;
+    border: 1px solid gray;
+    border-right: 0px;
+    outline: none;
+    color: gray;
+    width: 100px;
+    text-align: right;
+    height: 30px;
+  }
+  ion-checkbox .item-cover {
+    width: 5% !important;
+  }
+  input[type="text"]#cursiteb {
+    -webki-appearance: none !important;
+    border-right: 0px;
+    outline: none;
+    width: 100px;
+    background: white;
+    border: 1px solid gray;
+    color: gray;
+    text-align: right;
+    height: 30px;
+  }
+  input[type="text"]#curamountsiteb {
+    -webkit-appearance: none !important;
+    color: gray;
+    text-align: center;
+    width: 120px;
+    border: 1px solid gray;
+    border-left: 0px;
+    margin: 0 0 0 -5px;
+    background: white;
+    outline: none;
+    text-align: left;
+    height: 30px;
+  }
+  input[type="text"]#hoursiteb {
+    -webkit-appearance: none !important;
+    color: gray;
+    text-align: left;
+    width: 120px;
+    border: 1px solid gray;
+    border-left: 0px;
+    margin: 0 0 0 -4px;
+    background: white;
+    height: 30px;
+  }
+  input[type="text"]#houramtsiteb {
+    -webkit-appearance: none !important;
+    border: 1px solid gray;
+    border-right: 0px;
+    outline: none;
+    color: gray;
+    width: 100px;
+    text-align: right;
+    height: 30px;
+  }
+  .item[no-lines] {
+    height: 1.8em;
+    min-height: 1.5em;
+  }
+  input[type="text"]#cursitea {
+    -webki-appearance: none !important;
+    border-right: 0px;
+    outline: none;
+    width: 100px;
+    background: white;
+    border: 1px solid gray;
+    color: gray;
+    text-align: right;
+    height: 30px;
+  }
+  input[type="text"]#curamountsitea {
+    -webkit-appearance: none !important;
+    color: gray;
+    text-align: center;
+    width: 120px;
+    border: 1px solid gray;
+    border-left: 0px;
+    margin: 0 0 0 -5px;
+    background: white;
+    outline: none;
+    text-align: left;
+    height: 30px;
+  }
+  input[type="text"]#hoursitea {
+    -webkit-appearance: none !important;
+    color: gray;
+    text-align: left;
+    width: 110px;
+    border: 1px solid gray;
+    border-left: 0px;
+    margin: 0 0 0 -4px;
+    background: white;
+    height: 30px;
+  }
+  input[type="text"]#houramtsitea {
+    -webkit-appearance: none !important;
+    border: 1px solid gray;
+    border-right: 0px;
+    outline: none;
+    color: gray;
+    width: 100px;
+    text-align: right;
+    height: 30px;
+  }
+  .card-header-md {
+    padding-bottom: 0px;
+  }
+  .spendlink {
+    content: url("../../assets/imgs/linked-icon.svg");
+  }
+  .spendlink.unlink {
+    content: url("../../assets/imgs/unlinked-icon.svg");
+  }
+  .imageDyn {
+    position: relative;
+    width: 100%;
+    /* for IE 6 */
+  }
+  .flexupFlexedbal {
+    position: absolute;
+    top: 10%;
+    left: 495px;
+    width: 100%;
+  }
+  .flexdownFlexedbal {
+    position: absolute;
+    top: 5%;
+    left: 195px;
+    width: 100%;
+  }
+  .flexupContractedbal {
+    position: absolute;
+    top: 30%;
+    left: 170px;
+    width: 100%;
+  }
+  .flexdownContractedbal {
+    position: absolute;
+    top: 50%;
+    left: 480px;
+    width: 100%;
+  }
+  .flexupContractedTip {
+    display: inline-block;
+    position: absolute;
+    top: 29%;
+    left: 400px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexdownContractedTip {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 710px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexupFlexedTipbal {
+    display: inline-block;
+    position: absolute;
+    top: 9%;
+    left: 700px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexdownFlexedTipbal {
+    display: inline-block;
+    position: absolute;
+    top: 5%;
+    left: 400px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexupUtilisationbal {
+    position: absolute;
+    top: 55%;
+    left: 460px;
+    width: 100%;
+  }
+  .flexdownUtilisationbal {
+    position: absolute;
+    top: 43%;
+    left: 20px;
+    width: 100%;
+  }
+  .flexdownUtilisationagg {
+    position: absolute;
+    top: 30%;
+    left: 20px;
+    width: 100%;
+  }
+  .flexupUtilisationagg {
+    position: absolute;
+    top: 65%;
+    left: 460px;
+    width: 100%;
+  }
+  .flexupUtilTipagg {
+    display: inline-block;
+    position: absolute;
+    top: 65%;
+    left: 680px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexupUtilisationrel {
+    position: absolute;
+    top: 42%;
+    left: 460px;
+    width: 100%;
+  }
+  .flexupSummarybal {
+    position: absolute;
+    top: 10%;
+    left: 5px;
+    width: 50%;
+  }
+  .flexdownSummarybal {
+    position: absolute;
+    top: 2%;
+    left: 480px;
+    width: 50%;
+  }
+  .flexupMinuesbal {
+    position: absolute;
+    top: 90%;
+    left: 200px;
+    width: 100%;
+  }
+  .flexupUtilTipbal {
+    display: inline-block;
+    position: absolute;
+    top: 55%;
+    left: 680px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexdownUtilTipbal {
+    display: inline-block;
+    position: absolute;
+    top: 42%;
+    left: 240px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexdownUtilTipagg {
+    display: inline-block;
+    position: absolute;
+    top: 30%;
+    left: 240px;
+    width: 2%;
+    cursor: pointer;
+  }
+
+  .flexupMinutesTip {
+    display: inline-block;
+    position: absolute;
+    top: 90%;
+    left: 620px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .flexupUtilTiprel {
+    display: inline-block;
+    position: absolute;
+    top: 42%;
+    left: 680px;
+    width: 2%;
+    cursor: pointer;
+  }
+  .tooltip {
+    // position: relative;
+    display: inline-block; //border-bottom: 1px dotted black;
+    position: absolute;
+    top: 29%;
+    left: 400px;
+    width: 100%;
+    cursor: pointer;
+  }
+  .flexupContractedTip .tooltiptext,
+  .flexupFlexedTipbal .tooltiptext,
+  .flexupUtilTipbal .tooltiptext,
+  .flexupMinutesTip .tooltiptext,
+  .flexupUtilTipagg .tooltiptext,
+  .flexupUtilTiprel .tooltiptext,
+  .flexdownFlexedTipbal .tooltiptext,
+  .flexdownUtilTipbal .tooltiptext,
+  .flexdownContractedTip .tooltiptext,
+  .flexdownUtilTipagg .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: #e2e8e1;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  .flexupContractedTip:hover .tooltiptext,
+  .flexupFlexedTipbal:hover .tooltiptext,
+  .flexupUtilTipbal:hover .tooltiptext,
+  .flexupMinutesTip:hover .tooltiptext,
+  .flexupUtilTipagg:hover .tooltiptext,
+  .flexupUtilTiprel:hover .tooltiptext,
+  .flexdownFlexedTipbal:hover .tooltiptext,
+  .flexdownUtilTipbal:hover .tooltiptext,
+  .flexdownContractedTip:hover .tooltiptext,
+  .flexdownUtilTipagg:hover .tooltiptext {
+    visibility: visible;
+  }
+  .button-white:hover {
+    background-color: rgb(243, 245, 247) !important;
+  }
+  .button-grey:hover {
+    background-color: #d1d7da !important;
+  }
+  .sub-heading {
+    font-weight: 600;
+    font-size: 1.15em;
+  }
+}

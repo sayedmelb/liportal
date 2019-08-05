@@ -1,0 +1,40 @@
+<div *ngIf="isLoading" class="loader">
+    <ion-spinner></ion-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <ion-grid class="col-padding">
+        <ion-row>
+                <ion-col class="col-padding">
+                    <input class="input-style" (keyup)='search($event)' style="width: 40%!important;" type="text" placeholder="Search" />
+                </ion-col>
+                <ion-col  size-sm class="buttons">                        
+                    <a (click)="downloadFile()" href="#">CSV Export</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <mbsc-button (click)="test()" color="warning">Create Request</mbsc-button>
+                </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="col-padding">
+                    <tabular-widget [data]="display"></tabular-widget>
+            </ion-col>
+        </ion-row>        
+    </ion-grid>                     
+</div>
+
+<ng-template #templateRequestId let-value="value" ngx-datatable-cell-template>
+    <a href="#">{{value}}</a>
+</ng-template>
+
+<ng-template #templateStatus let-row="row" let-value="value" ngx-datatable-cell-template>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <div class="circle" [ngClass]="setClass(value)"></div>
+          </td>
+          <td style="padding-left: 5px;">
+            <div>{{value}}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</ng-template>

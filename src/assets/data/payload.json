@@ -1,0 +1,122 @@
+{
+    "reasonCode": {
+               "remedy": "Fulfillment",
+                "cause": "Order",
+                "problem": "Product Order"
+    },
+    "properties": {
+    "contact": {
+    "id": "7f6097ac-02c3-41c4-96c5-0c9879ed68d9",
+    "type": "Contact",
+    "name": "Contract Contact",
+    "properties": {
+    "contract": {
+    "email": "test_team@uecomm.com.au",
+    "phone": "0300000000",
+    "name": "Test Contract Contact"
+    },
+    "technical": {
+    "email": "test_team@uecomm.com.au",
+    "phone": "0300000000",
+    "name": "Test Technical Contact"
+    },
+    "optus": {
+    "accountMgr": "Test Account Manager",
+    "consultant": "Test Solution Consultant",
+    "consultantEmail": "test_team@uecomm.com.au",
+    "accountMgrEmail": "test_team@uecomm.com.au"
+    }
+    }
+    },
+    "offers": [{
+    "name": "Internet",
+    "id": "6c1c150f-9e51-438f-8797-57d0054fd497",
+    "type": "Default SD-Ethernet-Offer Test",
+    "properties": {
+    "topology": "",
+    "locale": "Metro",
+    "accessType": "Access_CE",
+    "linkType": "Primary",
+    "bandwidth": "2M/2M",
+    "address": {
+    "properties": {
+    "streetName": "Collins",
+    "originalType": "Address",
+    "prequalifiable": true,
+    "postcode": "3000",
+    "notInitialized": false,
+    "displayAddress": "367 Collins Street, Melbourne VIC 3000, AU",
+    "originalAddress": "367 Collins Street Melbourne VIC 3000",
+    "state": "VIC",
+    "address": "367 Collins St, Melbourne VIC 3000, Australia",
+    "types": [
+    "street_address"
+    ],
+    "formattedAddress": "367 Collins Street, Melbourne, VIC, 3000",
+    "longitude": 144.9624228,
+    "streetNumber": "367",
+    "country": "AU",
+    "suburb": "Melbourne",
+    "latitude": -37.8171496,
+    "name": "367 Collins St, Melbourne VIC 3000, Australia",
+    "address_hash": "868588757##p##ChIJU00_XrNC1moRtzwODNJhg3E",
+    "streetType": "Street",
+    "place_id": "ChIJU00_XrNC1moRtzwODNJhg3E"
+    },
+    "reference": [{
+    "application": "CPQ",
+    "id": "6ae4d43b-ed03-4cd7-8925-40686ff5ec91"
+    }
+    ],
+    "name": "367 Collins Street, Melbourne VIC 3000, AU",
+    "type": "Address",
+    "id": "6ae4d43b-ed03-4cd7-8925-40686ff5ec91"
+    }
+    }
+    }
+    ],
+    "contract": {
+    "type": "Contract",
+    "name": "1-5K9I1P BRT Test Opp",
+    "id": "ec6f5579-92e0-4701-a19f-a95daf619a77",
+    "properties": {
+    
+    "id":"xxxxxxxxxxxxxxxxx",
+    "term": 24,
+    "price": {
+    "totalCapex": 0,
+    "totalContractRequestedValue": 16946.16,
+    "standardInstall": 0,
+    "totalInstall": 0,
+    "nonStandardCommercialAvailability": {
+    "siteCount": 1,
+    "internetBillingOption": false,
+    "invalidSiteCount": false,
+    "invalidInternetBillingOptions": [],
+    "invalidProducts": [],
+    "available": true,
+    "invalidProduct": false,
+    "wipvpn": false,
+    "sepResult": false
+    },
+    "totalMonthly": 706.1039999999999,
+    "annualOrderValue": 8473.248,
+    "totalContractValue": 16946.496,
+    "specialInstall": 0,
+    "totalContractMaxSalesDiscountValue": 16946.4
+    },
+    "opportunityId": "1-5K9I1P"
+    },
+    "reference": [{
+    "application": "CPQ",
+    "id": "1-5K9I1P"
+    }
+    ]
+    },
+    "uid": "35914"
+    },
+    "name": "putProductOrder",
+    "timestamp": "20180905T02:09:32.575",
+    "id": "c55a71bf-6def-4341-9045-844c28f4a7dd",
+    "type": "Product Order"
+    }

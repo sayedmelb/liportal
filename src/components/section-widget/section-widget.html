@@ -1,0 +1,35 @@
+<ion-grid>
+  <br />
+  <ion-row>
+    <ion-col col-2 *ngIf="!schema.child"></ion-col>
+    <ion-col col-7 no-padding padding-left padding-right>
+      <ion-row align-items-start>
+        <ion-col>
+          <ion-title> {{ schema.settings.title }} </ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ng-container *ngFor="let list of schema.settings.list">
+            <img [src]="schema.settings.path + list.image" class="thumbnail" />
+            <b padding-right>{{ list.label }}</b>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <hr>
+        </ion-col>
+      </ion-row>
+      <network-diagram [schema]="schema"></network-diagram>
+      <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplate()" ></span>
+      <!-- <radio-list [radiotype]="0"  [schema]="schema"></radio-list>
+      <radio-list [radiotype]="1"  [schema]="schema"></radio-list> -->
+      <two-button-combo [schema]="schema"></two-button-combo>
+      <button-list></button-list>
+      <navigation-button-list [schema]="schema"></navigation-button-list>
+    </ion-col>
+    <ion-col col-1 *ngIf="schema.child"> <div class="vl"></div> </ion-col>
+    <ion-col col-4 *ngIf="schema.child"> <!-- <sidebar></sidebar> --> </ion-col>
+  </ion-row>
+</ion-grid>

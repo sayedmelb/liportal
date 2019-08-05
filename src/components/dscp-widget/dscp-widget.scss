@@ -1,0 +1,74 @@
+dscp-widget {
+    .crossbar {
+        position: absolute;
+        z-index: 99;
+        top: 0.5rem;
+        right: 0.5rem;
+        cursor: pointer;
+        height: 3rem;
+        width: 3rem;
+    }
+
+    ion-content ion-label {
+        margin-top: 2px !important;
+        margin-bottom: 1px !important;
+    }
+
+    .modal-wrapper {
+        position: absolute;
+        overflow: hidden;
+        max-width: 780px;
+        border-radius: 10px;
+        width: 780px !important;
+        height: 50vh !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 0;
+        box-shadow: 0 16px 20px rgba(0, 0, 0, .4);
+        background-color: #fafafa;
+        margin-top: -41px !important;
+    }
+
+    .toolbar-background {
+        background-color: #fff !important;
+    }
+
+    @media only screen and (min-height: 768px) and (min-width: 768px) {
+        .dscp-widget {
+            .modal-wrapper {
+                left: calc(50% - (600px/2));
+                top: calc(50% - (600px/2));
+                position: absolute;
+                width: 800px !important;
+                height: 600px;
+                margin-top: -42px !important;
+            }
+        }
+
+    }
+
+    @media only screen and (max-height: 767px) {
+        .modal-wrapper {
+            height: 770px;
+            height: 570px;
+            margin-top: -42px;
+        }
+    }
+
+
+
+    div.toolbar-title {
+        color: #ffffff;
+    }
+
+    
+}
+@media only screen and (min-height: 600px) and (min-width: 768px) {
+    .md .modal-wrapper {
+        margin-top: -42px!important;
+    }
+
+}

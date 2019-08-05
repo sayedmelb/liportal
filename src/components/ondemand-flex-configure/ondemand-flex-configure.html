@@ -1,0 +1,982 @@
+<ng-container *ngFor="let data of schema.datasource">
+  <ion-grid>
+    <br />
+    <ion-row *ngIf="!isSaveLatter">
+      <ion-col col-8>
+        <ion-row>
+          <ion-col col-11 no-padding padding-left padding-right>
+            <ion-row align-items-start>
+              <ion-col>
+                <ion-title> {{ schema.settings.title }}</ion-title>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ul class="progressbar">
+                  <ng-container *ngFor="let list of schema.settings.list">
+                      <li [ngClass]="{'active': list.status==='active','complete': list.status==='complete'}"><span
+                          class="barTitle">{{list.title}}</span></li>
+                    </ng-container>
+              </ul>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>  </ion-col>
+              <ion-col>
+                <div style="margin-left: 5px;">
+                  <span class="grey">
+                    {{ schema.settings.configuresummary }}
+                  </span>
+                </div>
+              </ion-col>
+            </ion-row>
+            <network-diagram [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null">
+            </network-diagram>
+            <ion-row>
+              <ion-col col-8>
+                 <ion-row>
+                   <ion-col col-1></ion-col>
+                   <ion-col col-6 align-self-center><span style="margin-left: -1px; font-size: large" [innerHTML]="schema.settings.enabledtitle"></span></ion-col>
+                   <ion-col col-5><label class="switch"><input type="checkbox" [(ngModel)]="dynamicFlexSwitch"  (click)="checkStatus()" id="togBtn"><div class="slider round"><!--ADDED HTML --><span class="on">ON</span><span class="off">OFF</span><!--END--></div></label></ion-col>
+                 </ion-row>
+              </ion-col>
+              <ion-col col-4></ion-col>
+            </ion-row>
+            <br />
+            <ng-container *ngIf="dynamicFlexSwitch">
+              <ion-row >
+                <ion-col>
+                  <span class="sub-heading">{{
+                    schema.settings.sliderheading
+                  }}</span>
+                  <br />
+                  <!-- below is hardcoded as image is not getting rendered from cdo level-->
+                  <p class='description-text'>Use the slider to set the service speed you require between A-End and
+                      B-End.<br><b>Note:</b> The slider below represents <b>A-end</b> which is currently utilised link &nbsp; <info-icon></info-icon>
+                    </p>
+                  <!-- <br />
+                  <span
+                    class="grey"
+                    [innerHTML]="schema.settings.slidersummary"
+                  ></span> -->
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 ></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12 ></ion-col>
+              </ion-row>
+              <ion-row class="dynamicslider">
+                <ion-col>
+                  <!-- <slider [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+                    (bwChange)="getSliderChange($event)"></slider> -->
+                    <slider-schedule [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+                        (bwChange)="getSliderChange($event)"></slider-schedule>  
+                </ion-col>
+              </ion-row>
+              <!-- <ion-row class="dynamicslider" style="display:none;">
+                <ion-col>
+                  <ion-list>
+                    <ion-item no-padding>
+                      <strong item-start style="padding-top: 30px;"
+                        >{{ schema.settings.slidertitle }}&nbsp; &nbsp;</strong
+                      >
+                      <ion-range
+                        id="flexRange"
+                        [(ngModel)]="channelBandwidth"
+                        [min]="data.contracted_bw"
+                        [max]="data.channel_bw"
+                        [step]="step"
+                        snaps="true"
+                        pin="true"
+                        dualKnobs="true"
+                        (ionChange)="onChange($event)"
+                        (mouseleave)="IonSliderPressed($event)"
+                        (click)="IonSliderPressed($event)"
+                      >
+                        <ion-label class="lblLower" range-left
+                          >{{ data.contracted_bw }} Mbps</ion-label
+                        >
+                        <ion-label range-right style="margin-top: 70px;"
+                          >{{ data.channel_bw }}+ Mbps</ion-label
+                        >
+                      </ion-range>
+                      <ion-label class="lblUpper"
+                        >{{ data.flex_pack }} Mbps</ion-label
+                      >
+                      <ion-label class="lblContracted label"
+                        >Contracted Bandwidth</ion-label
+                      >
+                    </ion-item>
+                  </ion-list>
+                </ion-col>
+              </ion-row> -->
+              <ion-row>
+                <ion-col>
+                  <ion-item no-lines class="upgradeFlex" *ngIf="limitMsg == true">
+                    <span style="color: #195b6b; font-weight: bold" item-start>{{
+                      schema.settings.upgrademsg
+                    }}</span>
+                    <button
+                      ion-button
+                      class="button-yellow"
+                      style="width: 10em;"
+                      item-start
+                      onclick="alert('Permanent BANDWIDTH section - work under progres');"
+                    >
+                      UPGRADE
+                    </button>
+                  </ion-item>
+                  <ion-item
+                    no-lines
+                    style="background: transparent; height: 2.60em;"
+                    *ngIf="limitMsg == false"
+                    >&nbsp;</ion-item
+                  >
+                </ion-col>
+              </ion-row>
+              <hr />
+              <flex-rules [schema]="schema"></flex-rules>
+              <!-- <ion-row>
+                <ion-col padding-top>
+                  <span class="sub-heading">{{
+                    schema.settings.flex.settings.flexup.title 
+                  }}</span>
+                  <br />
+                  <br />
+                  <span [innerHTML]="schema.settings.flex.settings.flexup.summary"></span>
+                </ion-col>
+                <ion-col col-12>&nbsp;</ion-col>
+              </ion-row> -->
+              <!-- <ion-row>
+                <ion-col col-12>
+                  <button
+                    *ngFor="let control of schema.controlsup"
+                    (click)="setFlex($event, control.flextype, control.type)"
+                    [ngClass]="{
+                      btnagg: control.buttontype == 'btnagg',
+                      btnbal: control.buttontype == 'btnbal',
+                      btnrel: control.buttontype == 'btnrel',
+                      btncus: control.buttontype == 'btncus',
+                      btnActivated: data.increased_utilisation_mode == 'balanced',
+                      btnActivated: control.active == true
+                    }"
+                    class=" button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+                    ion-button
+                  >
+                    {{ control.title }}
+                  </button>
+                </ion-col>
+                <ion-col col-12>&nbsp;</ion-col>
+                <ion-col col-2>{{ schema.settings.flex.settings.flexup.utilleftlabel }}&nbsp; </ion-col>
+                <ion-col col-1>
+                  <input
+                    maxlength="3"
+                    minlength="1"
+                    class="flexInput"
+                    [(ngModel)]="flexupUtilisation"
+                    (keypress)="keyPress($event)"
+                    (keyup)="updateFlexUtil($event, 'up')"
+                  />&nbsp;</ion-col
+                >
+                <ion-col col-9 padding-left>
+                  <span>
+                    {{ schema.settings.flex.settings.flexup.utilmidlabel }} &nbsp; {{ initialRange.lower }} &nbsp; {{schema.settings.flex.settings.flexup.utilrightlabel}}</span
+                  >
+                </ion-col>
+                <ion-col col-2>  {{ schema.settings.flex.settings.flexup.pcleftlabel }}  &nbsp;</ion-col>
+                <ion-col col-1>
+                  <input
+                    maxlength="2"
+                    minlength="2"
+                    (keypress)="keyPress($event)"
+                    (keyup)="updateFlexMinutes('up')"
+                    class="flexInput"
+                    [(ngModel)]="flexupUtilisationMinutes"
+                  />
+                </ion-col>
+                <ion-col col-9 padding-left>
+                  <span>{{ schema.settings.flex.settings.flexup.pcmidlabel }} &nbsp; {{ leftknob }} &nbsp; {{ schema.settings.flex.settings.flexup.pcrightlabel }}</span>
+                </ion-col>
+                <ion-col col-12>
+                  <div *ngIf="flexUp == 'balanced'" class="imageDyn">
+                    <img src="../../assets/imgs/flexupbalanced.JPG" alt="" />
+                    <span class="flexupSummarybal"
+                      >Example Representation <br />
+                      (based on dummy utilisation data)</span
+                    >
+                    <span class="flexupFlexedbal"
+                      >Flexed Bandwidth <strong>{{ changeFlexValue }}Mbps</strong>
+                    </span>
+                    <span class="flexupContractedbal"
+                      >Contracted Bandwidth
+                      <strong>{{ initialRange.lower }}Mbps</strong>
+                    </span>
+                    <div class="flexupFlexedTipbal">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Flex Bandwidth</strong> is the speed that you want
+                        the link to Flex to when the performance rules are
+                        triggered
+                      </span>
+                    </div>
+                    <span class="flexupUtilisationbal"
+                      >Utilisation threshold over {{ flexupUtilisation }}%</span
+                    >
+                    <div class="flexupUtilTipbal">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Utilisation Threshold</strong> is the % of the
+                        contracted speed where you determine Flex should be
+                        triggered</span
+                      >
+                    </div>
+                    <div class="flexupContractedTip">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Contracted Bandwidth </strong> is the minimum
+                        committed speed you are currently contracted for.</span
+                      >
+                    </div>
+                    <span class="flexupMinuesbal"
+                      >Above the threshold for 60% of the defined period
+                      <strong>{{ flexupUtilisationMinutes }} minutes</strong>
+                    </span>
+                    <div class="flexupMinutesTip">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Period above threshold </strong>- this is set at
+                        60% of the time period you have set. E.g. Utilisation must
+                        exceed threshold for more than 60% of a 5 Min, 10Min, etc.
+                        period.</span
+                      >
+                    </div>
+                  </div>
+
+                  <div *ngIf="flexUp == 'aggresive'" class="imageDyn">
+                    <img src="../../assets/imgs/flexupaggresive.JPG" alt="" />
+                    <span class="flexupSummarybal"
+                      >Example Representation <br />
+                      (based on dummy utilisation data)</span
+                    >
+                    <span class="flexupFlexedbal"
+                      >Flexed Bandwidth <strong>{{ changeFlexValue }}Mbps</strong>
+                    </span>
+                    <span class="flexupContractedbal"
+                      >Contracted Bandwidth
+                      <strong>{{ initialRange.lower }}Mbps</strong>
+                    </span>
+                    <div class="flexupFlexedTipbal">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Flex Bandwidth</strong> is the speed that you want
+                        the link to Flex to when the performance rules are
+                        triggered
+                      </span>
+                    </div>
+                    <span class="flexupUtilisationagg"
+                      >Utilisation threshold over {{ flexupUtilisation }}%</span
+                    >
+                    <div class="flexupUtilTipagg">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Utilisation Threshold</strong> is the % of the
+                        contracted speed where you determine Flex should be
+                        triggered</span
+                      >
+                    </div>
+                    <div class="flexupContractedTip">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Contracted Bandwidth </strong> is the minimum
+                        committed speed you are currently contracted for.</span
+                      >
+                    </div>
+                    <span class="flexupMinuesbal"
+                      >Above the threshold for 60% of the defined period
+                      <strong>{{ flexupUtilisationMinutes }} minutes</strong>
+                    </span>
+                    <div class="flexupMinutesTip">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Period above threshold </strong>- this is set at
+                        60% of the time period you have set. E.g. Utilisation must
+                        exceed threshold for more than 60% of a 5 Min, 10Min, etc.
+                        period.</span
+                      >
+                    </div>
+                  </div>
+                  <div *ngIf="flexUp == 'relaxed'" class="imageDyn">
+                    <img src="../../assets/imgs/flexuprelaxed.JPG" alt="" />
+                    <span class="flexupSummarybal"
+                      >Example Representation <br />
+                      (based on dummy utilisation data)</span
+                    >
+                    <span class="flexupFlexedbal"
+                      >Flexed Bandwidth <strong>{{ changeFlexValue }}Mbps</strong>
+                    </span>
+                    <span class="flexupContractedbal"
+                      >Contracted Bandwidth
+                      <strong>{{ initialRange.lower }}Mbps</strong>
+                    </span>
+                    <div class="flexupFlexedTipbal">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Flex Bandwidth</strong> is the speed that you want
+                        the link to Flex to when the performance rules are
+                        triggered
+                      </span>
+                    </div>
+                    <span class="flexupUtilisationrel"
+                      >Utilisation threshold over {{ flexupUtilisation }}%</span
+                    >
+                    <div class="flexupUtilTiprel">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Utilisation Threshold</strong> is the % of the
+                        contracted speed where you determine Flex should be
+                        triggered</span
+                      >
+                    </div>
+                    <div class="flexupContractedTip">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Contracted Bandwidth </strong> is the minimum
+                        committed speed you are currently contracted for.</span
+                      >
+                    </div>
+                    <span class="flexupMinuesbal"
+                      >Above the threshold for 60% of the defined period
+                      <strong>{{ flexupUtilisationMinutes }} minutes</strong>
+                    </span>
+                    <div class="flexupMinutesTip">
+                      <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+                      <span class="tooltiptext">
+                        <strong>Period above threshold </strong>- this is set at
+                        60% of the time period you have set. E.g. Utilisation must
+                        exceed threshold for more than 60% of a 5 Min, 10Min, etc.
+                        period.</span
+                      >
+                    </div>
+                  </div>
+                </ion-col>
+              </ion-row> -->
+              <ion-row>
+                <ion-col padding-top>
+                  <span class="sub-heading">{{ schema.settings.flex.settings.flexdown.title}}</span> <br />
+                  <br />
+                  <span>
+                      {{ schema.settings.flex.settings.flexdown.summary}}
+                  </span>
+                 
+                </ion-col>
+                <ion-col col-12>&nbsp;</ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-12>
+                  <button
+                    *ngFor="let control of schema.controlsdown"
+                    (click)="setFlex($event, control.flextype, control.type)"
+                    [ngClass]="{
+                      btnaggdown: control.buttontype == 'btnaggdown',
+                      btnbaldown: control.buttontype == 'btnbaldown',
+                      btnreldown: control.buttontype == 'btnreldown',
+                      btncusdown: control.buttontype == 'btncusdown',
+                      btnActivatedDown:
+                        data.increased_utilisation_mode == 'balanceddown',
+                      btnActivatedDown: control.active == true
+                    }"
+                    class=" button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+                    ion-button
+                  >
+                    {{ control.title }}
+                  </button>
+                </ion-col>
+                <ion-col col-12>&nbsp;</ion-col>
+                <ion-col col-3>if the link does not exceeds&nbsp; </ion-col>
+                <ion-col col-1>
+                  <input
+                    maxlength="3"
+                    minlength="1"
+                    class="flexInput"
+                    [(ngModel)]="flexupUtilisationDown"
+                    (keypress)="keyPress($event)"
+                    (keyup)="updateFlexUtil($event, 'down')"
+                  />&nbsp;</ion-col
+                >
+                <ion-col col-8 padding-left>
+                  <span
+                    >% utilisation of {{ initialRange.lower }}Mbps bandwidth</span
+                  >
+                </ion-col>
+                <ion-col col-3> for more than &nbsp;</ion-col>
+                <ion-col col-1>
+                  <input
+                    (keypress)="keyPress($event)"
+                    (blur)="updateFlexMinutes('down')"
+                    class="flexInput"
+                    [(ngModel)]="flexupUtilisationMinutesDown"
+                  />
+                </ion-col>
+                <ion-col col-8 padding-left> <span>minutes</span> </ion-col>
+              </ion-row>
+              <hr />
+              <br />
+              <ion-row>
+                <ion-col padding-top>
+                  <span class="sub-heading">Timebox rules</span> <br />
+                  <br />
+                  <span>
+                    Timebox rules allow you to determine when Flex feature is
+                    turned on / off. Selecting
+                    <strong>"Flex any time"</strong> means that if the threshold
+                    settings are breached then the service will flex. Selecting
+                    <strong>"Flex at specified times"</strong> means that outside
+                    these times your service will not flex even if the thresholds
+                    are breached.</span
+                  >
+                </ion-col>
+                <ion-col col-12>&nbsp;</ion-col>
+                <ion-col col-12>
+                  <button
+                    ion-button
+                    (click)="setTimeBox($event, 'off')"
+                    class="btnflextime btnActivatedTimebox button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+                  >
+                    Flex any time
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setTimeBox($event, 'on')"
+                    ion-button
+                    class="btnflexspecified  button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+                    style="width:200px;"
+                  >
+                    Flex at specified times
+                  </button>
+                </ion-col>
+                <ion-col col-12>&nbsp;</ion-col>
+                <ion-col col-12 *ngIf="timeBox == 'on'">
+                  <ion-row>
+                    <ion-col
+                      col-xl-2
+                      col-lg-1
+                      col-1
+                      col-md-2
+                      col-sm-2
+                      align-self-center
+                    >
+                      <span
+                        style="padding:2px; font-size:0.9em; padding-left: 10px;"
+                        >Between</span
+                      >
+                    </ion-col>
+                    <ion-col col-2>
+                      <mbsc-time [(ngModel)]="stime" [options]="timeSettings" (ngModelChange)="checkDattimeValidation()"></mbsc-time>
+                    </ion-col>
+                    <ion-col col-1 align-self-center>
+                      <span style="padding:2px; padding-left: 10px;">and</span>
+                    </ion-col>
+                    <ion-col col-2>
+                      <mbsc-time [(ngModel)]="etime" [options]="timeSettings" (ngModelChange)="checkDattimeValidation()"></mbsc-time>
+                    </ion-col>
+                    <ion-col></ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col col-12 *ngIf="timeBox == 'on'">
+                  <br />
+                  On these days <br />
+                  <button
+                    ion-button
+                    (click)="setWeekDay($event, 'mon')"
+                    [ngClass]="{ btnActivatedDay: weekFlexDays.mon == true }"
+                    class="btnMonDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+                  >
+                    MON
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setWeekDay($event, 'tue')"
+                    [ngClass]="{ btnActivatedDay: weekFlexDays.tue == true }"
+                    class="btnTueDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+                  >
+                    TUE
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setWeekDay($event, 'wed')"
+                    [ngClass]="{ btnActivatedDay: weekFlexDays.wed == true }"
+                    class="btnWedDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+                  >
+                    WED
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setWeekDay($event, 'thu')"
+                    [ngClass]="{ btnActivatedDay: weekFlexDays.thu == true }"
+                    class="btnThuDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+                  >
+                    THU
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setWeekDay($event, 'fri')"
+                    [ngClass]="{ btnActivatedDay: weekFlexDays.fri == true }"
+                    class="btnFrDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+                  >
+                    FRI
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setWeekDay($event, 'sat')"
+                    [ngClass]="{ btnActivatedDay: weekFlexDays.sat == true }"
+                    class="btnSatDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+                  >
+                    SAT
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setWeekDay($event, 'sun')"
+                    [ngClass]="{ btnActivatedDay: weekFlexDays.sun == true }"
+                    class="btnSunDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+                  >
+                    SUN
+                  </button>
+                </ion-col>
+              </ion-row>
+              <hr />
+              <ion-row>
+                <ion-col padding-top col-12>
+                  <span class="sub-heading">Spend Cap</span> <br />
+                  <br />
+                  <span>
+                    The spend cap feature allows you to set a maximum dollar
+                    amount for flex charges per service during the month. Whne the
+                    maximum Flex dollar amount is reached, the Dynamic Feature
+                    will be turned off and the speed will reduce to the contracted
+                    bandwidth. The Spend cap amount can be adjusted at any time
+                    during the month.
+                  </span>
+                  <br />
+                  <br />
+                </ion-col>
+                <ion-col col-12>
+                  <button
+                    ion-button
+                    (click)="setSpendCap($event, 'off')"
+                    class="btnNoCap btnActivatedSpendCap button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+                  >
+                    <span style="font-size: 1.1em;">No cap</span>
+                  </button>
+                  <button
+                    ion-button
+                    (click)="setSpendCap($event, 'on')"
+                    ion-button
+                    class="btnSpendCap  button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+                    style="width:200px;"
+                  >
+                    <span style="font-size: 1.1em;">Set cap</span>
+                  </button>
+                </ion-col>
+                <ion-col col-12>&nbsp;</ion-col>
+                <ion-col col-5 *ngIf="spendCap == 'on'">
+                  <ion-card>
+                    <ion-card-header>
+                      <span style="font-size: 1.1em; font-weight: bold;">{{ data.address }}</span>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <ion-label style="font-size: 1.1em;">
+                        Dollar Amount</ion-label
+                      >
+                      <input type="text" id="cursitea" value="$ " disabled />
+                      <input
+                        maxlength="10"
+                        minlength="1"
+                        (keypress)="onlyNumbersWithDotSpendCap($event)"
+                        (blur)="spendCaponBlur('amtsitea', '', '')"
+                        type="text"
+                        placeholder="0"
+                        id="curamountsitea"
+                        [(ngModel)]="spendCapAmountsitea"
+                      />
+                      <ion-label style="font-size: 1.1em;">
+                        Whole hours(per mth)</ion-label
+                      >
+                      <input
+                        maxlength="6"
+                        minlength="1"
+                        (keypress)="onlyNumbersWithDotSpendCap($event)"
+                        (blur)="spendCaponBlur('hrsitea', '', '')"
+                        type="text"
+                        placeholder="0"
+                        id="houramtsitea"
+                        [(ngModel)]="spendCapHoursitea"
+                      />
+                      <input type="text" id="hoursitea" value=" hours" disabled />
+                      <ion-label style="font-size: 1.1em;">
+                        Edit dollar amount or hours</ion-label
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+                <ion-col
+                  *ngIf="spendCap == 'on'"
+                  col-1
+                  align-self-center
+                  style="z-index: 99999;"
+                >
+                  <img
+                    style="height: 30px; margin-left: -27px; cursor: pointer;  "
+                    [ngClass]="{ unlink: spendCapToggle == true }"
+                    (click)="updateSpendCap()"
+                    class="spendlink"
+                  />
+                </ion-col>
+                <ion-col *ngIf="spendCap == 'on'" col-5>
+                  <ion-card style="margin-left: -70px;">
+                    <ion-card-header>
+                      <span style="font-size: 1.1em; font-weight: bold;">{{ data.from }}</span>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <ion-label style="font-size: 1.1em;">
+                        Dollar Amount</ion-label
+                      >
+                      <input type="text" id="cursiteb" value="$ " disabled />
+                      <input
+                        maxlength="10"
+                        minlength="1"
+                        (keypress)="onlyNumbersWithDotSpendCap($event)"
+                        (blur)="spendCaponBlur('amtsiteb', '', '')"
+                        type="text"
+                        placeholder="0"
+                        id="curamountsiteb"
+                        [(ngModel)]="spendCapAmountsiteb"
+                      />
+                      <ion-label style="font-size: 1.1em;">
+                        Whole hours(per mth)</ion-label
+                      >
+                      <input
+                        maxlength="6"
+                        minlength="1"
+                        (keypress)="onlyNumbersWithDotSpendCap($event)"
+                        (blur)="spendCaponBlur('hrsiteb', '', '')"
+                        type="text"
+                        placeholder="0"
+                        id="houramtsiteb"
+                        [(ngModel)]="spendCapHoursiteb"
+                      />
+                      <input type="text" id="hoursiteb" value=" hours" disabled />
+                      <ion-label style="font-size: 1.1em;">
+                        Edit dollar amount or hours</ion-label
+                      >
+                    </ion-card-content>
+                  </ion-card>
+                </ion-col>
+                <ion-col *ngIf="spendCap == 'on'"></ion-col>
+              </ion-row>
+              <hr />
+              <ion-row>
+                <ion-col padding-top col-12>
+                  <span style="font-size: 1.2em;">
+                    <strong>Notification rules</strong>
+                  </span>
+                  <br />
+                  <br />
+                  <span style="color:gray;">Notify me:</span>
+                </ion-col>
+                <ion-col col-8>
+                  <ion-item class="padding-0" no-lines>
+                    <ion-label style="color:black;">
+                      When flex increase or decrease is triggered</ion-label
+                    >
+                    <ion-checkbox
+                      class="margin-right-8"
+                      [(ngModel)]="flexIncreaseDecrease"
+                    ></ion-checkbox>
+                  </ion-item>
+                  <ion-item class="padding-0" no-lines>
+                    <ion-label style="color:black;">
+                      When usage exceeds a defined amount</ion-label
+                    >
+                    <ion-checkbox
+                      class="margin-right-8"
+                      [(ngModel)]="flexUsage"
+                    ></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-4></ion-col>
+                <ion-col *ngIf="flexUsage == true" col-3>
+                  <ion-label> Dollar Amount</ion-label>
+                  <input type="text" id="cur" value="$ " disabled />
+                  <input
+                    maxlength="10"
+                    minlength="1"
+                    (keypress)="onlyNumbersWithDot($event)"
+                    (blur)="updateExcessUsage($event, 'amt', '', '')"
+                    type="text"
+                    placeholder="0"
+                    id="curamount"
+                    [(ngModel)]="usageAmount"
+                  />
+                </ion-col>
+                <ion-col *ngIf="flexUsage == true" col-3>
+                  <ion-label> Whole hours</ion-label>
+                  <input
+                    maxlength="6"
+                    minlength="1"
+                    (keypress)="onlyNumbersWithDot($event)"
+                    (blur)="updateExcessUsage($event, 'hr', '', '')"
+                    type="text"
+                    placeholder="0"
+                    id="houramt"
+                    [(ngModel)]="usageHour"
+                  />
+                  <input type="text" id="hour" value="  hours" disabled />
+                </ion-col>
+                <ion-col *ngIf="flexUsage == true"></ion-col>
+                <ion-col col-8>
+                  <ion-item style="outline:none;" class="padding-0" no-lines>
+                    <ion-label style="color:black;">
+                      When spend cap is reached</ion-label
+                    >
+                    <ion-checkbox
+                      class="margin-right-8"
+                      [(ngModel)]="flexSpendCap"
+                    ></ion-checkbox>
+                  </ion-item>
+                </ion-col>
+                <ion-col col-4></ion-col>
+                <ion-col col-8>
+                  <ion-label> Would you like to add secondary contact</ion-label>
+                  <input
+                    maxlength="30"
+                    minlength="1"
+                    style="height: 30px; width: 250px;"
+                    (blur)="validateEmail($event)"
+                    type="text"
+                    placeholder="secondary@email.com"
+                    id="email"
+                    [(ngModel)]="usageEmail"
+                  />
+                </ion-col>
+                <ion-col col-4></ion-col>
+              </ion-row>
+              <hr />
+              <ion-row>
+                <ion-col col-2> </ion-col>
+                <ion-col col-3>
+                  <button
+                    ion-button
+                    full
+                    [disabled]="!isValid"
+                    class="button-white btnAction"
+                    (click)="saveforLatter($event)"
+                  >
+                    SAVE FOR LATTER
+                  </button>
+                </ion-col>
+                <ion-col col-2></ion-col>
+                <ion-col col-3>
+                  <button
+                    ion-button
+                    full
+                    [disabled]="!isValid"
+                    class="button-yellow btnAction"
+                    (click)="setnextLevel($event)"
+                  >
+                    REVIEW CHANGE
+                  </button>
+                </ion-col>
+                <ion-col col-2> </ion-col>
+              </ion-row>
+            </ng-container>
+            <ion-row>
+              <ion-col col-12> <hr /> </ion-col>
+              <ion-col col></ion-col>
+              <ion-col col-3 style="text-align: center">
+                <span class="btnCancel" (click)="closeModel()">Cancel</span>
+              </ion-col>
+              <ion-col col></ion-col>
+              <ion-col col-12> <hr /> </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-1> <div class="vl"></div> </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-4>
+        <ion-title>Change Summary</ion-title>
+        <h6>FLEX BANDWIDTH</h6>
+        <hr class="bold2" />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey"
+            >
+
+            {{ oninintData ? oninintData[0].selectedProduct.properties.location.title: null }}
+            <!-- {{ oninintData[0].selectedProduct.properties.location.title}} -->
+            <!-- {{ data.address }} -->
+            
+            </ion-col
+          >
+          <ion-col col-12 padding-top no-padding padding-bottom
+            >{{ minValue }} ->
+            
+            {{ bwchangeData ? bwchangeData : minValue }} Mbps
+            <!-- {{ changeFlexValue ? changeFlexValue : minValue }} Mbps -->
+            </ion-col
+          >
+        </ion-row>
+        <hr />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey"
+            >
+            {{ oninintData ? oninintData[0].otherEnds[0].properties.location.title: null }}
+          
+            <!-- {{ data.from }} -->
+            
+            </ion-col
+          >
+          <ion-col col-12 padding-top padding-bottom no-padding
+            >{{ minValue }} -> 
+            {{ bwchangeData ? bwchangeData : minValue }} Mbps
+            <!-- {{ changeFlexValue }} Mbps -->
+            </ion-col
+          >
+        </ion-row>
+        <h6>FLEX COST</h6>
+        <hr class="bold2" />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey"
+            >
+            {{ oninintData ? oninintData[0].selectedProduct.properties.location.title: null }}
+           
+            <!-- {{ data.address }} -->
+            
+            </ion-col
+          >
+          <ion-col col-12 padding-top no-padding padding-bottom
+            >$ {{ siteaFlexTotal | number: "1.2-2" }} if triggered</ion-col
+          >
+        </ion-row>
+        <hr />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey"
+            >
+            <!-- {{ data.from }} -->
+            {{ oninintData ? oninintData[0].otherEnds[0].properties.location.title: null }}
+         
+            
+            </ion-col
+          >
+          <ion-col col-12 padding-top padding-bottom no-padding
+            >$ {{ sitebFlexTotal | number: "1.2-2" }} if triggered</ion-col
+          >
+        </ion-row>
+        <hr />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey">
+            <span style="font-weight: 600;color: black;"
+              >Total cost $ {{ sitesFlexTotal | number: "1.2-2" }} </span
+            >if triggered <br />$ ## minimum cost <br />60min minimum time
+            period <br />
+            <br />Other pricing information
+          </ion-col>
+        </ion-row>
+        <h6>SPEND CAP</h6>
+        <hr class="bold2" />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey"
+            >{{ data.address }}</ion-col
+          >
+          <ion-col col-12 padding-top no-padding padding-bottom>
+            <span style="font-weight: 600;"
+              >$ {{ spendCapAmountsitea | number: "1.2-2" }} per month</span
+            >
+          </ion-col>
+        </ion-row>
+        <hr />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey"
+            >{{ data.from }}</ion-col
+          >
+          <ion-col col-12 padding-top padding-bottom no-padding>
+            <span style="font-weight: 600;"
+              >$ {{ spendCapAmountsiteb | number: "1.2-2" }} per month</span
+            >
+          </ion-col>
+        </ion-row>
+        <hr />
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey">
+            <span style="font-weight: 600; color: black;"
+              >Total spend cap $ {{ spendCapTotal | number: "1.2-2" }} per month
+            </span>
+            <br />$ ## minimum cost <br />60min minimum time period <br />
+            <br />Other pricing information
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row *ngIf="isSaveLatter">
+      <ion-col></ion-col>
+      <ion-col col-8 padding>
+        <ion-row align-items-start>
+          <ion-col>
+            <ion-title>Dynamic Flex Bandwidth Change</ion-title>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="font-weight: bold;">
+            <img
+              src="../../assets/imgs/whiteRedCircle.png"
+              class="custom-icon"
+            />
+            <span>CONFIGURE&nbsp;&nbsp;</span>
+            <img src="../../assets/imgs/grey-tick.png" class="custom-icon" />
+            <span>REVIEW&nbsp;&nbsp;</span>
+            <img src="../../assets/imgs/grey-tick.png" class="custom-icon" />
+            <span>CONFIRMATION</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <hr style="background-color: #D1D7DA; border-width: 0.5px;" />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 *ngIf="isSaveLatter">
+            <ion-row>
+              <ion-col col-12> <div style="height: 30px;"></div> </ion-col>
+              <ion-col col-12>
+                <span style="font-size: 2.5em; color:black; font-weight: bold"
+                  >Your configuration was saved for later</span
+                >
+              </ion-col>
+              <ion-col col-3>
+                <button
+                  ion-button
+                  full
+                  class="button-grey btnAction"
+                  (click)="editConfigure($event)"
+                >
+                  EDIT
+                </button>
+              </ion-col>
+              <ion-col col-9></ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12> <hr /> </ion-col>
+          <ion-col col-5></ion-col>
+          <ion-col col-2 style="text-align: center">
+            <span class="btnCancel" (click)="closeModel()">Cancel</span>
+          </ion-col>
+          <ion-col col-5></ion-col>
+          <ion-col col-12> <hr /> </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col></ion-col>
+    </ion-row> -->
+  </ion-grid>
+</ng-container>

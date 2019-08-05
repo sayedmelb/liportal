@@ -1,0 +1,122 @@
+<ion-row>
+    <ion-col padding-top>
+      <span class="sub-heading">Timebox rules</span> <br />
+      <br />
+      <span>
+        Timebox rules allow you to determine when Flex feature is
+        turned on / off. Selecting
+        <strong>"Flex any time"</strong> means that if the threshold
+        settings are breached then the service will flex. Selecting
+        <strong>"Flex at specified times"</strong> means that outside
+        these times your service will not flex even if the thresholds
+        are breached.</span
+      >
+    </ion-col>
+    <ion-col col-12>&nbsp;</ion-col>
+    <ion-col col-12>
+      <button
+        ion-button
+        (click)="setTimeBox($event, 'off')"
+        class="btnflextime btnActivatedTimebox button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+      >
+        Flex any time
+      </button>
+      <button
+        ion-button
+        (click)="setTimeBox($event, 'on')"
+        ion-button
+        class="btnflexspecified  button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+        style="width:200px;"
+      >
+        Flex at specified times
+      </button>
+    </ion-col>
+    <ion-col col-12>&nbsp;</ion-col>
+    <ion-col col-12 *ngIf="timeBox == 'on'">
+      <ion-row>
+        <ion-col
+          col-xl-2
+          col-lg-1
+          col-1
+          col-md-2
+          col-sm-2
+          align-self-center
+        >
+          <span
+            style="padding:2px; font-size:0.9em; padding-left: 10px;"
+            >Between</span
+          >
+        </ion-col>
+        <ion-col col-2>
+          <mbsc-time [(ngModel)]="stime" [options]="timeSettings" (ngModelChange)="checkDattimeValidation('start',stime)"></mbsc-time>
+        </ion-col>
+        <ion-col col-1 align-self-center>
+          <span style="padding:2px; padding-left: 10px;">and</span>
+        </ion-col>
+        <ion-col col-2>
+          <mbsc-time [(ngModel)]="etime" [options]="timeSettings" (ngModelChange)="checkDattimeValidation('end',etime)"></mbsc-time>
+        </ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-12 *ngIf="timeBox == 'on'">
+      <br />
+      On these days <br />
+      <button
+        ion-button
+        (click)="setWeekDay($event, 'mon')"
+        [ngClass]="{ btnActivatedDay: weekFlexDays.mon == true }"
+        class="btnMonDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+      >
+        MON
+      </button>
+      <button
+        ion-button
+        (click)="setWeekDay($event, 'tue')"
+        [ngClass]="{ btnActivatedDay: weekFlexDays.tue == true }"
+        class="btnTueDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+      >
+        TUE
+      </button>
+      <button
+        ion-button
+        (click)="setWeekDay($event, 'wed')"
+        [ngClass]="{ btnActivatedDay: weekFlexDays.wed == true }"
+        class="btnWedDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+      >
+        WED
+      </button>
+      <button
+        ion-button
+        (click)="setWeekDay($event, 'thu')"
+        [ngClass]="{ btnActivatedDay: weekFlexDays.thu == true }"
+        class="btnThuDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+      >
+        THU
+      </button>
+      <button
+        ion-button
+        (click)="setWeekDay($event, 'fri')"
+        [ngClass]="{ btnActivatedDay: weekFlexDays.fri == true }"
+        class="btnFrDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+      >
+        FRI
+      </button>
+      <button
+        ion-button
+        (click)="setWeekDay($event, 'sat')"
+        [ngClass]="{ btnActivatedDay: weekFlexDays.sat == true }"
+        class="btnSatDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+      >
+        SAT
+      </button>
+      <button
+        ion-button
+        (click)="setWeekDay($event, 'sun')"
+        [ngClass]="{ btnActivatedDay: weekFlexDays.sun == true }"
+        class="btnSunDay  button button-md button-clear button-clear-md button-large button-large-md btnNormalwk"
+      >
+        SUN
+      </button>
+    </ion-col>
+  </ion-row>

@@ -1,0 +1,34 @@
+<ion-grid>
+  <ion-row>
+      <ion-col col-12>
+          <ion-row style="cursor: pointer;" (click)="toggle()">
+            <ion-col col-3 text-left>
+              <div class="term-header">
+                  Add Contact
+              </div>
+            </ion-col>
+            <ion-col col-8></ion-col>
+            <ion-col col-1 text-right>
+              <span class="arrow-down">
+                <ion-icon name="ios-arrow-down"></ion-icon>
+              </span>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+    <!-- <ion-col col-12 text-center>
+      <div class="term-header">
+        Add Contact
+        <span class="arrow-down" (click)="toggle()">
+          <ion-icon name="ios-arrow-down"></ion-icon>
+        </span>
+      </div>
+    </ion-col> -->
+    <ion-col *ngIf="show" col-12 class="pd-bt-2">
+      <span class="sub-heading">
+        Add Contact <info-icon></info-icon>
+      </span>
+      <br />
+
+    </ion-col>
+  </ion-row>
+</ion-grid>

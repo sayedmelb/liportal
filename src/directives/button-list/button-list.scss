@@ -1,0 +1,73 @@
+button-list {
+  .sub-heading {
+    font-weight: 600;
+    font-size: 1.4rem;
+    padding-left: 2rem;
+    padding-right: 1rem;
+    float: left;
+
+    display: flex;
+    // flex-direction: column;
+  }
+
+  .heading-label {
+    padding-right: 1rem;
+
+  }
+
+  .button-list {
+    padding: 1rem;
+    align-content: center;
+  }
+
+  .flex-item {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding: 10px;
+  }
+
+  .label-md {
+    margin: 0;
+  }
+
+  label {
+    border: 1px solid #D1D7DA;
+    background-color: rgba(227, 233, 236, 0.2);
+    color: #000000;
+    font-family: "Mark Pro";
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .item-md .item-button {
+    padding: 15px;
+    font-size: 1.4rem;
+  }
+
+  .btnNormal {
+    border: 1px solid #d0d6d9;
+    color: black;
+    font-family: "Mark Pro";
+    font-size: 1.4rem;
+    background-color: #f9fafb;
+    text-align: center;
+    padding: 1rem 4rem;
+    width: 15rem;
+  }
+
+  .btnNormal.btnActivated {
+    border: 2px solid #00A3AD;
+    background-color: #FFFFFF;
+  }
+
+  input[type="radio"] {
+   // appearance: none;
+  }
+
+}

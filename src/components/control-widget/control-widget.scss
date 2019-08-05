@@ -1,0 +1,12 @@
+control-widget {
+    .mbsc-lv-ios .mbsc-lv-item {
+        padding: .8em 1em .8em 1em;
+        font-size: 0.8em;
+    }
+    .mbsc-lv-ios .mbsc-lv-item:before, .mbsc-lv-ios .mbsc-lv-item:after {
+        border-top: 0 solid #ccc;
+    }
+    .mbsc-lv-ios .mbsc-lv-item:hover {
+        background-color: color($colors, optuslightgrey);
+    }
+}

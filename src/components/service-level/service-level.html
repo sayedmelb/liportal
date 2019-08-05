@@ -1,0 +1,50 @@
+<ion-grid>
+  <ion-row >
+    <ion-col col-12 class="pd-bt-2">
+      <span class="sub-heading">
+         {{schema.label | dynamicPipe:{pipes:'componentheader'} }} <info-icon *ngIf="tooltipText" [infoText]="tooltipText" [textPlacement]="'right'"></info-icon>
+      </span>
+    </ion-col> 
+    <ion-col col-12 *ngIf="property =='serviceLevel' && networkType !=='P2P'"><span class="span-link" (click)="openServiceLevelDetails()">Service Level Target Details</span></ion-col> 
+    <!-- <ion-col col-6 *ngFor="let service of model; let i=index"  [ngClass]="{'border-right': (i+1)!=model.length}">  -->
+    <ion-col col-6 *ngFor="let service of model; let i=index" >
+      <button-list [index]="i" [column]="property"  [dataSource]="schema.dataSource"  [addressEnd] = "addressEnds[i]" [networkType]="networkType" [model]="service" (dataChange)="selectedOption($event)"></button-list>
+      <br>
+      
+     
+    </ion-col>
+    
+    <ng-container *ngIf="property=='flex_capacity' && networkType == 'P2P' ">
+      <ion-col col-6 >
+        <span class='pad-left color-grey' style='font-size: 1.1rem;'>5x only available with enough port capacity</span>
+      </ion-col>
+      <ion-col col-6>
+        <span class='pad-left color-grey' style='font-size: 1.1rem;'>5x only available with enough port capacity</span>
+      </ion-col>
+    </ng-container>
+    <ng-container *ngIf="property=='flex_capacity' && networkType !=='P2P' ">
+      <ion-col col-12 >
+        <span class='color-grey' style='font-size: 1.1rem; padding-left: 3.7rem;'>5x only available with enough port capacity</span>
+    </ion-col>
+    </ng-container>
+   
+    <!-- && networkType =='P2P' -->
+    <!-- <ion-col col-6 *ngIf="property=='flex_capacity'  ">
+      <span class='pad-left color-grey' >5x only available with enough port capacity</span>
+    </ion-col> -->
+    
+    <!-- <ion-col col-6 *ngIf="property=='flex_capacity' && networkType ==='P2P' ">
+      <span class='pad-left color-grey' >{{ networkType }} 5x only available with enough port capacity</span>
+    </ion-col> -->
+    <!-- <ion-col col-6 *ngIf="property=='flex_capacity'">
+      test
+      </ion-col> -->
+    <!-- <ion-col col-6 *ngIf="property=='flex_capacity' && networkType !=='P2P' ">
+      
+    </ion-col> -->
+
+  
+  </ion-row>
+</ion-grid>
+<br>
+ 

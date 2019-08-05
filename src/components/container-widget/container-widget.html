@@ -1,0 +1,9 @@
+<ion-grid no-padding>
+  <ion-row wrap>
+    <ng-template ngFor let-fieldset [ngForOf]="formProperty.schema.fieldsets">
+      <ion-col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 *ngFor="let fieldId of fieldset.fields">
+        <sf-form-element [formProperty]="formProperty.getProperty(fieldId)"></sf-form-element>
+      </ion-col>
+    </ng-template>
+  </ion-row>
+</ion-grid>

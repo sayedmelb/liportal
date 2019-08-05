@@ -1,0 +1,186 @@
+<!-- <ion-list>
+  <ion-row>
+    <ion-col col-2>
+      <strong>Search</strong> <br />
+      <input
+        class="serviceSearch"
+        placeholder="Search by name, location status..."
+        autocomplete="off"
+        (keyup)="updateFilter($event)"
+      />
+    </ion-col>
+    <ion-col col-8> </ion-col>
+    <ion-col align-self-end col-2>
+      <button style="display:none;" ion-button class="button-yellow btnAlign">ADD A SERVICE</button>
+    </ion-col>
+  </ion-row>
+  <ngx-datatable
+    #table
+    style="height: 75vh !important;"
+    class="tableWidget"
+    columnMode="force"
+    [rows]="rows"
+    [limit]="5"
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="100"
+    [scrollbarV]="false"
+    [scrollbarH]="true"
+    [selectionType]="'single'"
+    (select)="onSelect($event)"
+  >
+    <ng-template ngFor let-col [ngForOf]="columns">
+      <ngx-datatable-column
+        [name]="col.title"
+        [prop]="col.prop"
+        headerClass="{{col.headerclass}}"
+        [width]="145"
+      >
+        <ng-template
+          let-column="col"
+          ngx-datatable-header-template
+          let-sort="sortFn"
+        >
+          <ion-icon
+            color="optusblack"
+            *ngIf="col.type != 'cog'"
+            name="md-menu"
+          ></ion-icon>
+          <span (click)="sort()"> {{ col.title }} </span>
+        </ng-template>
+        <ng-template
+          let-column="col"
+          let-row="row"
+          let-value="value"
+          ngx-datatable-cell-template
+        >
+          <span
+            [ngClass]="col.type == 'link' ? col.linkclass : ''"
+            *ngIf="col.type == 'text' || col.type =='link'"
+            >{{ getValue(col, row) | dynamicPipe:col }}</span
+          >
+          <span
+            *ngIf="col.type == 'template'"
+            [innerHTML]="getTemplate(col, row)"
+          > </span>
+          <span *ngIf="col.type == 'cog'" (click)="showMenu($event, row)">
+            <ion-icon
+              name="md-settings"
+              role="img"
+              [ngClass]="col.type == 'cog' ? col.linkclass : ''"
+              class="icon icon-md ion-md-settings"
+              aria-label="settings"
+            ></ion-icon>
+            <img
+              [src]="col.imageurl"
+              [ngClass]="col.type == 'cog' ? col.imageclass : ''"
+            />
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+    </ng-template>
+  </ngx-datatable>
+</ion-list> -->
+<!-- [cellClass]="'customCell'" -->
+<ion-list *ngIf="showGridList()==true">
+  <ion-row>
+    <ion-col col-2>
+      <strong>Search</strong> <br />
+      <input
+        class="serviceSearch"
+        placeholder="Search by name, location status..."
+        autocomplete="off"
+        (keyup)="updateFilter($event)"
+      />
+    </ion-col>
+    <ion-col col-8> </ion-col>
+    <ion-col align-self-end col-2>
+      <button style="display: none;"  ion-button class="button-yellow btnAlign" (click)="reloadData()">ADD A SERVICE</button>
+    </ion-col>
+  </ion-row>
+  <ngx-datatable
+    #table
+    style="height: 100vh!important;"
+    class="tableWidget"
+    columnMode="force"
+    [rows]="rows"
+    [limit]="5"
+    [columnMode]="'force'"
+    [headerHeight]="30"
+    [footerHeight]="50"
+    [rowHeight]="100"
+    [scrollbarV]="false"
+    [scrollbarH]="true"
+    [selectionType]="'single'"
+    (select)="onSelect($event)"
+    [columns]="columns"
+  >
+    <ng-template ngFor let-col [ngForOf]="columns">
+      <ngx-datatable-column
+        [name]="col.title"
+        [prop]="col.prop"
+        headerClass="{{col.headerclass}}"
+        cellClass="{{col.cellClass}}"
+        
+       
+      >
+        <ng-template
+          let-column="col"
+          ngx-datatable-header-template
+          let-sort="sortFn"
+        >
+          <ion-icon
+            color="optusblack"
+            *ngIf="col.type != 'cog'"
+            name="md-menu"
+          ></ion-icon>
+          <span (click)="sort()"> {{ col.title }} </span>
+        </ng-template>
+        <ng-template
+          let-column="col"
+          let-row="row"
+          let-value="value"
+          ngx-datatable-cell-template
+          
+        >
+        
+        <span
+        [ngClass]="col.type == 'link' ? col.linkclass : ''"
+        *ngIf="col.type == 'link'" (click) ="getDetail(col,row)"
+        >{{ getValue(col, row) }}</span
+          >
+          <span
+            [ngClass]="col.type == 'link' ? col.linkclass : ''"
+            *ngIf="col.type != 'template' && col.type != 'link' && col.type!=='text-flex' "
+            >{{ getValue(col, row) | dynamicPipe:col }}</span
+          >
+          <span
+          [ngClass]="col.type == 'link' ? col.linkclass : ''"
+          *ngIf="col.type != 'template' && col.type != 'link' && col.type=='text-flex' "
+          >{{ getValue(col, row) |  dynamicPipe:{pipes:col.title}  }}</span
+        >
+          <span
+            [ngClass]="col.cellClass"
+            *ngIf="col.type == 'template'"
+            [innerHTML]="row.properties | statusPipe: col.renderStrategy"
+          ></span>
+          <span [ngClass]="col.cellClass" *ngIf="col.type == 'cog'" (click)="showMenu($event, row)">
+            <ion-icon
+              name="md-settings"
+              role="img"
+              [ngClass]="col.type == 'cog' ? col.linkclass : ''"
+              class="icon icon-md ion-md-settings"
+              aria-label="settings"
+            ></ion-icon>
+            <img
+              [src]="col.imageurl"
+              [ngClass]="col.type == 'cog' ? col.imageclass : ''"
+            />
+          </span>
+        </ng-template>
+      </ngx-datatable-column>
+    </ng-template>
+  </ngx-datatable>
+</ion-list>
+<!-- <service-detail [schema]="schema" [model]="product"></service-detail> -->

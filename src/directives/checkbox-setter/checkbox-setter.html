@@ -1,0 +1,35 @@
+<ion-row no-lines>
+    <ion-col col-12></ion-col>
+    <ion-col col-6 *ngIf="stateControl!=='Weekly'">
+        <span class="sub-heading" *ngIf="stateControl=='Monthly'">Days of the month</span>
+        <span class="sub-heading"  *ngIf="stateControl=='Daily'  ">Specific days</span>
+    </ion-col>
+    <ion-col col-6 *ngIf="stateControl=='Weekly'">
+            <span class="sub-heading"  *ngIf="stateControl=='Weekly'  ">Recur every</span> 
+            <input
+                    maxlength="3"
+                    minlength="1"
+                    min="1" 
+                    class="flexInput"
+                    [(ngModel)]="weeklyCount"
+                    (keypress)="keyPress($event)"
+                    (keyup)="updateWeeklyCount($event)"
+                  />
+            <span class="sub-heading"  *ngIf="stateControl=='Weekly'  ">week(s) on</span> 
+    </ion-col>
+    <ion-col col-6></ion-col>
+    <ion-col *ngFor="let dayname of dayslist" [attr.col-2]="stateControl=='Monthly'? true:null"
+        [attr.col-3]="stateControl=='Daily'? true:null" [attr.col-4]="stateControl=='Weekly'? true:null">
+        <ion-item no-lines>
+            <ion-label> {{dayname.day}} </ion-label>
+            <ion-checkbox class="margin-right-8" [(ngModel)]="dayname.checked" (click)="checkDay(dayname.day)">
+            </ion-checkbox>
+        </ion-item>
+    </ion-col>
+    <ion-col *ngIf="stateControl=='Daily'" [attr.col-3]="stateControl=='Daily'? true:null"></ion-col>
+    <ion-col *ngIf="stateControl=='Weekly'" [attr.col-3]="stateControl=='Weekly'? true:null"></ion-col>
+    <ion-col *ngIf="stateControl=='Monthly'" [attr.col-5]="stateControl=='Monthly'? true:null"></ion-col>
+    <ion-col col-12 *ngIf="stateControl=='Monthly'">
+            <span class="sub-heading" *ngIf="stateControl=='Monthly'">*For months with no 30 or 31, the preceding days will be selected</span>
+    </ion-col>
+</ion-row>

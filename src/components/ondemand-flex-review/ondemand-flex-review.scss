@@ -1,0 +1,54 @@
+ondemand-flex-review {
+  .heading2 .toolbar-title-md {
+    font-size: 2.5rem;
+  }
+  .arw {
+    max-width: 100%;
+    border: 0;
+    width: 18px;
+    vertical-align: sub;
+  }
+  .verticalDivider {
+    width: 1px;
+    height: 50px;
+    background-color: #d1d7da;
+  }
+  .header6 {
+    font-size: 1.6rem;
+    margin-top: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    box-sizing: border-box;
+    display: block;
+    font-size: 1.2em;
+    margin-block-start: 2.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+  .header-margin {
+    margin-top: 0rem !important;
+  }
+  .sub-header-label {
+    color: color($colors, secondary);
+    font-weight: 500;
+    font-size: 0.9em;
+  }
+  .spn-left {
+    display: inline;
+    margin-left: -2.5em;
+  }
+  .height-16 {
+    height: 16rem;
+  }
+  .fnt-label {
+    line-height: 30px;
+    font-size: 1.2em;
+  }
+  .button-grey:hover {
+    background-color: #d1d7da !important;
+  }
+  .button-white:hover {
+    background-color: rgb(243, 245, 247) !important;
+  }
+}

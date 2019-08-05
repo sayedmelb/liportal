@@ -1,0 +1,125 @@
+info-icon {
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+  }
+  .overlay:target {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .popup {
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position: relative;
+    transition: all 1s ease-in-out;
+  }
+  .popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+  }
+  .popup .close:hover {
+    color: #06D85F;
+  }
+  .popup .content {
+    max-height: 30%;
+    overflow: auto;
+  }
+  
+  .icon-xsm {
+    width: 1rem;
+    height: 1rem;
+  }
+  .icon-sm {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .icon-md {
+    width: 2rem;
+    height: 2rem;
+  }
+  .icon-lg {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .icon-xl {
+    width: 3rem;
+    height: 3rem;
+  }
+  .icon-xxl {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  @media screen and (max-width: 700px){
+    .popup{
+      width: 70%;
+    }
+  }
+}
+
+//Tooltip styles
+.ng-tooltip {
+  position: absolute;
+  max-width: 350px;
+  font-size: 1.25rem;
+  text-align: left;
+  padding: 5px;
+  background-color: #e4ecec;
+  border: 1px solid #D1D7DA;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  z-index: 1000;
+  opacity: 0;
+}
+.ng-tooltip:after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+.ng-tooltip-top:after {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: #D1D7DA transparent transparent transparent;
+}
+.ng-tooltip-bottom:after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-color: transparent transparent #D1D7DA transparent;
+}
+.ng-tooltip-left:after {
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent transparent transparent #D1D7DA;
+}
+.ng-tooltip-right:after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-color: transparent #D1D7DA transparent transparent;
+}
+.ng-tooltip-show {
+  opacity: 1;
+}

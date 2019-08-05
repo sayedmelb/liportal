@@ -1,0 +1,101 @@
+<div *ngIf="!schema.datasource || !schema.datasource[0].model">
+  <ion-spinner></ion-spinner>
+</div>
+<ion-grid *ngIf="showservicedata() && schema.datasource && schema.datasource[0].model">
+  <ion-item class="optus-header" no-lines>
+    <ion-note class="tab-header link-header">
+      <span >Services</span>
+    </ion-note> <span>/ {{schema.datasource[0].selectedProduct.properties.service.properties.serviceId}}</span>
+    <!-- <pre>{{formProperty.schema.tabs|json}} </pre> -->
+  </ion-item>
+  <ion-row>
+    <ion-col col-1><button ion-button full class="button-yellow btnAction" (click)="goBack()">BACK</button> </ion-col>
+    <ion-col col-11></ion-col>
+    <ion-col col-1></ion-col>
+    <ion-col col-10>
+      <ion-row>
+        <ion-col col-12>
+          <network-diagram [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null">
+          </network-diagram>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <ion-list>
+            <ion-item-divider class="tab-segment" no-border no-lines sticky style="z-index:999" no-padding>
+              <ion-segment color="md-teal" [(ngModel)]="subSelected" class="padding-left-10">
+                <ng-template ngFor let-tab [ngForOf]="tabs">
+                  <ion-segment-button [value]="tab.id" [ngStyle]="{'max-width': tab.width}">
+                    {{tab.title }}
+                  </ion-segment-button>
+                </ng-template>
+              </ion-segment>
+              <hr style="margin-top: 0.7em;">
+            </ion-item-divider>
+            <div *ngIf="subSelected=='SDT'">
+              <ion-row>
+                <ion-col col-12>
+                  <!-- <mbsc-scrollview>
+                  <mbsc-scrollview-item *ngFor="let tab of tabs"> -->
+                  <service-details-cards (networkUpdate)="checkChange($event)" [pageName]="'SD'"
+                    [schema]="schema.datasource[0]" [parentschema]="schema" [model]="schema.datasource[0].model">
+                  </service-details-cards>
+                  <!-- </mbsc-scrollview-item>
+                </mbsc-scrollview> -->
+                </ion-col>
+              </ion-row>
+              <hr>
+              <div class="collapsible-container">
+                <div class="header">
+                  Dynamic Flex Speed
+                  <span class="arrow-down" (click)="toggleDynamicFlex()">
+                    <ion-icon name="ios-arrow-down"></ion-icon>
+                  </span>
+                </div>
+                <div *ngIf="showDynamicFlex" [@openClose]>
+                  Place holder for dynamic flex;
+                </div>
+              </div>
+              <hr>
+              <div class="collapsible-container">
+                <div class="header">
+                  Schedule Flex Speed
+                  <span class="arrow-down" (click)="toggleScheduleFlex()">
+                    <ion-icon name="ios-arrow-down"></ion-icon>
+                  </span>
+                </div>
+                <div *ngIf="showScheduleFlex" [@openClose]>
+                  Place holder for schedule flex speed.
+                </div>
+              </div>
+              <hr>
+              <div class="collapsible-container">
+                <div class="header">
+                  Reporting
+                  <span class="arrow-down" (click)="toggleUtilization()">
+                    <ion-icon name="ios-arrow-down"></ion-icon>
+                  </span>
+                </div>
+                <div *ngIf="showUtilization" [@openClose]>
+                  <graph-widget [schema]="schema"></graph-widget>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div *ngIf="subSelected=='PD'">
+              <port-details-widget [schema]="schema" [model]="schema.datasource[0]"></port-details-widget>
+            </div>
+            <div *ngIf="subSelected=='OD'">
+              <other-details-widget [schema]="schema" [model]="" (onServiceClick)="onServiceClick($event)">
+              </other-details-widget>
+            </div>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col col-1></ion-col>
+  </ion-row>
+
+</ion-grid>
+
+<!-- (click)="updateHeader(tab)" [value]="tab.id" (ionSelect)="selectSub(tab.id, tabContent)" -->

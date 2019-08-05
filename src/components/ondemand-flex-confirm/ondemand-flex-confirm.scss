@@ -1,0 +1,110 @@
+ondemand-flex-confirm  {
+    .ion-text-center {
+      text-align: center;
+    }
+    .loading-bar-header {
+      text-align: center;
+      font-family: "Mark Pro";
+      font-weight: 600;
+      font-size: 2.4rem;
+    }
+    .toolbar-title-md {
+      font-family: "Mark Pro Heavy" !important;
+    }
+  
+      .sub-header-label {
+          color: color($colors, secondary);
+          cursor: pointer;
+      }
+      .mbsc-ios.mbsc-form {
+          background: none;
+      }
+      .mbsc-ios {
+        .mbsc-form {
+          background: none;
+        }
+        .mbsc-control-w {
+          &:before {
+            border: none;
+          }
+          &:after {
+            border: none;
+          }
+        }
+        .mbsc-progress-track {
+          height: 1rem;
+          border-radius: 0.5rem;
+        }
+        .mbsc-progress-bar {
+          border-radius: 0.5rem;
+          background: color($colors, optusteal);
+        }
+      }
+      
+      @media (max-width: 1279px) {
+          .progressbar {
+            margin-left: -9.0rem;
+            .barTitle {
+              margin-top : -6rem;
+              margin-left: -1.25rem;
+              position: absolute;
+            }
+          }
+        }
+        @media (min-width: 1280px) {
+          .progressbar {
+            margin-left: -9.5rem;
+            .barTitle {
+              margin-top : -6rem;
+              margin-left: -1.25rem;
+              position: absolute;
+            }
+          }
+      
+        }
+      
+        @media (min-width: 1520px) {
+          .progressbar {
+            margin-left: -12rem;
+            .barTitle {
+              margin-top : -6rem;
+              margin-left: -1.25rem;
+              position: absolute;
+            }
+          }
+      
+        }
+      .btn-close {
+          width: 24%!important;
+          height: 12%;
+      }
+      .btn-close-text {
+          font-weight: bold;
+          font-size: 1.0em;
+      }
+      .sub-summary {
+          color: grey;
+          font-size: 1.1em
+      }
+      .close-header {
+          font-size: 1.5em;
+          color: black;
+          // font-weight: bold;
+          margin-top: 100px;
+      }
+      .close-container {
+          background-color: #f9fafb;
+          text-align: center;
+          height: 320px;
+          border: 1px lightgray solid
+      }
+      .container-height-high{
+        height: 320px;
+      }
+      .container-height-med {
+        height: 200px;
+      }
+      .col-red {
+        color: red;
+      }
+  }

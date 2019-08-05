@@ -1,0 +1,123 @@
+<ion-row align-items-start class="pd-lt-2">
+  <ion-col col-12 class="container-col"> <span class="header">FLEX SCHEDULE</span>
+    <hr class="bold2">
+  </ion-col>
+  <ion-col col-6 class="container-col ">
+    <ng-container *ngIf="schema.datasource.length > 0">
+      <ion-row>
+        <ion-col col-12> 
+          <span class="label-container">
+            <span class="color-grey">Start date (AEST)<br> </span>
+          <span *ngIf="schema.datasource[0].model[0].recurrence_type=='Once'">{{schema.datasource[0].model[0].single_date  | date: 'EE dd/MM/yyyy'}}</span>
+          <span *ngIf="schema.datasource[0].model[0].recurrence_type!=='Once'">{{schema.datasource[0].model[0].start_date | date: 'EE dd/MM/yyyy'}}</span> 
+          </span>
+        </ion-col>
+      
+      </ion-row>
+    </ng-container>
+  </ion-col>
+  <ion-col col-6 class="container-col" >
+    <ng-container *ngIf="schema.datasource.length > 0">
+        <ion-row>
+            <ion-col col-12 *ngIf="schema.datasource[0].model[0].recurrence_type!=='Once'"> 
+              <span class="label-container">
+                <span class="color-grey">End date (AEST)<br> </span>
+              <span>{{schema.datasource[0].model[0].end_date | date: 'EE dd/MM/yyyy'}}</span>
+              </span>
+            </ion-col>
+            <ion-col col-12 *ngIf="schema.datasource[0].model[0].recurrence_type=='Once'">
+                <span class="label-container" *ngIf="schema.datasource[0].model[0].single_date1">
+                    <span class="color-grey">End date (AEST)<br> </span>
+                  <span>{{schema.datasource[0].model[0].single_date1 | date: 'EE dd/MM/yyyy'}}</span>
+                  </span>
+            </ion-col>
+          
+          </ion-row>
+    </ng-container>
+  </ion-col>
+  <ion-col col-12 >
+    <hr>
+  </ion-col>
+  <ion-col col-6 class="container-col ">
+      <ng-container *ngIf="schema.datasource.length > 0">
+        <ion-row>
+          <ion-col col-12> 
+            <span class="label-container">
+              <span class="color-grey">Start time<br> </span>
+            <span >{{schema.datasource[0].model[0].start_time}}</span>
+            </span>
+          </ion-col>
+        
+        </ion-row>
+      </ng-container>
+    </ion-col>
+    <ion-col col-6 class="container-col" >
+      <ng-container *ngIf="schema.datasource.length > 0">
+          <ion-row>
+              <ion-col col-12 > 
+                <span class="label-container">
+                  <span class="color-grey">End time<br> </span>
+                <span>{{schema.datasource[0].model[0].end_time}}</span>
+                </span>
+              </ion-col>
+            </ion-row>
+      </ng-container>
+    </ion-col>
+    <ion-col col-12 >
+      <hr>
+    </ion-col>
+    <ion-col col-6 class="container-col ">
+        <ng-container *ngIf="schema.datasource.length > 0">
+          <ion-row>
+            <ion-col col-12> 
+              <span class="label-container">
+                <span class="color-grey">Reccurance Pattern<br> </span>
+              <span >{{schema.datasource[0].model[0].recurrence_type}}</span>
+              </span>
+            </ion-col>
+          
+          </ion-row>
+        </ng-container>
+      </ion-col>
+      <ion-col col-6 class="container-col" >
+        <ng-container *ngIf="schema.datasource.length > 0">
+            <ion-row>
+                <ion-col col-12  > 
+                  <span class="label-container">
+                    <span *ngIf="schema.datasource[0].model[0].recurrence_type!=='Once'" class="color-grey">Day(s)<br> </span>
+                  <span [innerHTML]="getDaysList()"></span>
+                  </span>
+                </ion-col>
+              </ion-row>
+        </ng-container>
+      </ion-col>
+      <ion-col col-12 >
+        <hr>
+      </ion-col>
+      <ion-col col-6 class="container-col ">
+          <ng-container *ngIf="schema.datasource.length > 0">
+            <ion-row>
+              <ion-col col-12> 
+                <span class="label-container">
+                  <span class="color-grey">Number of occurances<br> </span>
+                <span >{{schema.datasource[0].model[0].totalOccurance}}</span>
+                </span>
+              </ion-col>
+            
+            </ion-row>
+          </ng-container>
+        </ion-col>
+        <ion-col col-6 class="container-col" >
+          <ng-container *ngIf="schema.datasource.length > 0">
+              <ion-row>
+                  <ion-col col-12 > 
+                    <span class="label-container">
+                      <span class="color-grey">Total hours for all occurances<br> </span>
+                    <span >{{schema.datasource[0].model[0].totalHoursOccurance}}</span>
+                    </span>
+                  </ion-col>
+                </ion-row>
+          </ng-container>
+        </ion-col>
+ 
+</ion-row>

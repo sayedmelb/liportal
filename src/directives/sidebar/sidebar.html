@@ -1,0 +1,50 @@
+<div>
+
+  <img class="crossbar" (click)="onClose ()" src='../../assets/imgs/sidebarclose.png'>
+  <!-- <img class="sideleftarrow" (click)="onClose ()" src='../../assets/imgs/sidebarleftarrow.JPG'> -->
+  <ion-list class="height-56" no-margin>
+    <ion-row>
+      <ion-col col-12>
+        <hr>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let product of model.location.properties.products">
+      <ion-col col-11 no-padding>
+        <ng-container *ngFor="let row of schema.child.settings.rows">
+          <ion-row *ngIf="row.type=='colvertical'">
+            <ion-col col-12 class="field-label">{{ row.title }}<br>
+              <span class="subheading">{{ getValue(row.key, product) | dynamicPipe:row }}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="row.type=='col' ">
+            <ion-col col-6 class="field-label">{{ row.title }}</ion-col>
+            <ion-col col-6 class="field-text">{{ getValue(row.key, product) | dynamicPipe:row }}</ion-col>
+          </ion-row>
+          <ion-row *ngIf="row.type=='template'">
+            <ion-col col-6>
+                <span [innerHtml]="getDataFromTemplate(row, product) || 'Loading ...'"></span>
+            </ion-col>
+            <ion-col col-6>
+               <span style="padding-top: 0.8rem; display:'inline-flex';">{{product.properties.Flexing}}</span>
+            </ion-col>
+            
+            <ion-col col-12>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="row.type=='html'">
+            <ion-col col-12>
+              <div>{{row.html}}
+              </div>
+            </ion-col> 
+          </ion-row>
+        </ng-container>
+      </ion-col>
+      <ion-col col-1 no-padding>
+        <ion-icon name="md-settings" color="optusteal" (click)="showMenu($event, product)"></ion-icon>
+      </ion-col>
+      <ion-col col-12>
+        <hr>
+      </ion-col>
+    </ion-row>
+  </ion-list>
+</div>

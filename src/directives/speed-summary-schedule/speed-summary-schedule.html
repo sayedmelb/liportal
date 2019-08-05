@@ -1,0 +1,39 @@
+<ion-row align-items-start class="pd-lt-2">
+  <ion-col col-12 class="container-col"> <span class="header">FLEX SPEED</span>
+    <hr class="bold2">
+  </ion-col>
+  <ion-col col-6 class="container-col ">
+    <ng-container *ngIf="schema.datasource?.length > 0">
+      <ion-row>
+        <ion-col col-12> <span class="label-container"><span *ngIf="network==='P2P'"><strong>A-End:</strong> </span>
+            <span *ngIf="network!=='P2P'"><b>
+                {{ schema.datasource[0].selectedProduct.properties.line | dynamicPipe:{pipes:'networkname'}  }}</b>
+              <br>
+            </span>
+            <span *ngIf="network==='P2P'">
+              {{ schema.datasource[0].selectedProduct.properties.line | dynamicPipe:{pipes:'networkname'}  }}
+              <br>
+            </span>
+            <span>
+              {{schema.datasource[0].selectedProduct.properties.location.title}}</span>
+          </span>
+        </ion-col>
+        <ion-col col-12> <span class="label-sub"> {{schema.datasource[0].model[0].contractedBw}} </span> </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-col>
+  <ion-col col-6 class="container-col" *ngIf="networkType!=='Mesh'">
+    <ng-container *ngIf="schema.datasource?.length > 0">
+      <ion-row>
+        <ion-col col-12> <span class="label-container"><strong>B-End:</strong>
+            <span> {{ schema.datasource[0].otherEnds[0].properties.line | dynamicPipe:{pipes:'networkname'}  }} <br>
+              {{this.schema.datasource[0].otherEnds[0].properties.location.title}} </span>
+          </span> </ion-col>
+        <ion-col col-12><span class="label-sub">
+            {{ getBEndContrateBw() }}</span>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+  </ion-col>
+  <ion-col col-6 class="container-col" *ngIf="networkType==='Mesh'"></ion-col>
+</ion-row>

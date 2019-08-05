@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ schema.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-template ngFor let-fieldset [ngForOf]="formProperty.schema.fieldsets">
+    <ng-container  *ngFor="let fieldId of fieldset.fields">
+      <sf-form-element [formProperty]="formProperty.getProperty(fieldId)" *ngIf="!propertiesBehaviour[fieldId] || propertiesBehaviour[fieldId].show"></sf-form-element>
+    </ng-container>
+  </ng-template>
+</ion-content>

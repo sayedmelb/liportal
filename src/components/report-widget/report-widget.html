@@ -1,0 +1,10 @@
+<ng-container *ngFor="let data of schema.datasource">
+    <ion-row>
+        <ion-col col-12>
+            <h1>{{data.title}}</h1>
+            <ion-img width="1000" height="275" [src]="data.img"></ion-img>
+            <ion-img width="1000" height="275" [src]="data.img_alt"></ion-img>
+            <ion-img width="1000" height="275" [src]="data.img_secondary"></ion-img>
+        </ion-col>
+    </ion-row>
+</ng-container>

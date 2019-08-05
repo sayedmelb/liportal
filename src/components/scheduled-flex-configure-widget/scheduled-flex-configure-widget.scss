@@ -1,0 +1,184 @@
+scheduled-flex-configure-widget {
+  .row-style{
+    cursor: pointer; 
+    background-color: #f4f4f4;
+    height: 5.5rem; //4rem;
+  }
+  .restrict-row-height {
+    height: 4.2rem;
+  }
+  .arrow-icon-down {
+    content: url("../../assets/imgs/down.png");
+    height: 2rem;
+  }
+  .arrow-icon-up {
+    content: url("../../assets/imgs/up.png");
+    height: 2rem;
+  }
+  .loading-hgt{
+    height: 60px;
+    padding: 0px;
+  }
+    #flexRange {
+        .range-pin:after {
+            content: " Mbps";
+        }
+    }
+    .term-header {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #006280;
+    }
+    .upgradeFlex {
+        background-color: #fdf6da;
+        border-bottom: 1px solid #ddcb76 !important;
+    }
+    .mbsc-ios .mbsc-control-w {
+        margin-top: 0;
+        border: 1px solid black;
+    }
+    .item-md.item-block .item-inner {
+        padding-right: 0;
+    }
+    //To show ion-range pin always - Start
+    .range-md .range-knob-handle .range-pin {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    .range-md:not(.range-has-pin) .range-knob-handle .range-knob {
+        transform: scale(1);
+    }
+    .range-ios .range-knob-handle .range-pin {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+    //To show ion-range pin always - End
+    .imageSchInfographic {
+        position: relative;
+        width: 100%;
+        /* for IE 6 */
+    }
+    .leftFlexChange {
+        position: absolute;
+        top: 68%;
+        left: 170px;
+        width: 100%;
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    .rightFlexChange {
+        position: absolute;
+        top: 68%;
+        left: 430px;
+        width: 100%;
+        font-weight: 600;
+        font-size: 1.1em;
+    }
+    @media(min-width:1500px) {
+        .leftFlexChange {
+            left: 200px;
+
+        }
+        .rightFlexChange {
+            left: 520px;  
+        }
+    }
+
+
+    .toolbar-title-md {
+        font-family: "Mark Pro Heavy" !important;
+      }
+    
+        ion-col.border-right.col {
+            border-right: 1px solid #D1D7DA;
+          }
+          @media (max-width: 1279px) {
+            .progressbar {
+              margin-left: -8rem;
+              .barTitle {
+                margin-top : -6rem;
+                margin-left: -1.25rem;
+                position: absolute;
+              }
+            }
+            
+          }
+          @media (min-width: 1280px) {
+            .progressbar {
+              margin-left: -10rem;
+    
+              .barTitle {
+                margin-top : -6rem;
+                margin-left: -1.25rem;
+                position: absolute;
+              }
+            }
+    
+          }
+          .scroll-container{
+           
+            height: 700px;
+          }
+
+          @media (max-width: 1400px) { 
+            .scroll-container{
+               
+              height: 500px;
+            }
+          }
+         
+    
+          @media (min-width: 1401px) {
+            .progressbar {
+              margin-left: -11rem;
+    
+              .barTitle {
+                margin-top : -6rem;
+                margin-left: -1.25rem;
+                position: absolute;
+              }
+
+              .scroll-container{
+           
+                height: 800px;
+              }
+             
+              
+            }
+    
+          }
+
+          .sub-heading {
+            font-weight: 600;
+            padding-left: 2rem;
+            font-size: 1.6rem;
+          }
+          .sub-heading-2 {
+              color: #00B1BB;
+              font-size: 1.4rem;
+          }
+          .black-bold{
+              font-weight: bold;
+              font-size: 0.9em;
+          }
+          .grey-text{
+            font-size: 0.9em;
+            color: grey;
+          }
+          .description-text {
+            color: #747576;
+            padding-left:2rem;
+          }
+          .fixed-sticky{
+            position:fixed; 
+            top: 50px;
+          }
+          .scroll-container{
+            overflow: auto; 
+            //height: 600px;
+          }
+          .backdropOpacityPopover {
+            .popover-content {
+              overflow: hidden;
+            }
+          }
+    
+}

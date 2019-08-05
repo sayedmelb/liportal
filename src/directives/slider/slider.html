@@ -1,0 +1,20 @@
+<div class="custom-slider">
+    <!-- bwidth = <input type="number" [(ngModel)]="bWidth"> <br>
+    flex pack = <input type="number" [(ngModel)]="flexPack"> <br/>
+    {{options.floor}} - {{options.ceil}}
+    <input type="button" (click)="changeOptions()" value="change"/>
+    <br/><br/><br/><br/> -->
+    <!-- <input type="number" [(ngModel)]="_utilizedByOtherServices"/>  -->
+    <ng5-slider [(value)]="_bWidth" [(highValue)]="_contracted_bw" [options]="options" (userChangeEnd)="onUserChangeEnd($event)" [manualRefresh]="manualRefresh">
+         
+    </ng5-slider>
+    <div class="warning-message" *ngIf="errorType"> 
+        <p *ngFor="let message of infoMessages"><ion-icon name="{{errorType}}"></ion-icon><span class='warning-text' innerHTML="{{message}}"> </span></p>
+    </div>
+    <!-- <pre>
+        -- Other: {{_utilizedByOtherServices}}--<br>
+        -- FM: {{getMaxAvailableFlex()}} <br>
+        -- Profile index {{getProfileIndex(getMaxAvailableFlex())}} <br>
+        -- Avail {{getAvailableBw()}}
+    </pre> -->
+</div>

@@ -1,0 +1,104 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 class="pd-bt-2">
+      <span class="sub-heading">
+        {{schema.settings.twobuttoncombo[0].label}}
+      </span>
+      <info-icon [infoText]="'VLAN ID is a unique number identifier expected from the customer when the service has a UNI handoff type of UNI Tagged. This VLAN id needs to match on the Optus Side.'" [textPlacement]="'right'"></info-icon>
+      <br />
+
+    </ion-col>
+    <!-- [ngClass]="{'border-right': networkType==='P2P'}" -->
+    <ion-col col-6>
+      <ion-row>
+        <ion-col col-12>
+          <span class="inputLabel" *ngIf="networkType==='P2P'">{{twobuttonlabelLeft}} : </span>
+          <span class="white-space-left" *ngIf="networkType!=='P2P'">&nbsp;</span>
+          <input type="text" maxlength="4" minlength="1" class="flexInput" [(ngModel)]="inputLeft"
+            (keypress)="keyPress($event)" (blur)="setInputData('Aend')" [readonly]="messageState==='in-progress'">
+          <button *ngIf="messageState!=='preload'" ion-button (click)="CheckAvailability(inputLeft,'left')"
+            class="button-yellow btnAlign">CHECK AVAILABILITY</button>
+        </ion-col>
+        <ion-col col-12>
+          <br>
+          <div *ngIf="messageState=='in-progress' ">
+            <ion-spinner></ion-spinner>
+          </div>
+        </ion-col>
+        <ion-col col-2 style="padding-left: 1.6rem;">
+          <img *ngIf="messageState=='load'" [src]="schema.settings.twobuttoncombo[0].warningmessageicon"
+            class="iconsign">
+        </ion-col>
+        <ion-col col-10>
+          <span *ngIf="messageState=='load'" class="small-text"
+            [innerHTML]="schema.settings.twobuttoncombo[0].warningmessage"></span>
+        </ion-col>
+        <ion-col col-2 style="padding-left:2.8rem;"><span  *ngIf="messageState=='load'" style="font-size: 1.1rem;"><b>Note:</b>
+          </span></ion-col>
+        <ion-col col-10><span *ngIf="messageState=='load'" class="small-text">This VLAN is not reserved and will be
+            confimed during provisioning process</span></ion-col>
+        <ion-col col-2 style="padding-left:1.6rem;"><img *ngIf="messageState=='validated'"
+            [src]="schema.settings.twobuttoncombo[0].validatedmessageicon" class="iconsign"> </ion-col>
+        <ion-col col-10><span *ngIf="messageState=='validated'" class="small-text"
+            [innerHTML]="schema.settings.twobuttoncombo[0].validatedmessage"></span></ion-col>
+        <ion-col col-2 style="padding-left:1.6rem;"><img *ngIf="messageState=='error'" [src]="schema.settings.twobuttoncombo[0].errormessageicon"
+            class="iconsign"></ion-col>
+        <ion-col col-10><span *ngIf="messageState=='error'" class="small-text"
+            [innerHTML]="schema.settings.twobuttoncombo[0].errormessage"></span></ion-col>
+      </ion-row>
+
+
+
+
+
+
+    </ion-col>
+    <ion-col col-6 *ngIf="networkType==='P2P'">
+      <ion-row>
+        <ion-col col-12>
+          <span class="inputLabel">{{twobuttonlabelRight}} : </span>
+          <input type="text" maxlength="4" minlength="1" class="flexInput inputVlanRight" [(ngModel)]="inputRight"
+            (keypress)="keyPress($event)" (blur)="setInputData('Bend')" [readonly]="messageStateFrom==='in-progress'">
+          <button *ngIf="messageStateFrom!=='preload'" ion-button (click)="CheckAvailability(inputRight,'right')"
+            class="button-yellow btnAlign">CHECK AVAILABILITY</button>
+        </ion-col>
+        <ion-col col-12>
+            <br>
+            <div *ngIf="messageStateFrom=='in-progress' ">
+              <ion-spinner></ion-spinner>
+            </div>
+        </ion-col>
+        <ion-col col-2 style="padding-left: 1.6rem;">
+            <img *ngIf="messageStateFrom=='load'" [src]="schema.settings.twobuttoncombo[0].warningmessageicon"
+            class="iconsign">
+        </ion-col>
+        <ion-col col-10>
+            <span *ngIf="messageStateFrom=='load'" class="small-text"
+            [innerHTML]="schema.settings.twobuttoncombo[0].warningmessage"></span>
+        </ion-col>
+        <ion-col col-2 style="padding-left:2.8rem;"><span  *ngIf="messageStateFrom=='load'" style="font-size: 1.1rem;"><b>Note:</b>
+        </span></ion-col>
+        <ion-col col-10><span *ngIf="messageStateFrom=='load'" class="small-text">This VLAN is not reserved and will be
+            confimed during provisioning process</span></ion-col>
+        <ion-col col-2 style="padding-left:1.6rem;"><img *ngIf="messageStateFrom=='validated'" [src]="schema.settings.twobuttoncombo[0].validatedmessageicon"
+          class="iconsign"> </ion-col>    
+        <ion-col col-10> <span *ngIf="messageStateFrom=='validated'" class="small-text"
+          [innerHTML]="schema.settings.twobuttoncombo[0].validatedmessage"></span></ion-col>
+        <ion-col col-2 style="padding-left:1.6rem;"> <img *ngIf="messageStateFrom=='error'" [src]="schema.settings.twobuttoncombo[0].errormessageicon"
+          class="iconsign"></ion-col>    
+        <ion-col col-10><span *ngIf="messageStateFrom=='error'" class="small-text"
+          [innerHTML]="schema.settings.twobuttoncombo[0].errormessage"></span></ion-col>
+      </ion-row>
+
+      
+     
+      <!-- <br><span style="padding-left:1.1rem;" *ngIf="messageStateFrom=='load'" class="small-text"><b>Note:</b> This VLAN
+        is not reserved and will be confimed during provisioning process</span> -->
+     
+      
+
+
+    </ion-col>
+    <ion-col col-6 *ngIf="networkType!=='P2P'"></ion-col>
+  </ion-row>
+</ion-grid>

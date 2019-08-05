@@ -1,0 +1,251 @@
+<div class="fixed-sticky">
+  <!-- <ion-title>Change Summary</ion-title> -->
+  <!-- <cost-summary-schedule [schema]="schema" [model]="schema.datasource" [networkType]="networkType">
+  </cost-summary-schedule> -->
+  <ion-grid>
+    <ion-row>
+      <ion-col col-8 no-padding padding-left padding-right style="width: 110rem;">
+        &nbsp;
+      </ion-col>
+      <ion-col col-4>
+        <ion-row>
+          <ion-col col-1></ion-col>
+          <ion-col col-10>
+            <ion-title>Cost Summary</ion-title>
+            <ion-row>
+
+              <ion-col col-10>
+                <hr class="bold2" />
+              </ion-col>
+              <ion-col col-2></ion-col>
+
+            </ion-row>
+            <ng-container>
+              <ion-row>
+                <ion-col>coming soon..</ion-col>
+
+              </ion-row>
+            </ng-container>
+          </ion-col>
+          <ion-col col-1></ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+</div>
+<div *ngIf="isLoading">
+  <ion-spinner></ion-spinner>
+</div>
+<div class="scroll-container" *ngIf="!isLoading">
+  <ion-grid>
+    <br />
+    <ion-row>
+      <!-- <ion-col col-2 *ngIf="!schema.child"></ion-col> -->
+      <ion-col col-8 no-padding padding-left padding-right class="border-right">
+        <ion-row align-items-start>
+          <ion-col>
+            <ion-title> {{ schema.settings.title }} </ion-title>
+            <br />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul class="progressbar">
+              <ng-container *ngFor="let list of schema.settings.list">
+                <li [ngClass]="{'active': list.status==='active','complete': list.status==='complete'}"><span
+                    class="barTitle">{{list.title}}</span></li>
+              </ng-container>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12> </ion-col>
+          <ion-col>
+            <div style="margin-left: 5px;">
+              <span class="grey">
+                {{ schema.settings.configuresummary }}
+              </span>
+            </div>
+          </ion-col>
+        </ion-row>
+        <network-diagram [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null">
+        </network-diagram>
+        <ion-row>
+          <ion-col col-8>
+            <ion-row>
+              <ion-col col-1></ion-col>
+              <ion-col col-6 align-self-center><span style="margin-left: -1px; font-size: large"
+                  [innerHTML]="schema.settings.enabledtitle"></span></ion-col>
+              <ion-col col-5><label class="switch"><input type="checkbox" [(ngModel)]="dynamicFlexSwitch"
+                    (click)="checkStatus()" id="togBtn">
+                  <div class="slider round">
+                    <!--ADDED HTML --><span class="on">ON</span><span class="off">OFF</span>
+                    <!--END-->
+                  </div>
+                </label></ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-4></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12></ion-col>
+        </ion-row>
+        <!-- <ion-row style="height: 1.5rem;">
+        </ion-row>
+        <hr /> -->
+
+
+        <ng-container *ngIf="dynamicFlexSwitch">
+          <ion-row>
+            <ion-col>
+              <span class="sub-heading">{{
+                    schema.settings.sliderheading
+                  }}</span>
+              <br />
+              <!-- below is hardcoded as image is not getting rendered from cdo level-->
+              <p class='description-text'>Put more description to the slider "Use the slider to set bandwidth flex you require between A-End and B-end.<br><b>Note:</b> The slider below represents <b>A-end</b> which is currently utilised link &nbsp;
+                <info-icon></info-icon>
+              </p>
+              <!-- <br />
+                  <span
+                    class="grey"
+                    [innerHTML]="schema.settings.slidersummary"
+                  ></span> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12></ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-12></ion-col>
+          </ion-row>
+          <ion-row class="dynamicslider">
+            <ion-col>
+              <!-- <slider [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+                    (bwChange)="getSliderChange($event)"></slider> -->
+              <slider-schedule [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+                (bwChange)="getSliderChange($event)"></slider-schedule>
+            </ion-col>
+          </ion-row>
+          <ion-row class="pd-tp-3">
+              <ion-col col-6 *ngFor="let control of tempSchemaForActionCheckbox">
+                <action-checkbox [data]="schema.datasource ? schema.datasource[0].model: null" [schema]="control" ></action-checkbox>
+              </ion-col>
+            </ion-row>
+          <ion-row style="height: 1.5rem;">
+          </ion-row>
+          <ion-row>
+            <ion-col col-12>
+                <div class="pad-dv">
+                    <flex-rules [model]="schema.datasource ? schema.datasource[0].model: null" [schema]="schema"></flex-rules>
+                </div>
+            </ion-col>
+          </ion-row>
+          
+          <ion-row style="height: 1.5rem;">
+          </ion-row> 
+          <ion-row>
+              <ion-col col-12>
+                  <div class="pad-dv">
+                      <flex-rules-down [model]="schema.datasource ? schema.datasource[0].model: null" [schema]="schema">
+                        </flex-rules-down>
+                  </div>
+              </ion-col>
+            </ion-row>
+          
+          <ion-row style="height: 1.5rem;">
+          </ion-row>
+         
+          <ion-row>
+              <ion-col col-12>
+                  <div class="pad-dv">
+                      <time-box [model]="schema.datasource ? schema.datasource[0].model: null" [schema]="schema"></time-box>
+                  </div>
+              </ion-col>
+            </ion-row>
+
+         
+          <ion-row style="height: 1.5rem;">
+          </ion-row>
+
+          <ion-row>
+              <ion-col col-12>
+                  <div class="pad-dv">
+                      <spend-cap [model]="schema.datasource ? schema.datasource[0].model: null" [schema]="schema"></spend-cap>
+                  </div>
+              </ion-col>
+            </ion-row>
+
+        </ng-container>
+
+      </ion-col>
+
+    </ion-row>
+    <ion-row *ngIf="dynamicFlexSwitch">
+      <ion-col col-8>
+        <hr />
+        <ion-row>
+          <ion-col col-2> </ion-col>
+          <ion-col col-3>
+            <button ion-button full [disabled]="!isValid" class="button-white btnAction"
+              (click)="saveforLatter($event)">
+              SAVE FOR LATTER
+            </button>
+          </ion-col>
+          <ion-col col-2></ion-col>
+          <ion-col col-3>
+            <button ion-button full [disabled]="!isValid" class="button-yellow btnAction"
+              (click)="setnextLevel($event)">
+              REVIEW CHANGE
+            </button>
+          </ion-col>
+          <ion-col col-2> </ion-col>
+        </ion-row>
+        <hr />
+
+        <!-- <navigation-button-list [schema]="schema"></navigation-button-list> -->
+      </ion-col>
+
+      <ion-col col-4>
+        <!-- <ion-title>Change Summary</ion-title> -->
+        &nbsp;
+
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        <ion-row>
+          <ion-col col-12>
+            <hr />
+          </ion-col>
+          <ion-col col></ion-col>
+          <ion-col col-3 style="text-align: center">
+            <span class="btnCancel" (click)="closeModel()">Cancel</span>
+          </ion-col>
+          <ion-col col-3 *ngIf="!dynamicFlexSwitch">
+            <button ion-button full class="button-yellow btnAction" (click)="OnDirectSubmit($event)">
+              SUBMIT
+            </button>
+          </ion-col>
+          <ion-col col></ion-col>
+          <ion-col col-12>
+            <hr />
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-col col-4>
+
+      &nbsp;
+
+    </ion-col>
+
+
+
+  </ion-grid>
+</div>

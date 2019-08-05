@@ -1,0 +1,17 @@
+<mbsc-form input-style="box" label-style="stacked">
+    <div class="mbsc-grid mbsc-form-grid">
+        <mbsc-form-group>
+            <!-- <mbsc-form-group-title></mbsc-form-group-title> -->
+            <div class="mbsc-row">
+                <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                    <!-- <mbsc-time [(ngModel)]="scheduled_start_time" [options]="desktopSettings" (ngModelChange)="onPickTime('start_time',scheduled_start_time)">Start Date (AEST)</mbsc-time> -->
+                    <mbsc-date [(ngModel)]="scheduled_start_date" [options]="desktopSettings" (ngModelChange)="onPickDate('start_date',scheduled_start_date)">Start Date (AEST)</mbsc-date>
+                </div>
+                <div class="mbsc-col-sm-12 mbsc-col-md-6">
+                  <!-- <mbsc-time [(ngModel)]="scheduled_end_time" [options]="desktopSettings" (ngModelChange)="onPickTime('end_time',scheduled_end_time)" >End Date (AEST)</mbsc-time> -->
+                  <mbsc-date [(ngModel)]="scheduled_end_date" [options]="desktopSettings" (ngModelChange)="onPickDate('end_date',scheduled_end_date)">End Date (AEST)</mbsc-date>
+              </div>
+            </div>
+        </mbsc-form-group>
+     </div>
+</mbsc-form>

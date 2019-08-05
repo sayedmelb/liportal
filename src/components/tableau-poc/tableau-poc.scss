@@ -1,0 +1,32 @@
+tableau-poc {
+
+    a {
+        font: 400 13px "Mark Pro" !important;
+    }    
+
+    .input-style {
+        border: 1px solid #999;
+        border-radius: 5px;
+        height: 40px;
+        width: 80%;
+      
+        -webkit-appearance: border-box;
+      }
+
+    .buttons {
+        text-align:right;
+        padding-left: 0px !important;
+    }
+
+    .col-padding {
+        padding-left: 0px !important;
+    }
+
+    .col-padding-10 {
+        padding-left: 10px !important;
+    }
+
+     .mbsc-label {
+         width: 100% !important;
+     } 
+}

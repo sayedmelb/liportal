@@ -1,0 +1,31 @@
+<ion-row align-items-start class="pd-lt-2">
+        <ion-col col-12 class="container-col"> <span class="header">VLAN ID</span>
+          <hr class="bold2">
+        </ion-col>
+        <ion-col col-6 class="container-col ">
+          <ng-container *ngIf="schema.datasource.length > 0">
+            <ion-row>
+              <ion-col col-12> <span class="label-container"><span *ngIf="network==='P2P' "><b>A-End:</b></span>
+                <span *ngIf="checkAddressState()" > {{schema.datasource[0].selectedProduct.properties.location.title}}</span>
+              </span> </ion-col>
+              <ion-col col-12 *ngIf="schema.datasource[0].model[0].vlan !== schema.datasource[0].model[0]._vlan">
+                <span class="label-sub"> {{ schema.datasource[0].model[0].vlan }} </span> </ion-col>
+              <ion-col col-12> <span class="iris-blue" *ngIf="schema.datasource[0].model[0].vlan === schema.datasource[0].model[0]._vlan ">(No
+                  Change)</span> </ion-col> 
+            </ion-row>
+          </ng-container>
+        </ion-col>
+        <ion-col col-6 class="container-col" *ngIf="network!=='Mesh'">
+          <ng-container *ngIf="schema.datasource.length > 0">
+            <ion-row>
+                <ion-col col-12> <span class="label-container"> <strong>B-End:</strong><span *ngIf="checkAddressState()" > {{schema.datasource[0].otherEnds[0].properties.location.title}}</span></span> </ion-col>
+              <!-- <ion-col col-12> <span class="label-container"> <strong>B-End:</strong><span *ngIf="data.addressON=='vlan'" > {{schema.datasource[0].otherEnds[0].properties.location.title}}</span></span> </ion-col> -->
+              <ion-col col-12 *ngIf="schema.datasource[0].model[1].vlan !== schema.datasource[0].model[1]._vlan"> 
+                <span class="label-sub">{{ schema.datasource[0].model[1].vlan }}</span> </ion-col>
+              <ion-col col-12> <span class="iris-blue"  *ngIf="schema.datasource[0].model[1].vlan === schema.datasource[0].model[1]._vlan"  >(No
+                  Change)</span> </ion-col> 
+            </ion-row>
+          </ng-container>
+        </ion-col>
+        <ion-col col-6 class="container-col" *ngIf="network==='Mesh'"></ion-col> 
+      </ion-row>

@@ -1,0 +1,511 @@
+<div class="fixed-sticky">
+  <cost-summary-schedule [schema]="schema" [model]="schema.datasource" [networkType]="networkType">
+  </cost-summary-schedule>
+</div>
+<div *ngIf="isLoading">
+  <ion-spinner></ion-spinner>
+</div>
+<div class="scroll-container" *ngIf="!isLoading">
+  <ion-grid>
+    <br />
+    <ion-row>
+      <ion-col col-2 *ngIf="!schema.child"></ion-col>
+      <ion-col col-8 no-padding padding-left padding-right class="border-right">
+        <ion-row align-items-start>
+          <ion-col>
+            <ion-title> {{ schema.settings.title }} </ion-title>
+            <br />
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ul class="progressbar">
+              <ng-container *ngFor="let list of schema.settings.list">
+                <li [ngClass]="{'active': list.status==='active','complete': list.status==='complete'}"><span
+                    class="barTitle">{{list.title}}</span></li>
+              </ng-container>
+            </ul>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <hr>
+          </ion-col>
+        </ion-row>
+        <network-diagram [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null">
+        </network-diagram>
+
+
+
+        <!-- <ion-row class="pd-tp-2 pd-bt-2">
+          <ion-col>
+            <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplate()"></span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="pd-tp-2 pd-bt-2">
+          <ion-col>
+            <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplateSpeedChange()"></span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="dynamicslider">
+          <ion-col>
+            <slider-schedule [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+              (bwChange)="getSliderChange($event)"></slider-schedule>
+          </ion-col>
+        </ion-row>
+        <ion-row class="pd-tp-3">
+          <ion-col col-6 *ngFor="let control of tempSchemaForActionCheckbox">
+            <action-checkbox [schema]="control"></action-checkbox>
+          </ion-col>
+        </ion-row> -->
+
+        <ion-row align-items-start [ngClass]="{'restrict-row-height': calendarstatus===true}">
+          
+          <ion-col col-12>
+            <events-calendar [schema]="schema" [model]="schema.datasource ? schema.datasource: null" (checkCalendarOpenstatus)="CalendarOpenstatus($event)">
+            </events-calendar>
+          </ion-col>
+          
+        </ion-row>
+        <ion-row style="height: 1.5rem;">
+        </ion-row>
+        <ion-row align-items-start [ngClass]="{'restrict-row-height': slidershow===true}">
+          <ion-col col-12>
+            <!-- <schedule-opener *ngIf="!slidershow" [schema]="schema"  [model]="schema.datasource ? schema.datasource[0].model: null">
+            </schedule-opener> -->
+            <ion-grid>
+              <ion-row>
+                <ion-col col-12>
+                  <ion-row class="row-style"  (click)="slidertoggle('eventtimes')">
+                    <ion-col col-5 text-left style="vertical-align: middle; margin: auto;">
+                      <div class="term-header">
+                        Schedule Flex Times
+                      </div>
+                    </ion-col>
+                    <ion-col col-6></ion-col>
+                    <ion-col col-1 text-right style="vertical-align: middle; margin: auto;">
+                      <span *ngIf="slidershow" class="arrow-icon-down">
+
+                      </span>
+                      <span *ngIf="!slidershow" class="arrow-icon-up">
+
+                        </span>
+                      <!-- <span class="arrow-down">
+                        <ion-icon name="ios-arrow-down"></ion-icon>
+                      </span> -->
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col *ngIf="!slidershow" col-12 class="pd-bt-2">
+                  <flex-scheduling [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null">>
+                  </flex-scheduling>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+         
+        </ion-row>
+        <ion-row style="height: 1.5rem;">
+          </ion-row>
+        <ion-row align-items-start class="slider-row" [ngClass]="{'restrict-row-height': slidershow===false}">
+          <ion-col col-12>
+            <ion-grid>
+              <ion-row>
+                
+                <ion-col col-12>
+                  <ion-row class="row-style"  (click)="slidertoggle('slider')">
+                    <ion-col col-5 text-left style="vertical-align: middle; margin: auto;">
+                      <div class="term-header">
+                        Schedule Flex Speed
+                      </div>
+                    </ion-col>
+                    <ion-col col-6></ion-col>
+                    <ion-col col-1 text-right style="vertical-align: middle; margin: auto;">
+                        <span *ngIf="!slidershow" class="arrow-icon-down">
+  
+                        </span>
+                        <span *ngIf="slidershow" class="arrow-icon-up">
+  
+                          </span>
+                        <!-- <span class="arrow-down">
+                          <ion-icon name="ios-arrow-down"></ion-icon>
+                        </span> -->
+                      </ion-col>
+                  </ion-row>
+                </ion-col>
+                <ion-col class="loading-bar"  >
+                   
+                    <div *ngIf="isLoadingProgress">
+                        <ion-spinner></ion-spinner>
+                         &nbsp;Checking Available bandwidth..
+                      </div>  
+
+                </ion-col>
+                <ion-col *ngIf="notavailable" class="not-available">
+                  <span>The bandwith is not available at this selected date and time.<br> Please select another date and time.</span>
+
+                </ion-col>
+                <ion-col *ngIf="slidershow" col-12 class="pd-bt-2">
+                  <ion-row class="pd-tp-2 pd-bt-2">
+                    <ion-col>
+                      <ion-row>
+                        <!-- <ion-col col-12> <span class='sub-heading'> Speed Change </span>&nbsp;<info-icon></info-icon>
+                        </ion-col> -->
+                        <ion-col col-12>
+                          <p class='description-text'>Use the slider to set the service speed you require between A-End and
+                            B-End.<br><b>Note:</b> The slider below represents <b>A-end</b> which is currently utilised link &nbsp; <info-icon></info-icon>
+                          </p>
+                        </ion-col>
+                      </ion-row>
+                      <!-- <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplate()"></span> -->
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="pd-tp-2 pd-bt-2">
+                    <ion-col>
+                      <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplateSpeedChange()"></span>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="dynamicslider">
+                    <ion-col>
+                      <slider-schedule [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+                        (bwChange)="getSliderChange($event)"></slider-schedule>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row class="pd-tp-3">
+                    <ion-col col-6 *ngFor="let control of tempSchemaForActionCheckbox">
+                      <action-checkbox [data]="schema.datasource ? schema.datasource[0].model: null" [schema]="control" ></action-checkbox>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
+          </ion-col>
+        </ion-row>
+        <ion-row style="height: 1.5rem;">
+          </ion-row>
+
+        <ion-row align-items-start>
+          <ion-col col-12>
+          <!-- start of paste-->
+          <ion-grid>
+            <ion-row>
+              <ion-col col-12>
+                <ion-row class="row-style"  (click)="addContacttoggle()">
+                  <ion-col col-5 text-left style="vertical-align: middle; margin: auto;">
+                    <div class="term-header">
+                     Add Contact
+                    </div>
+                  </ion-col>
+                  <ion-col col-6></ion-col>
+                  <ion-col col-1 text-right style="vertical-align: middle; margin: auto;">
+                      <span *ngIf="!contactshow" class="arrow-icon-down"> 
+
+                      </span>
+                      <span *ngIf="contactshow" class="arrow-icon-up">
+
+                        </span>
+                      <!-- <span class="arrow-down">
+                        <ion-icon name="ios-arrow-down"></ion-icon>
+                      </span> -->
+                    </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col *ngIf="contactshow" col-12 class="pd-bt-2">
+                <span class="sub-heading">
+                  Add Contact <info-icon></info-icon>
+                </span>
+                <br />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+            <!--end of paste-->
+          </ion-col>
+          <ion-col col-12>
+            <!-- <hr> -->
+          </ion-col>
+        </ion-row>
+
+        <!-- <ion-row> -->
+          <!-- <ion-col col-12>
+            <ion-row class="row-style"  (click)="slidertoggle()">
+              <ion-col col-5 text-left>
+                <div style="padding-left: 1.2rem;" class="term-header">
+                  Select Flex Event Speed
+                </div>
+              </ion-col>
+              <ion-col col-6></ion-col>
+              <ion-col col-1 text-right>
+                <span class="arrow-down" style="padding-right: 0.8rem;">
+                  <ion-icon name="ios-arrow-down"></ion-icon>
+                </span>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+          <!-- <ion-col *ngIf="slidershow" col-12 class="pd-bt-2">
+            <ion-row class="pd-tp-2 pd-bt-2">
+              <ion-col>
+                <ion-row>
+                  <ion-col col-12>
+                    <p class='description-text'>Use the slider to set the service speed you require between A-End and
+                      B-End.<br><b>Note:</b> The slider below represents <b>A-end</b> which is currently utilised link &nbsp; <info-icon></info-icon>
+                    </p>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-row class="pd-tp-2 pd-bt-2">
+              <ion-col>
+                <span *ngIf="schema.settings.showsummary==true" [innerHTML]="getTemplateSpeedChange()"></span>
+              </ion-col>
+            </ion-row>
+            <ion-row class="dynamicslider">
+              <ion-col>
+                <slider-schedule [schema]="schema" [model]="schema.datasource ? schema.datasource[0].model: null"
+                  (bwChange)="getSliderChange($event)"></slider-schedule>
+              </ion-col>
+            </ion-row>
+            <ion-row class="pd-tp-3">
+              <ion-col col-6 *ngFor="let control of tempSchemaForActionCheckbox">
+                <action-checkbox [data]="schema.datasource ? schema.datasource[0].model: null" [schema]="control"></action-checkbox>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+          <!-- <ion-col col-12>
+            <hr>
+          </ion-col> -->
+          <!-- <ion-col col-12>
+            <add-contact [schema]="schema" [model]="schema.datasource[0].model"></add-contact>
+          </ion-col>
+          <ion-col col-12>
+            <hr>
+          </ion-col> -->
+        <!-- </ion-row> -->
+
+
+      </ion-col>
+
+    </ion-row>
+    <ion-row>
+      <ion-col col-8>
+        <navigation-button-list [schema]="schema"></navigation-button-list>
+      </ion-col>
+      <ion-col col-4>
+        &nbsp;
+      </ion-col>
+    </ion-row>
+
+
+
+  </ion-grid>
+</div>
+
+
+
+<!-- <ng-container *ngFor="let data of schema.datasource">
+  <ion-grid>
+    <br>
+    <ion-row>
+      <ion-col col-8>
+        <ion-row>
+          <ion-col col-11 no-padding padding-left padding-right>
+            <ion-row align-items-start>
+              <ion-col>
+                <ion-title> {{schema.settings.title}} </ion-title>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ng-container *ngFor="let list of schema.settings.list">
+                  <img [src]="schema.settings.path + list.image" class="thumbnail" />
+                  <b padding-right>{{ list.label }}</b>
+                </ng-container>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <hr>
+              </ion-col>
+            </ion-row>
+            <ion-card>
+              <ion-card-content no-padding>
+                <div class="imageSchInfographic">
+                  <img [src]="schema.settings.networkimg">
+                  <span class="leftFlexChange">{{ data.scheduled_bw ?
+                    data.scheduled_bw :
+                    data.contracted_bw }}{{ data.bw_unit }}</span>
+                  <span class="rightFlexChange">{{ data.scheduled_bw ?
+                    data.scheduled_bw :
+                    data.contracted_bw }}{{ data.bw_unit }}</span>
+                </div>
+              </ion-card-content>
+            </ion-card>
+            <br>
+            <br>
+            <ion-row>
+              <ion-col>
+                <h6>Flex Bandwidth</h6>
+                <span class="grey">Use slider or text box</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item no-padding no-lines>
+                  <strong item-start padding-right padding-top>BANDWIDTH</strong>
+                  <ion-range item-end id="flexRange" [(ngModel)]="data.scheduled_bw" [min]="data.contracted_bw" [max]="data.channel_bw"
+                    step="20" pin="true" (ionChange)="checkCalculationAndValidation(data)">
+                    <ion-label class="lblLower" range-left>{{ data.contracted_bw }} {{ data.bw_unit }}</ion-label>
+                    <ion-label class="lblLower" range-right>{{ data.channel_bw }} {{ data.bw_unit }}</ion-label>
+                  </ion-range>
+                  <ion-label class="lblUpper">{{ data.flex_pack }} {{ data.bw_unit }}</ion-label>
+                  <ion-label class="lblContracted label">Contracted Bandwidth</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-item no-lines class="upgradeFlex" *ngIf="data.scheduled_bw > data.flex_pack">
+                  <b style="color: #31758c;" item-start>{{ schema.settings.upgrademsg }}</b>
+                  <button ion-button class="button-yellow" style="width: 10em;" item-start onclick="alert('Permanent BANDWIDTH section - work under progres');">UPGRADE</button>
+                </ion-item>
+                <ion-item no-lines style="background: transparent; height: 2.85em;" *ngIf="data.scheduled_bw <= data.flex_pack">&nbsp;</ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col padding-top>
+                <strong>Flex Scheduling</strong>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-6>
+                <mbsc-calendar [disabled]="disabled"  [(ngModel)]="data.scheduled_start_date" (ngModelChange)="checkCalculationAndValidation(data)"
+                  [options]="dateSettings" display="center" placeholder="Please Select...">&nbsp;Start
+                  Date
+                </mbsc-calendar>
+              </ion-col>
+              <ion-col col-6>
+                <mbsc-calendar [disabled]="disabled" [(ngModel)]="data.scheduled_end_date" (ngModelChange)="checkCalculationAndValidation(data)"
+                  [options]="dateSettings" display="center" placeholder="dd/mm/yyyy">&nbsp;End
+                  Date
+                </mbsc-calendar>
+              </ion-col>
+              <ion-col col-6>
+                <ion-item no-padding no-lines>
+                  <ion-label stacked>Recurs</ion-label>
+                  <ion-select full [(ngModel)]="data.scheduled_recurrence" (ionChange)="checkCalculationAndValidation(data)"
+                    [disabled]="disabled">
+                    <ion-option value="Never">Never</ion-option>
+                    <ion-option value="Daily">Daily</ion-option>
+                    <ion-option value="Monday">Monday</ion-option>
+                    <ion-option value="Tuesday">Tuesday</ion-option>
+                    <ion-option value="Wednesday">Wednesday</ion-option>
+                    <ion-option value="Thursday">Thursday</ion-option>
+                    <ion-option value="Friday">Friday</ion-option>
+                    <ion-option value="Saturday">Saturday</ion-option>
+                    <ion-option value="Sunday">Sunday</ion-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <br>
+            <ion-row>
+              <ion-col></ion-col>
+              <ion-col col-3>
+                <button ion-button full [disabled]="!is_valid" class="button-yellow btnAction" (click)="goToNext()">REVIEW
+                  CHANGE</button>
+              </ion-col>
+              <ion-col>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+              <ion-col col-5></ion-col>
+              <ion-col col-2 style="text-align: center"><span class="btnCancel" (click)="closeModel()">Cancel</span></ion-col>
+              <ion-col col-5></ion-col>
+              <ion-col col-12>
+                <hr>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-1>
+            <div class="vl"></div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col col-4>
+        <h6>FLEX BANDWIDTH</h6>
+        <hr class="bold2">
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey">{{ data.from }}</ion-col>
+          <ion-col col-12 padding-top no-padding padding-bottom>{{ data.contracted_bw }} -> {{ data.scheduled_bw ?
+            data.scheduled_bw :
+            data.contracted_bw }} {{ data.bw_unit }}</ion-col>
+        </ion-row>
+        <hr>
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey">{{ data.address }}</ion-col>
+          <ion-col col-12 padding-top padding-bottom no-padding>{{ data.contracted_bw }} -> {{ data.scheduled_bw }}
+            {{ data.bw_unit }}</ion-col>
+        </ion-row>
+        <h6>FLEX SCHEDULING</h6>
+        <hr class="bold2">
+        <ion-row>
+          <ion-col col-6 padding-top no-padding>
+            <ion-row>
+              <ion-col padding-top no-padding class="grey">
+                Start Datetime
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col padding-top no-padding>{{ data.scheduled_start_date | date: 'EEEE dd/MM/yyyy' }}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col padding-top no-padding>{{ data.scheduled_start_date | date: 'hh:mm aa' }}
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-6 padding-top no-padding>
+            <ion-row>
+              <ion-col padding-top no-padding class="grey">
+                End Datetime
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col padding-top no-padding>{{ data.scheduled_end_date | date: 'EEEE dd/MM/yyyy' }}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col padding-top no-padding>{{ data.scheduled_end_date | date: 'hh:mm aa'}}</ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey">Recurs</ion-col>
+          <ion-col col-12 padding-top no-padding>{{ data.scheduled_recurrence }}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 padding-top no-padding class="grey">Total flex time</ion-col>
+          <ion-col col-12 padding-top no-padding>{{ ((data.scheduled_end_date!=="") && (data.scheduled_start_date!=="")
+            && (data.scheduled_end_date > data.scheduled_start_date)) ? (((data.scheduled_end_date -
+            data.scheduled_start_date) / 1000 / 60
+            / 60) | number: '1.2-2') : 0 }} hours</ion-col>
+        </ion-row>
+        <h6>FLEX COST</h6>
+        <hr class="bold2">
+        <ion-row>
+          <ion-col col-12 padding-top no-padding>
+            <b>$ {{ ((data.scheduled_bw <= data.flex_pack) && data.scheduled_end_date && data.scheduled_start_date) ? (
+                1.6 * ((875 - 750)/720) * ((data.scheduled_end_date - data.scheduled_start_date) / 1000 / 60/ 60) |
+                number: '1.2-2' ) : 0 }} total</b> </ion-col> <ion-col col-12 no-padding>
+                $ {{ data.monthly_cost }} /month
+          </ion-col>
+          <ion-col col-12 padding-top no-padding class="grey">
+            Other pricing information
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-container> -->

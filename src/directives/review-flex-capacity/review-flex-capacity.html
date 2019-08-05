@@ -1,0 +1,40 @@
+<ion-row align-items-start class="pd-lt-2">
+        <ion-col col-12 class="container-col"> <span class="header">FLEX CAPACITY </span>
+          <hr class="bold2">
+        </ion-col>
+        <ion-col col-6 class="container-col ">
+          <ng-container *ngIf="schema.datasource.length > 0">
+            <ion-row>
+              <ion-col col-12> <span class="label-container" *ngIf="network==='P2P' "><strong>A-End:</strong></span>
+                <span *ngIf="checkAddressState()" > {{schema.datasource[0].selectedProduct.properties.location.title}}
+              </span> </ion-col>
+              <ion-col col-5><span class=" label-sub color-blue">Before</span></ion-col>
+              <ion-col col-2></ion-col>
+              <ion-col col-5><span class=" label-sub color-blue" *ngIf="schema.datasource[0].selectedProduct.properties.flex_pack !== schema.datasource[0].model[0].flex_capacity">After</span></ion-col>
+              <ion-col col-5><span class="label-sub"> {{ schema.datasource[0].selectedProduct.properties.flex_pack }} </span> </ion-col>
+              <ion-col col-2> <img class="arw" src='../../assets/imgs/12-hor.png'> </ion-col>
+              <ion-col col-5> <span class="label-sub" *ngIf=" schema.datasource[0].selectedProduct.properties.flex_pack !== schema.datasource[0].model[0].flex_capacity  ">{{schema.datasource[0].model[0].flex_capacity}}</span>
+              </ion-col>
+              <ion-col col-5> <span class="iris-blue" *ngIf=" schema.datasource[0].selectedProduct.properties.flex_pack === schema.datasource[0].model[0].flex_capacity ">(No
+                  Change)</span> </ion-col>
+            </ion-row>
+          </ng-container>
+        </ion-col>
+        <ion-col col-6 class="container-col" *ngIf="network!=='Mesh'">
+          <ng-container *ngIf="schema.datasource.length > 0">
+            <ion-row>
+              <ion-col col-12> <span class="label-container"> <strong>B-End:</strong><span *ngIf="checkAddressState()" > {{schema.datasource[0].otherEnds[0].properties.location.title}}</span></span> </ion-col>
+              <ion-col col-5><span class=" label-sub color-blue">Before</span></ion-col>
+              <ion-col col-2></ion-col>
+              <ion-col col-5><span class=" label-sub color-blue" *ngIf="schema.datasource[0].otherEnds[0].properties.flex_pack !== schema.datasource[0].model[1].flex_capacity">After</span></ion-col>
+              <ion-col col-5> <span class="label-sub">{{ schema.datasource[0].otherEnds[0].properties.flex_pack }}</span> </ion-col>
+              <ion-col col-2> <img class="arw" src='../../assets/imgs/12-hor.png'> </ion-col>
+              <ion-col col-5> <span class="label-sub" *ngIf="schema.datasource[0].otherEnds[0].properties.flex_pack!== schema.datasource[0].model[1].flex_capacity ">{{ schema.datasource[0].model[1].flex_capacity }}</span>
+              </ion-col>
+              <ion-col col-5> <span class="iris-blue" *ngIf="schema.datasource[0].otherEnds[0].properties.flex_pack=== schema.datasource[0].model[1].flex_capacity">(No
+                  Change)</span> </ion-col>
+            </ion-row>
+          </ng-container>
+        </ion-col>
+        <ion-col col-6 class="container-col" *ngIf="network==='Mesh'"></ion-col> 
+      </ion-row>

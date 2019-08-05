@@ -1,0 +1,33 @@
+<div *ngIf="isLoading" class="loader">
+  <ion-spinner></ion-spinner>
+</div>
+<div *ngIf="!isLoading">
+  <ion-grid class="col-padding">
+      <ion-row>
+          <ion-col class="col-padding">
+              <input type="text" (keyup)='trapReturn($event)' class="input-style" placeholder="Search" [(ngModel)]="searchTerm" />            
+          </ion-col>
+          <ion-col class="col-padding-10" class="col-padding">             
+              <mbsc-calendar [(ngModel)]="max" [options]="maxSettings">Start and End  dates</mbsc-calendar>
+              <div>
+                  <button (click)="max = null">Clear</button>
+              </div>
+          </ion-col>
+          <ion-col class="col-padding-10">
+            <mbsc-button (click)="searchFor()" color="warning">Search</mbsc-button>
+          </ion-col>          
+          <ion-col class="buttons">                        
+              <a (click)="downloadFile()" href="#">CSV Export</a> &nbsp;&nbsp;&nbsp;&nbsp;              
+          </ion-col>
+      </ion-row>
+      <ion-row>
+          <ion-col class="col-padding">
+                  <tabular-widget [data]="display"></tabular-widget>
+          </ion-col>
+      </ion-row>        
+  </ion-grid>                     
+</div>
+
+<ng-template #templateId let-value="value" ngx-datatable-cell-template>
+  <a href="#">{{value}}</a>
+</ng-template>

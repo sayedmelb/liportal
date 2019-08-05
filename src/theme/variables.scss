@@ -1,0 +1,120 @@
+$font-path: "../assets/fonts";
+
+$app-direction: ltr;
+
+@import "ionic.globals";
+
+$colors: (
+  optusteal:           #00a3ad,
+  secondary:           #00B1BB,
+  optustealdark:       #31758c,
+  primary:             #488aff,
+  danger:              #f53d3d,
+  sliderinactive:      #f27482,
+  optusblack:          #000,
+  dark:                #222,
+  light:               rgba(227,233,236,0.2),
+  optusgrey:           #5D5D5D,
+  optusgreyshade2:     grey,
+  sliderknobfontcolor: #666668,
+  menucolor:           #888a8c,
+  menuhover:           #acafb2,
+  optuslightgrey:      lightgrey,
+  slidermarker:        #d3d3d3,
+  sliderknobhover:     #e8e8e8,
+  optuslightergrey:    #F9FAFB,
+  optusgreybg:         #F7F7F7,
+  optusgreyshadow:     rgba(190,190,190,0.6),
+  optusbuttongrey:     #D6D6D6,
+  optuswhite:          #fff,
+  optusyellow:         #fccc0d,
+  optusyellowlight:    #FFE200,
+  midgrey:             #6A6B6C
+);
+
+// usage of $colors in .scss
+// color($colors, <color-name in $colors>);
+
+@import "ionic.theme.default";
+@import "ionicons";
+@import "style";
+
+@font-face {
+  font-family: 'Mark Pro';
+  src: url(#{$font-path}/markpro/MarkPro.otf);
+}
+@font-face {
+  font-family: 'Mark Pro Black';
+  src: url(#{$font-path}/markpro/MarkPro-Black.otf);
+}
+@font-face {
+  font-family: 'Mark Pro Bold';
+  src: url(#{$font-path}/markpro/MarkPro-Bold.otf);
+}
+@font-face {
+  font-family: 'Mark Pro Heavy';
+  src: url(#{$font-path}/markpro/MarkPro-Heavy.otf);
+}
+@font-face {
+  font-family: 'Mark Pro Medium';
+  src: url(#{$font-path}/markpro/MarkPro-Medium.otf);
+}
+@font-face {
+  font-family: 'Mark Pro Thin';
+  src: url(#{$font-path}/markpro/MarkPro-Thin.otf);
+}
+
+
+@font-face{
+  font-family: 'MarkOT';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/markfont/MarkOT.otf');
+
+}
+@font-face{
+  font-family: 'MarkOT';
+  font-style: bold;
+  font-weight: 800;
+  src: url('../assets/fonts/markfont/MarkOT-Heavy.otf');
+}
+@font-face{
+  font-family: 'MarkOT';
+  font-style: light;
+  font-weight: 300;
+  src: url('../assets/fonts/markfont/MarkOT-Light.otf');
+}
+@font-face{
+  font-family: 'MarkOT';
+  font-style: medium;
+  font-weight: 500;
+  src: url('../assets/fonts/markfont/MarkOT-Medium.otf');
+}
+$font-family-base: "MarkOT";
+$font-family-md-base: "MarkOT";
+$font-family-ios-base: "MarkOT";
+$font-family-wp-base: "MarkOT";
+
+body{
+  font-family: "MarkOT"!important;
+  font-weight: 400!important;
+}
+
+h1,h2{
+  font-family: "Mark Pro Heavy"!important;
+}
+
+p,button,span,div, ul,li{
+  font-family: "Mark Pro"!important;
+}
+
+
+//added breakpoints
+$tabs-background: color($colors, optuswhite);
+$toolbar-background: color($colors, optusblack);
+$tabs-tab-color-active: color($colors, optusblack);
+
+//button hover color
+$button-ios-background-color-hover: color($colors, optusyellowlight);
+$button-wp-background-color-hover: color($colors, optusyellowlight);
+$button-md-background-color-hover: color($colors, optusyellowlight);

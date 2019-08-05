@@ -1,0 +1,215 @@
+<ion-row>
+  <ion-col padding-top>
+    <span class="sub-heading">{{
+                    schema.settings.flex.settings.flexup.title 
+                  }}</span>
+    <br />
+    <br />
+    
+        <span  [innerHTML]="schema.settings.flex.settings.flexup.summary"></span>
+    
+   
+  </ion-col>
+  <ion-col col-12>&nbsp;</ion-col> 
+</ion-row>
+<!-- btnActivated: schema.datasource[0].increased_utilisation_mode == 'balanced', -->
+                      
+<ion-row>
+  <ion-col col-12>
+      
+          <button *ngFor="let control of schema.controlsup" (click)="setFlex($event, control.flextype, control.type)"
+          [ngClass]="{
+                          btnagg: control.buttontype == 'btnagg',
+                          btnbal: control.buttontype == 'btnbal',
+                          btnrel: control.buttontype == 'btnrel',
+                          btncus: control.buttontype == 'btncus',
+                          btnActivated: control.active == true
+                        }" class=" button button-md button-clear button-clear-md button-large button-large-md btnNormal"
+          ion-button>
+          {{ control.title }}
+        </button>
+     
+
+   
+  </ion-col>
+  <ion-col col-12>&nbsp;</ion-col>
+  <ion-col col-2>
+    {{ schema.settings.flex.settings.flexup.utilleftlabel }}&nbsp; </ion-col>
+  <ion-col col-1>
+    <input maxlength="3" minlength="1" class="flexInput" [(ngModel)]="flexupUtilisation" (keypress)="keyPress($event)"
+      (keyup)="updateFlexUtil($event, 'up')" />&nbsp;</ion-col>
+  <ion-col col-9 padding-left>
+    <span>
+      {{ schema.settings.flex.settings.flexup.utilmidlabel }} &nbsp; {{ initialRange.lower }} &nbsp;
+      {{schema.settings.flex.settings.flexup.utilrightlabel}}</span>
+  </ion-col>
+  <ion-col col-2> {{ schema.settings.flex.settings.flexup.pcleftlabel }} &nbsp;</ion-col>
+  <ion-col col-1>
+    <input maxlength="2" minlength="2" (keypress)="keyPress($event)" (keyup)="updateFlexMinutes('up')" class="flexInput"
+      [(ngModel)]="flexupUtilisationMinutes" />
+  </ion-col>
+  <ion-col col-9 padding-left>
+
+    <span>{{ schema.settings.flex.settings.flexup.pcmidlabel }} &nbsp; {{ leftknob }} &nbsp;
+      {{ schema.settings.flex.settings.flexup.pcrightlabel }}</span>
+  </ion-col>
+  <ion-col col-12>
+    <ion-row class="row-style" (click)="toggleViewGraph()">
+      <ion-col col-2 text-left style="vertical-align: middle; margin: auto;">
+        <span class="term-header" style="font-size: 1.4rem;
+                          padding-left: 0rem;
+                          padding-right: 0.3rem;">
+          View Graph
+        </span>
+        <span *ngIf="!viewgraph" class="arrow-icon-down" style="position: absolute;">
+
+        </span>
+        <span *ngIf="viewgraph" class="arrow-icon-up" style="position: absolute;">
+
+        </span>
+      </ion-col>
+
+      <!-- <ion-col col-1 text-right style="vertical-align: middle; margin: auto;">
+                           
+                            <span *ngIf="!viewgraph" class="arrow-icon-down"> 
+      
+                              </span>
+                              <span *ngIf="viewgraph" class="arrow-icon-up">
+        
+                                </span>
+                          </ion-col>  -->
+      <ion-col col-10></ion-col>
+    </ion-row>
+    <div></div>
+    <div *ngIf="flexUp == 'balanced' && viewgraph" class="imageDyn">
+      <img src="../../assets/imgs/flexupbalanced.JPG" alt="" />
+      <span class="flexupSummarybal">Example Representation <br />
+        (based on dummy utilisation data)</span>
+      <span class="flexupFlexedbal">Flexed Bandwidth <strong>{{ changeFlexValue }}Mbps</strong>
+      </span>
+      <span class="flexupContractedbal">Contracted Bandwidth
+        <strong>{{ initialRange.lower }}Mbps</strong>
+      </span>
+      <div class="flexupFlexedTipbal">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Flex Bandwidth</strong> is the speed that you want
+          the link to Flex to when the performance rules are
+          triggered
+        </span>
+      </div>
+      <span class="flexupUtilisationbal">Utilisation threshold over {{ flexupUtilisation }}%</span>
+      <div class="flexupUtilTipbal">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Utilisation Threshold</strong> is the % of the
+          contracted speed where you determine Flex should be
+          triggered</span>
+      </div>
+      <div class="flexupContractedTip">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Contracted Bandwidth </strong> is the minimum
+          committed speed you are currently contracted for.</span>
+      </div>
+      <span class="flexupMinuesbal">Above the threshold for 60% of the defined period
+        <strong>{{ flexupUtilisationMinutes }} minutes</strong>
+      </span>
+      <div class="flexupMinutesTip">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Period above threshold </strong>- this is set at
+          60% of the time period you have set. E.g. Utilisation must
+          exceed threshold for more than 60% of a 5 Min, 10Min, etc.
+          period.</span>
+      </div>
+    </div>
+
+    <div *ngIf="flexUp == 'aggresive' && viewgraph" class="imageDyn">
+      <img src="../../assets/imgs/flexupaggresive.JPG" alt="" />
+      <span class="flexupSummarybal">Example Representation <br />
+        (based on dummy utilisation data)</span>
+      <span class="flexupFlexedbal">Flexed Bandwidth <strong>{{ changeFlexValue }}Mbps</strong>
+      </span>
+      <span class="flexupContractedbal">Contracted Bandwidth
+        <strong>{{ initialRange.lower }}Mbps</strong>
+      </span>
+      <div class="flexupFlexedTipbal">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Flex Bandwidth</strong> is the speed that you want
+          the link to Flex to when the performance rules are
+          triggered
+        </span>
+      </div>
+      <span class="flexupUtilisationagg">Utilisation threshold over {{ flexupUtilisation }}%</span>
+      <div class="flexupUtilTipagg">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Utilisation Threshold</strong> is the % of the
+          contracted speed where you determine Flex should be
+          triggered</span>
+      </div>
+      <div class="flexupContractedTip">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Contracted Bandwidth </strong> is the minimum
+          committed speed you are currently contracted for.</span>
+      </div>
+      <span class="flexupMinuesbal">Above the threshold for 60% of the defined period
+        <strong>{{ flexupUtilisationMinutes }} minutes</strong>
+      </span>
+      <div class="flexupMinutesTip">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Period above threshold </strong>- this is set at
+          60% of the time period you have set. E.g. Utilisation must
+          exceed threshold for more than 60% of a 5 Min, 10Min, etc.
+          period.</span>
+      </div>
+    </div>
+    <div *ngIf="flexUp == 'relaxed' && viewgraph" class="imageDyn">
+      <img src="../../assets/imgs/flexuprelaxed.JPG" alt="" />
+      <span class="flexupSummarybal">Example Representation <br />
+        (based on dummy utilisation data)</span>
+      <span class="flexupFlexedbal">Flexed Bandwidth <strong>{{ changeFlexValue }}Mbps</strong>
+      </span>
+      <span class="flexupContractedbal">Contracted Bandwidth
+        <strong>{{ initialRange.lower }}Mbps</strong>
+      </span>
+      <div class="flexupFlexedTipbal">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Flex Bandwidth</strong> is the speed that you want
+          the link to Flex to when the performance rules are
+          triggered
+        </span>
+      </div>
+      <span class="flexupUtilisationrel">Utilisation threshold over {{ flexupUtilisation }}%</span>
+      <div class="flexupUtilTiprel">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Utilisation Threshold</strong> is the % of the
+          contracted speed where you determine Flex should be
+          triggered</span>
+      </div>
+      <div class="flexupContractedTip">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Contracted Bandwidth </strong> is the minimum
+          committed speed you are currently contracted for.</span>
+      </div>
+      <span class="flexupMinuesbal">Above the threshold for 60% of the defined period
+        <strong>{{ flexupUtilisationMinutes }} minutes</strong>
+      </span>
+      <div class="flexupMinutesTip">
+        <img style="width: 18px;" src="../../assets/imgs/tip.png" />
+        <span class="tooltiptext">
+          <strong>Period above threshold </strong>- this is set at
+          60% of the time period you have set. E.g. Utilisation must
+          exceed threshold for more than 60% of a 5 Min, 10Min, etc.
+          period.</span>
+      </div>
+    </div>
+  </ion-col>
+</ion-row>

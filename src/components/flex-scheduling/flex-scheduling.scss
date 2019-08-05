@@ -1,0 +1,50 @@
+flex-scheduling {
+ 
+ 
+  ion-col.border-right.col {
+    border-right: 1px solid #D1D7DA;
+   
+  }
+  .margin-tp{
+    margin-top: -4rem;
+  }
+  
+  .flexInput {
+        width: 60px;
+        height: 30px;
+        text-align: center;
+        margin-top: -5px;
+      }
+      .btnAlign {
+        margin-top: -5px;
+        width: 170px;
+       // padding: 0!important;
+    }
+    .sub-heading {
+        font-weight: 400!important;//600;
+        font-size: 1.6rem;
+      }
+      .inputLabel {
+        font-weight: bold;
+        font-size: 1.4rem;
+        padding-left: 2rem;
+        padding-right: 1rem;
+      }
+      .white-space-left {
+        margin-left: 2rem;
+      }
+      .small-text {
+          font-size: 1rem;
+          color: color($colors, optusgrey);
+      }
+      .iconsign {
+        width: 22px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 1rem;
+      }
+      .grey-text {
+        font-size: 0.9em;
+        color: grey;
+    }
+}

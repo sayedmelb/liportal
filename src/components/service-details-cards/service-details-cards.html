@@ -1,0 +1,8 @@
+<div *ngIf="!showError" fxFlex fxLayout="row wrap">
+    <ng-container *ngFor="let item of attributeCards">
+        <service-details-card [parentschema]="parentschema" [schema]="item.schema" [model]="item.attributeValue"></service-details-card>
+    </ng-container>
+</div>
+<div *ngIf="showError">
+    Error...
+</div>

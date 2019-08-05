@@ -1,0 +1,24 @@
+<div *ngIf="isLoading" class="loader">
+    <ion-spinner></ion-spinner>
+</div>
+<div *ngIf="!isLoading">
+    <ion-grid style="padding-left: 0px !important;">
+        <ion-row>
+                <ion-col style="padding-left: 0px !important;">
+                        Service ID: {{serviceId}}
+                </ion-col>
+                <ion-col style="text-align:right;padding-left: 0px !important;">
+                        <input style="width: 50%!important;" type="text" placeholder="Search" size="4" />
+                </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col style="padding-left: 0px !important;">
+                    <tabular-widget [data]="display"></tabular-widget>
+            </ion-col>
+        </ion-row>        
+    </ion-grid>                     
+</div>
+
+<!-- <ng-template #templateServiceId let-value="value" ngx-datatable-cell-template>
+    <a href="#">{{value}}</a>
+</ng-template> -->

@@ -1,0 +1,24 @@
+<div *ngIf="isLoading" class="loader">
+  <ion-spinner></ion-spinner>
+</div>
+
+<div fxLayout="row wrap" style="padding-top: 2px!important;">
+    <div fxFlex fxLayout="row wrap">
+        <ng-container *ngFor="let item of attributeCards">
+          <service-details-card [schema]="item.schema" [model]="item.attributeValue"></service-details-card>
+        </ng-container>
+    </div>    
+</div>
+
+<hr />
+
+<div>
+    <h5>Nodes on this Network</h5>
+    <div>
+        <tabular-widget [data]="display" (onColumnClick)="navigate($event)"></tabular-widget> 
+    </div>
+</div>
+
+<!-- <ng-template #templateServiceId let-value="value" ngx-datatable-cell-template>
+  <a href="#">{{value}}</a>
+</ng-template>  -->

@@ -1,0 +1,35 @@
+other-services-widget {
+    .modal-wrapper{
+        position: absolute;
+        overflow: hidden;
+        max-width: 800px;
+        border-radius: 10px;
+        width: 800px!important;
+        height: 50vh !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 0;
+        box-shadow: 0 16px 20px rgba(0,0,0,.4);
+        background-color: #fafafa;
+      }
+
+      @media only screen and (min-height: 768px) and (min-width: 768px) {
+          .other-services-widget {
+            .modal-wrapper {
+                left: calc(50% - (600px/2));
+                top: calc(50% - (600px/2));
+                position: absolute;
+                width: 800px!important;
+                height: 600px;
+            }
+          }
+      
+    }
+
+    div.toolbar-title {
+        color: #ffffff;
+    }
+}

@@ -1,0 +1,164 @@
+<ion-grid>
+  <ion-row>
+    <ion-col col-12 class="pd-bt-2">
+      <span class="sub-heading">
+        QoS
+      </span>
+      <info-icon [infoText]="'You can turn on or change QoS (Quality of Service) Settings for your network here. Full QoS description is available in the Service Description.'" [textPlacement]="'right'"></info-icon>
+      <br />
+      <br />
+      <!-- <span class='sub-desc'>Qos settings apply to all sevices on this mesh network</span> -->
+      <span class='sub-desc'>The feature will be turned ON for all services on this mesh network.</span>
+    </ion-col>
+    <ion-col col-1>
+        <ion-row>
+            <ion-col col-1></ion-col>
+            <ion-col col-6 align-self-center></ion-col>
+            <ion-col col-5 style="padding-left: 2.1rem;"><label class="switch"><input type="checkbox" [(ngModel)]="toggle01"   id="togBtn"><div (click)="toggleOne('d')"  class="slider round"><!--ADDED HTML --><span class="on">ON</span><span class="off">OFF</span><!--END--></div></label></ion-col>
+          </ion-row>
+    </ion-col>
+    
+    <ion-col col-11 class='vertical-align'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="span-link" (click)="presentModalDSCP()"> Recommended Customer DSCP Mapping</span></ion-col> 
+      <!-- [disabled]="toggle01" -->
+    <!-- <ion-col col-1>
+      
+      <mbsc-form [options]="formSettings">
+        <mbsc-form-group>
+          <mbsc-switch  [(ngModel)]="toggle01" color="info" style="cursor: pointer;" (click)="toggleOne()">
+            <span *ngIf="networkType=='P2P'" class="inputLabel" [ngClass]="{'noinputLabel': networkType!=='P2P'}"
+              [innerHTML]="schema.settings.togglecombo[0].columns[0].value"></span>
+          </mbsc-switch>
+        </mbsc-form-group>
+      </mbsc-form>
+    </ion-col> -->
+    <!-- <ion-col col-11 class='vertical-align'>&nbsp;&nbsp; <span class="span-link" (click)="presentModalDSCP()"> Recommended Customer DSCP Mapping</span></ion-col> -->
+    <ion-col col-10 class="container-col"> 
+      
+      <!-- <div class="warning-message" *ngIf="model[0].qos.status == 'ON'">
+        <p>
+          <ion-icon name="warning"></ion-icon><span class='warning-text' innerHTML="{{message}}"> </span>
+        </p>
+      </div> -->
+    </ion-col>
+    <ion-col col-2>
+    </ion-col>
+    <!-- <ion-row *ngIf="model[0].qos.status == 'ON'">
+      <ion-col col-5>
+        <span class="sub-header">This Service</span>
+      </ion-col>
+      <ion-col col-3>
+        <span class="sub-header-med">Optus QoS Class</span>
+      </ion-col>
+      <ion-col col-2>
+        <span class="sub-header-med">Speed (%)</span>
+      </ion-col>
+      <ion-col col-2>
+        <span class="sub-header-med">Speed (Mbps)</span>
+      </ion-col>
+      <ion-col col-5>
+        <ion-row>
+          <ion-col col-12 style="background-color: #E5E5E5">
+            <ion-row>
+              <ion-col col-2>
+                <ul class="counterbar">
+                  <li class="active"><span class="barTitle">1</span></li>
+                </ul>
+              </ion-col>
+              <ion-col col-6 class="align-flex">
+                <span>{{ schema.datasource[0].selectedProduct.properties.line  | dynamicPipe:{pipes:'networkname'} }}</span>
+              </ion-col>
+              <ion-col col-4 class="align-flex">
+                <button ion-button class=" btnSelectedProduct btnRound btnAction " 
+                  (click)="editQos(0, $event)">
+                  <span class="btn-edit-text">SELECTED</span>
+                </button>
+              </ion-col>
+              <ion-col col-2></ion-col>
+              <ion-col col-6 class="align-flex">
+                <span>{{ schema.datasource[0].selectedProduct.properties.service.properties.serviceId}}</span></ion-col>
+              <ion-col col-4></ion-col>
+              <ion-col col-2> </ion-col>
+              <ion-col col-6 class="align-flex">
+                <span>{{ schema.datasource[0].selectedProduct.properties.location.title}}</span></ion-col>
+              <ion-col col-4></ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col col-12><span> Apply these QoS class speed percentages to all other services on this network</span>
+            
+            <ion-checkbox class="margin-right-8" [(ngModel)]='checkAllModels' (click)="checkAll()"></ion-checkbox>
+          </ion-col>
+          <ng-container *ngFor="let serv of schema.datasource[0].otherEnds; let i =index">
+            <ion-col col-12 style="background-color: #E5E5E5">
+              <ion-row>
+                <ion-col col-2>
+                  <ul class="counterbar">
+                    <li class="active"><span class="barTitle">{{i+2}}</span></li>
+                  </ul>
+                </ion-col>
+                <ion-col col-6 class="align-flex">
+                  <span>{{ serv.properties.line  | dynamicPipe:{pipes:'networkname'} }}</span>
+                </ion-col>
+                <ion-col col-4 class="align-flex">
+                  <button ion-button class=" btnRound btnEdit btnAction " 
+                    (click)="editQos(i+1, $event)">
+                    <span class="btn-edit-text">EDIT</span>
+                  </button>
+                </ion-col>
+                <ion-col col-2></ion-col>
+                <ion-col col-6 class="align-flex"><span>{{ serv.properties.service.properties.serviceId}}</span>
+                </ion-col>
+                <ion-col col-4></ion-col>
+                <ion-col col-2> </ion-col>
+                <ion-col col-6 class="align-flex"><span>{{ serv.properties.location.title}}</span></ion-col>
+                <ion-col col-4></ion-col>
+              </ion-row>
+            </ion-col>
+            <ion-col col-12></ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-col>
+      <ion-col col-7>
+        <ion-row>
+          <ion-col col-12>
+            <ion-row>
+              <ion-col col-12 style="background-color: #E5E5E5">
+                <ion-row>
+                  <ng-container *ngFor="let prop of inputModelStubQos.list; let i=index">
+                    <ion-col col-5 class="align-flex"><span> {{prop.Label  |dynamicPipe:{pipes:'qoslabel'} }}</span>
+                    </ion-col>
+                    <ion-col col-4 class="align-flex"><span class="flex-minus"
+                        (click)="updateQos('-',prop.Label, prop.Speedpc)"
+                        *ngIf="prop.SubLabel !=='bronze' && prop.SubLabel !=='network' && prop.SubLabel !=='total'  "> -
+                      </span><input
+                        [ngClass]="{'left-pad': prop.SubLabel =='bronze' || prop.SubLabel =='network' || prop.SubLabel =='total'  }"
+                        class="flexInput" readonly=true [(ngModel)]="prop.Speedpc" /><span class="flex-plus"
+                        (click)="updateQos('+',prop.Label, prop.Speedpc)"
+                        *ngIf="prop.SubLabel !=='bronze' && prop.SubLabel !=='network' && prop.SubLabel !=='total'  ">+</span>
+                    </ion-col>
+                    <ion-col col-3 class="align-flex"><input class="flexInputGrey" [(ngModel)]="prop.SpeedMbps" />
+                    </ion-col>
+                  </ng-container>
+                </ion-row>
+
+              </ion-col>
+              <ion-col col-12></ion-col>
+              <ion-col col-12 style="background-color: #E5E5E5">
+              <ion-row>
+                <ion-col col-3></ion-col>
+                <ion-col col-6> <button  ion-button  full  class="button-grey btnAction" (click)="saveforLatter($event)">DEFAULT SETTINGS
+                  </button></ion-col>
+                <ion-col col-3></ion-col>
+                <ion-col col-3></ion-col>
+                <ion-col col-6> <button  ion-button  full  class="button-yellow btnAction" (click)="saveSettings(serviceCounter)">SAVE SETTINGS
+                  </button></ion-col>
+                <ion-col col-3></ion-col>
+               
+              </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row> -->
+  </ion-row>
+</ion-grid>
